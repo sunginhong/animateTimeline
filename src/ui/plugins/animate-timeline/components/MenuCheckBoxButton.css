@@ -1,0 +1,68 @@
+.menu-checkbox-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    transition: background 0.2s var(--ease-standard);
+
+    > .menu-checkbox-label {
+        color: var(--Color-Neutral-Gray-1300, #2E2E2E);
+        font-feature-settings: 'liga' off, 'clig' off;
+        font-family: "Pretendard Variable";
+        font-size: 8px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px;
+    }
+    > .menu-checkbox-container {
+        position: relative;
+        width: 14px;
+        height: 14px;
+        border-radius: 3.5px;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 1.5px;
+
+        > #menu-checkbox-input {
+            margin: 0;
+        }
+    
+        > input {
+            position: absolute;
+            float: right;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 1;
+        }
+        > .menu-checkbox-shape {
+            position: absolute;
+            float: right;
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid #424242;
+            border-radius: 3.5px;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s var(--ease-standard);
+            background-color: #fff;
+            margin: 0;
+       
+            &.checked {
+                background-color: #424242;
+            }
+        
+            > svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 12px;
+                height: 12px;
+                display: inline-flex;
+                align-items: center;
+                flex-shrink: 0;
+            }
+        }
+    }
+}

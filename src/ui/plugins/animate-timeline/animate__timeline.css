@@ -1,0 +1,53 @@
+:root {
+    --main-background: #efefef;
+    --font-roboto: 'Roboto', sans-serif;
+    --code-fonts: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --ease-standard: cubic-bezier(0.15, 0, 0.15, 1);
+    --hover-anim: all 200ms cubic-bezier(0.15, 0, 0.15, 1);
+}
+
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body { font-family: var(--font-robot); }
+
+html, body { background: var(--main-background); margin: 0; }
+
+select::-ms-expand { 
+    display: none;
+}
+
+button {
+    border: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#ui {
+    width: 779px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
