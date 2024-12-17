@@ -1,7 +1,16 @@
+var selDelIndex = 0;
 export default function CreateListItemDelete(parent: HTMLElement, index: number, listWidth: number, handleDeleteClick: () => void): void {
+    const parentElement = parent.parentElement;
 
     const deleteElement = document.createElement('p');
-    deleteElement.className = "ui-list-new-item-easing";
+    // deleteElement.setAttribute('data-index', index.toString());
+    // deleteElement.className = "ui-list-new-item-delete";
+
+    if (parentElement) {
+        deleteElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        deleteElement.className = "ui-list-new-item-delete " + "input-elem-" + parentElement.getAttribute('data-index');
+    }
+    
     deleteElement.style.display = "flex";
     deleteElement.style.alignItems = "center";
     deleteElement.style.justifyContent = "center";
@@ -41,6 +50,31 @@ export default function CreateListItemDelete(parent: HTMLElement, index: number,
 
     deleteElement.addEventListener('click', function(event: Event) {
         handleDeleteClick();
+        selDelIndex = Number(this.parentElement.getAttribute('data-index'));
+        // console.log(Number(this.parentElement.getAttribute('data-index')))
     });
     
 }
+
+CreateListItemDelete.indexUpdate = function (): void {
+    const deleteElements = document.querySelectorAll('.ui-list-new-item-delete') as NodeListOf<HTMLElement>;
+
+    deleteElements.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-delete " + "input-elem-" + parentElement.getAttribute('data-index');
+        }
+    });
+};
+
+CreateListItemDelete.delIndexUpdate = function (): number {
+
+    return CreateListItemDelete.delIndexUpdateSet(selDelIndex);
+};
+
+CreateListItemDelete.delIndexUpdateSet = function (index): number {
+
+    return index;
+};
+

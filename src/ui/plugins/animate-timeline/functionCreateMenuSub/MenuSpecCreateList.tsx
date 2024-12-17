@@ -1,13 +1,16 @@
+import { m } from 'framer-motion';
 import CloseBtnIcon from './Components/CloseBtnIcon';
 import TitleLabel from './Components/TitleLabel';
 import { valOptSpecs } from './Components/valOptSpecs';
+import MenuSpecs from './MenuSpecs';
+import { get } from 'http';
 
 export default function MenuSpecCreateList(parent: HTMLElement, className: string, index: number, specSelectClick: (itemId: number) => void, specsLabelCheck: (itemId: string[]) => void) {
     let specs: any[][] = [[]];
     
     const menu = document.createElement('div');
+    menu.className = 'ui-menu-spec-sub ' + className;
     menu.setAttribute('data-index', index.toString());
-    menu.className = className;
     menu.style.position = 'absolute';
     menu.style.width = '100%';
     menu.style.height = '100%';
@@ -20,8 +23,8 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     menu.style.transform = 'translateX(100%)';
 
     const menuFrameTop = document.createElement('div');
+    menuFrameTop.className = 'specs-selector-frame-top idx-' + index.toString();
     menuFrameTop.setAttribute('data-index', index.toString());
-    menuFrameTop.className = 'specs-selector-frame-top';
     menuFrameTop.style.display = 'flex';
     menuFrameTop.style.alignItems = 'right';
     menuFrameTop.style.alignContent = 'space-between';
@@ -32,7 +35,8 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     menu.appendChild(menuFrameTop);
 
     const closeButtonrect = document.createElement('div');
-    closeButtonrect.className = 'close-button-rect';
+    closeButtonrect.className = 'close-button-rect idx-' + index.toString();
+    closeButtonrect.setAttribute('data-index', index.toString());
     closeButtonrect.style.display = 'flex';
     closeButtonrect.style.alignSelf = 'right';
     closeButtonrect.style.width = '100%';
@@ -43,7 +47,7 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     closeButtonrect.style.flexWrap = 'wrap';
     menuFrameTop.appendChild(closeButtonrect);
 
-    CloseBtnIcon(closeButtonrect);
+    CloseBtnIcon(closeButtonrect, index);
 
     closeButtonrect.addEventListener('click', () => {
         menu.style.transform = 'translateX(100%)';
@@ -55,7 +59,7 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     });
 
     const menuFrameBottom= document.createElement('div');
-    menuFrameBottom.className = 'specs-selector-frame-bottom';
+    menuFrameBottom.className = 'specs-selector-frame-bottom idx-' + index.toString();
     menuFrameBottom.setAttribute('data-index', index.toString());
     menuFrameBottom.style.display = 'flex';
     menuFrameBottom.style.alignItems = 'center';
@@ -69,7 +73,7 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     TitleLabel(menuFrameBottom, 'Spec', 'Choose your\nanimation specs');
 
     const menuFrameBottomSpec= document.createElement('div');
-    menuFrameBottomSpec.className = 'specs-selector-frame-bottom-spec-contain';
+    menuFrameBottomSpec.className = 'specs-selector-frame-bottom-spec-contain idx-' + index.toString();
     menuFrameBottomSpec.setAttribute('data-index', index.toString());
     menuFrameBottomSpec.style.display = 'flex';
     menuFrameBottomSpec.style.alignItems = 'center';
@@ -89,9 +93,10 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
      // 옵션 리스트 추가
     valOptSpecs.forEach((option, optionIndex) => {
         const optionElement = document.createElement('div');
-        optionElement.className = 'specs-selector-option';
+        optionElement.className = 'specs-selector-option idx-' + index.toString();
         optionElement.id = `opt-${index}-${optionIndex}`;
         optionElement.setAttribute('data-specs', option.label);
+        optionElement.setAttribute('data-specs-opt-idx', optionIndex.toString());
         optionElement.style.display = 'flex';
         optionElement.style.padding = '2px 8px';
         optionElement.style.justifyContent = 'center';
@@ -206,6 +211,65 @@ MenuSpecCreateList.update = function (specMenuSelectIndex: number, className: st
                 });
             }
         }
+    });
+};
+
+MenuSpecCreateList.menuSpecDelete = function (index: number, itemN: number): void {
+    const MenuSpec = document.querySelectorAll(`.ui-menu-spec-sub`);
+
+    MenuSpec.forEach((item, idx) => {
+        if(idx === index){
+            item.remove();
+        }
+    });
+    MenuSpecCreateList.indexUpdate();
+}
+
+MenuSpecCreateList.indexUpdate = function (): void {
+    const MenuSpec = document.querySelectorAll('.ui-menu-spec-sub') as NodeListOf<HTMLElement>;
+    MenuSpec.forEach((item, i) => {
+        item.setAttribute('data-index', i.toString());
+        item.className = "ui-menu-spec-sub " + "ui-menu-spec-sub " + i.toString();
+
+        Array.from(item.children).forEach(child => {
+            if(child.classList.contains('specs-selector-frame-top')) {
+                child.setAttribute('data-index', i.toString());
+                child.className = "specs-selector-frame-top idx-" + i.toString();
+
+                Array.from(child.children).forEach(closeButtonRect => {
+                    if(closeButtonRect.classList.contains('close-button-rect')) {
+                        closeButtonRect.setAttribute('data-index', i.toString());
+                        closeButtonRect.className = "close-button-rect idx-" + i.toString();
+
+                        Array.from(closeButtonRect.children).forEach(closeButton => {
+                            if(closeButton.classList.contains('close-button')) {
+                                closeButton.setAttribute('data-index', i.toString());
+                                closeButton.className = "close-button idx-" + i.toString();
+                            }
+                        });
+                    }
+                });
+            }
+            if(child.classList.contains('specs-selector-frame-bottom')) {
+                child.setAttribute('data-index', i.toString());
+                child.className = "specs-selector-frame-bottom idx-" + i.toString();
+
+                Array.from(child.children).forEach(frameBottomSpecContain => {
+                    if(frameBottomSpecContain.classList.contains('specs-selector-frame-bottom-spec-contain')) {
+                        frameBottomSpecContain.setAttribute('data-index', i.toString());
+                        frameBottomSpecContain.className = "specs-selector-frame-bottom-spec-contain idx-" + i.toString();
+                        
+                        Array.from(frameBottomSpecContain.children).forEach(specsSelectorOption => {
+                            if(specsSelectorOption.classList.contains('specs-selector-option')) {
+                                specsSelectorOption.setAttribute('data-index', i.toString());
+                                specsSelectorOption.className = "specs-selector-option idx-" + i.toString();
+                                specsSelectorOption.id = `opt-${i.toString()}-${specsSelectorOption.getAttribute('data-specs-opt-idx')}`;
+                            }
+                        });
+                    }
+                });
+            }
+        });
     });
 };
 

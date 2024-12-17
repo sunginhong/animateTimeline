@@ -1,7 +1,16 @@
 export default function CreateListItemDuration(parent: HTMLElement, index: number, listWidth: number, handleDurationClick: () => void): void {
 
+    const parentElement = parent.parentElement;
+
     const durationElement = document.createElement('p');
-    durationElement.className = "ui-list-new-item-duration";
+    // durationElement.setAttribute('data-index', index.toString());
+    // durationElement.className = "ui-list-new-item-duration";
+
+    if (parentElement) {
+        durationElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        durationElement.className = "ui-list-new-item-duration " + "input-elem-" + parentElement.getAttribute('data-index');
+    }
+
     durationElement.style.display = "flex";
     durationElement.style.alignItems = "center";
     durationElement.style.justifyContent = "center";
@@ -11,9 +20,14 @@ export default function CreateListItemDuration(parent: HTMLElement, index: numbe
     parent.appendChild(durationElement);
 
     const inputElement = document.createElement('input');
-    inputElement.className = "ui-list-new-item-duration-input";
+    // inputElement.className = "ui-list-new-item-duration-input";
     // inputElement.type = "number";
     // inputElement.defaultValue = (Math.floor(Math.random() * 6) + 3) + "00"; // Random duration
+    if (parentElement) {
+        inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        inputElement.className = "ui-list-new-item-duration-input " + "input-rect-" + parentElement.getAttribute('data-index');
+    }
+
     inputElement.defaultValue = "duration(ms)"
     inputElement.style.position = "relative";
     inputElement.style.width = (listWidth-6) + "px";
@@ -63,4 +77,23 @@ export default function CreateListItemDuration(parent: HTMLElement, index: numbe
 
 }
 
+CreateListItemDuration.indexUpdate = function (): void {
+    const durationElement = document.querySelectorAll('.ui-list-new-item-duration') as NodeListOf<HTMLElement>;
+    const inputElement = document.querySelectorAll('.ui-list-new-item-duration-input') as NodeListOf<HTMLElement>;
 
+    durationElement.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-duration " + "input-elem-" + parentElement.getAttribute('data-index');
+        }
+    });
+
+    inputElement.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-duration-input " + "input-rect-" + parentElement.getAttribute('data-index');
+        }
+    });
+};

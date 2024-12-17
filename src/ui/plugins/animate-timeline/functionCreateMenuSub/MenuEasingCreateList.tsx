@@ -1,13 +1,14 @@
 import CloseBtnIcon from './Components/CloseBtnIcon';
 import TitleLabel from './Components/TitleLabel';
 import { valOptEasing } from './Components/valOptEasing';
+import MenuEasing from './MenuEasing';
 
 export default function MenuEasingCreateList(parent: HTMLElement, className: string, index: number, easingselectClick: (itemId: number) => void, easingLabelCheck: (itemId: string) => void) {
     let easings: any[][] = [[]];
     
     const menu = document.createElement('div');
+    menu.className = 'ui-menu-easing-sub ' + className;
     menu.setAttribute('data-index', index.toString());
-    menu.className = className;
     menu.style.position = 'absolute';
     menu.style.width = '100%';
     menu.style.height = '100%';
@@ -20,8 +21,8 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menu.style.transform = 'translateX(100%)';
 
     const menuFrameTop = document.createElement('div');
+    menuFrameTop.className = 'easing-selector-frame-top idx-' + index.toString();
     menuFrameTop.setAttribute('data-index', index.toString());
-    menuFrameTop.className = 'easing-selector-frame-top';
     menuFrameTop.style.display = 'flex';
     menuFrameTop.style.alignItems = 'right';
     menuFrameTop.style.alignContent = 'space-between';
@@ -32,7 +33,8 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menu.appendChild(menuFrameTop);
 
     const closeButtonrect = document.createElement('div');
-    closeButtonrect.className = 'close-button-rect';
+    closeButtonrect.className = 'close-button-rect idx-' + index.toString();
+    closeButtonrect.setAttribute('data-index', index.toString());
     closeButtonrect.style.display = 'flex';
     closeButtonrect.style.alignSelf = 'right';
     closeButtonrect.style.width = '100%';
@@ -43,7 +45,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     closeButtonrect.style.flexWrap = 'wrap';
     menuFrameTop.appendChild(closeButtonrect);
 
-    CloseBtnIcon(closeButtonrect);
+    CloseBtnIcon(closeButtonrect, index);
 
     closeButtonrect.addEventListener('click', () => {
         menu.style.transform = 'translateX(100%)';
@@ -55,7 +57,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     });
 
     const menuFrameBottom= document.createElement('div');
-    menuFrameBottom.className = 'easing-selector-frame-bottom';
+    menuFrameBottom.className = 'easing-selector-frame-bottom idx-' + index.toString();
     menuFrameBottom.setAttribute('data-index', index.toString());
     menuFrameBottom.style.display = 'flex';
     menuFrameBottom.style.alignItems = 'center';
@@ -69,7 +71,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     TitleLabel(menuFrameBottom, 'Easing', 'Choose your\nanimation easings');
 
     const menuFrameBottomEasing= document.createElement('div');
-    menuFrameBottomEasing.className = 'easing-selector-frame-bottom-Easing-contain';
+    menuFrameBottomEasing.className = 'easing-selector-frame-bottom-easing-contain idx-' + index.toString();
     menuFrameBottomEasing.setAttribute('data-index', index.toString());
     menuFrameBottomEasing.style.display = 'flex';
     menuFrameBottomEasing.style.alignItems = 'center';
@@ -80,7 +82,6 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameBottom.appendChild(menuFrameBottomEasing);
 
     // 옵션 리스트 생성
-  
 
     // 이벤트 리스너 추가
     const easingLabelCheckArray: [string][] = [];
@@ -90,9 +91,10 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
      // 옵션 리스트 추가
     valOptEasing.forEach((option, optionIndex) => {
         const optionElement = document.createElement('div');
-        optionElement.className = 'easing-selector-option';
+        optionElement.className = 'easings-selector-option idx-' + index.toString();
         optionElement.id = `opt-${index}-${optionIndex}`;
         optionElement.setAttribute('data-easings', option.label);
+        optionElement.setAttribute('data-easings-opt-idx', optionIndex.toString());
         optionElement.style.display = 'flex';
         optionElement.style.padding = '2px 8px';
         optionElement.style.justifyContent = 'center';
@@ -105,7 +107,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
         menuFrameBottomEasing.appendChild(optionElement);
 
         const optionLabelElement = document.createElement('p');
-        optionElement.className = 'easing-selector-label';
+        optionElement.className = 'easing-selector-label idx-' + index.toString();
         optionLabelElement.style.alignItems = 'center';
         optionLabelElement.style.fontFamily = "Pretendard Variable";
         optionLabelElement.style.fontSize = '8px';
@@ -207,6 +209,68 @@ MenuEasingCreateList.update = function (EasingMenuSelectIndex: number, className
                     });
                 }
             }
+    });
+};
+
+MenuEasingCreateList.menuEasingDelete = function (index: number, itemN: number): void {
+    const MenuEasing = document.querySelectorAll(`.ui-menu-easing-sub`);
+
+    MenuEasing.forEach((item, idx) => {
+        if(idx === index){
+            item.remove();
+        }
+    });
+    MenuEasingCreateList.indexUpdate();
+}
+
+MenuEasingCreateList.indexUpdate = function (): void {
+    const MenuEasing = document.querySelectorAll('.ui-menu-easing-sub') as NodeListOf<HTMLElement>;
+
+    MenuEasing.forEach((item, i) => {
+        item.setAttribute('data-index', i.toString());
+        item.className = "ui-menu-easing-sub " + "ui-menu-easing-sub " + i.toString();
+
+        Array.from(item.children).forEach(child => {
+            if(child.classList.contains('easing-selector-frame-top')) {
+                child.setAttribute('data-index', i.toString());
+                child.className = "easing-selector-frame-top idx-" + i.toString();
+
+                Array.from(child.children).forEach(closeButtonRect => {
+                    if(closeButtonRect.classList.contains('close-button-rect')) {
+                        closeButtonRect.setAttribute('data-index', i.toString());
+                        closeButtonRect.className = "close-button-rect idx-" + i.toString();
+        
+                        Array.from(closeButtonRect.children).forEach(closeButton => {
+                            if(closeButton.classList.contains('close-button')) {
+                                closeButton.setAttribute('data-index', i.toString());
+                                closeButton.className = "close-button idx-" + i.toString();
+                            }
+                        });
+                    }
+                });
+            }
+            if(child.classList.contains('easing-selector-frame-bottom')) {
+                child.setAttribute('data-index', i.toString());
+                child.className = "easing-selector-frame-bottom idx-" + i.toString();
+
+                Array.from(child.children).forEach(frameBottomEasingContain => {
+
+                    if(frameBottomEasingContain.classList.contains('easing-selector-frame-bottom-easing-contain')) {
+                        frameBottomEasingContain.setAttribute('data-index', i.toString());
+                        frameBottomEasingContain.className = "easing-selector-frame-bottom-easing-contain idx-" + i.toString();
+                        
+                        Array.from(frameBottomEasingContain.children).forEach(easingsSelectorOption => {
+                            if(easingsSelectorOption.classList.contains('easing-selector-label')) {
+                                easingsSelectorOption.setAttribute('data-index', i.toString());
+                                easingsSelectorOption.className = "easing-selector-label idx-" + i.toString();
+                                easingsSelectorOption.id = `opt-${i.toString()}-${easingsSelectorOption.getAttribute('data-easings-opt-idx')}`;
+        
+                            }
+                        });
+                    }
+                });
+            }
+        });
     });
 };
 

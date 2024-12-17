@@ -1,8 +1,15 @@
 export default function CreateListItemLabels(parent: HTMLElement, index: number ,listWidth: number, handleLabelClick: () => void): void {
 
+    const parentElement = parent.parentElement;
+
     const labelContainer = document.createElement('div');
-    labelContainer.setAttribute('data-index', index.toString());
-    labelContainer.className = "ui-list-new-item-label";
+    // labelContainer.setAttribute('data-index', index.toString());
+    // labelContainer.className = "ui-list-new-item-label";
+    if (parentElement) {
+        labelContainer.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        labelContainer.className = "ui-list-new-item-label";
+    }
+
     labelContainer.style.display = "flex";
     labelContainer.style.alignItems = "center";
     labelContainer.style.justifyContent = "center";
@@ -11,8 +18,14 @@ export default function CreateListItemLabels(parent: HTMLElement, index: number 
     parent.appendChild(labelContainer);
 
     const inputElement = document.createElement('input');
-    inputElement.setAttribute('data-index', index.toString());
-    inputElement.className = "ui-list-new-item-label-input";
+    // inputElement.setAttribute('data-index', index.toString());
+    // inputElement.className = "ui-list-new-item-label-input";
+
+    if (parentElement) {
+        inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        inputElement.className = "ui-list-new-item-label-input";
+    }
+    
     inputElement.defaultValue = "Add label name";
     inputElement.style.position = "relative";
     inputElement.style.width = (listWidth-6) + "px";
@@ -60,3 +73,23 @@ export default function CreateListItemLabels(parent: HTMLElement, index: number 
         }
     });
 }
+
+CreateListItemLabels.indexUpdate = function (): void {
+    const labelContainer = document.querySelectorAll('.ui-list-new-item-label') as NodeListOf<HTMLElement>;
+    const inputElement = document.querySelectorAll('.ui-list-new-item-label-input') as NodeListOf<HTMLElement>;
+
+    labelContainer.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        }
+    });
+
+    inputElement.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        }
+    });
+};
+

@@ -5,6 +5,8 @@ import ListItemElements from './functionCreateList/ListItemElements';
 import ListLabels from './components/ListLabels';
 import ListLabelsLine from './components/ListLabelsLine'
 import { spec } from 'node:test/reporters';
+import UiMenu from './UiMenu';
+
 
 interface UiListProps {
     addItemChecked: boolean;
@@ -17,23 +19,37 @@ interface UiListProps {
 
     onSpecSelectIndexChange: (newChecked: number) => void;
     onEasingSelectIndexChange: (newChecked: number) => void;
+    onDeleteIndexChange: (newChecked: number) => void;
 }
 
-const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemNChecked , onSpecSelectIndexChange, onEasingSelectIndexChange, specsLabelChecked, easingLabelChecked}) => {
+const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemNChecked, onSpecSelectIndexChange, onEasingSelectIndexChange, onDeleteIndexChange, specsLabelChecked, easingLabelChecked}) => {
     const newItemsRef = useRef(null);
     const itemLabelRef = useRef(null);
+
     const [specSelectIndex, setspecSelectIndex] = useState(null);
     const [easingSelectIndex, setEasingSelectIndex] = useState(null);
+    const [deleteSelectIndex, setDelSelectIndex] = useState(null);
+
+    const [itemIndex, setItemIndex] = useState(null);
+    const [itemN, setItemN] = useState(0);
 
     let listWidthArray: number[] = [74, 220, 98, 72, 74, 40];
     let list: ListItemElements = new ListItemElements();
 
     function fnAddBtn(): void {
-        list.create(newItemsRef.current, "ui-list-row-new-item list-new-item " + (itemNChecked - 1), itemNChecked - 1, listWidthArray, handleLabelClick, handleSpecClick, handleEasingClick, handleDurationClick, handleDelayClick, handleDeleteClick);
+        list.create(newItemsRef.current, "ui-list-row-new-item list-new-item-" + itemIndex, itemIndex, listWidthArray, handleLabelClick, handleSpecClick, handleEasingClick, handleDurationClick, handleDelayClick, handleDeleteClick);
     } 
 
     function fnCreareBtn(): void {
     }
+
+    useEffect(() => {
+    }, [itemN]);
+
+    useEffect(() => {
+        setItemIndex(itemNChecked);
+        setItemN(itemNChecked);
+    }, [itemNChecked]);
 
     useEffect(() => {
         onSpecSelectIndexChange(specSelectIndex);
@@ -42,6 +58,12 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
     useEffect(() => {
         onEasingSelectIndexChange(easingSelectIndex);
     }, [easingSelectIndex]);
+
+    useEffect(() => {
+        // onDeleteIndexChange(deleteSelectIndex);
+        // // setDelSelectIndex(false);
+        // console.log('deleteSelectIndex'+deleteSelectIndex);
+    }, [deleteSelectIndex]);
 
     useEffect(() => {
         if (addItemChecked) {
@@ -81,6 +103,68 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
 
     const handleDeleteClick = () => {
         handleMenuReset();
+        let timer0: number | undefined;
+        let timer1: number | undefined;
+        let timer2: number | undefined;
+
+        const itemTotalLength = document.querySelectorAll(`.item-total-length`) as NodeListOf<HTMLElement>;
+        const itemTotalLengthTextContents = Array.from(itemTotalLength).map(item => item.textContent);
+       
+        const itemElement = document.querySelector(`.ui-list-row-new-item.list-new-item-${itemIndex}`);
+        if (itemElement) {
+            if(Number(itemTotalLengthTextContents[0])-1 >= 0) {
+                setItemN(Number(itemTotalLengthTextContents[0])-1);
+            }
+        
+        }
+        timer0 = window.setTimeout(() => {
+            setDelSelectIndex(list.delIndexUpdate());
+            list.listDelete(list.delIndexUpdate(), Number(itemTotalLengthTextContents[0])-1);
+            onDeleteIndexChange(list.delIndexUpdate());
+            window.clearTimeout(timer0);
+        }, 0);
+       
+        timer1 = window.setTimeout(() => {
+            window.clearTimeout(timer1);
+        }, 350);
+       
+        // timer1 = window.setTimeout(() => {
+        //     itemNChecked -= 1;
+        //     window.clearTimeout(timer1);
+        // }, 100);
+        // if (itemN > 0) {
+        //     timer1 = window.setTimeout(() => {
+        //         listArray.forEach((item, i) => {
+        //             if (this.id === i.toString()) {
+        //                 item.remove();
+        //                 delbtnArray[i].remove();
+        //                 listArray.splice(i, 1);
+        //                 delbtnArray.splice(i, 1);
+        //                 specArrayF = [...Array(i)];
+        //                 specsArray.splice(i, 1);
+        //                 specArrayF.splice(i, 1);
+        //                 specs.splice(i, 1);
+        //                 specUniqueArrF.splice(i, 1);
+        //                 specsSelectorArr[i].remove();
+        //                 specsSelectorArr.splice(i, 1);
+        //             }
+        //         });
+        //         window.clearTimeout(timer1);
+        //     }, 100);
+        //     itemN -= 1;
+        // }
+    
+        timer2 = window.setTimeout(() => {
+            
+            // listArray.forEach((item, i) => {
+            //     item.id = i.toString();
+            //     delbtnArray[i].id = i.toString();
+            //     item.querySelectorAll('option').forEach((option) => {
+            //         option.id = i.toString();
+            //     });
+            // });
+            window.clearTimeout(timer2);
+        }, 350);
     };
 
     const handleMenuReset = () => {
@@ -93,6 +177,21 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
             setEasingSelectIndex(-1);
             setspecSelectIndex(-1);
             setspecSelectIndex(itemId)   
+
+            const uiMenuEasingSub = document.querySelectorAll(`.ui-menu-easing-sub`);
+            if(itemId != -1){
+                const uiMenuSpecSub = document.querySelectorAll(`.ui-menu-spec-sub`);
+                uiMenuSpecSub.forEach((item, i) => { 
+                    if(i === itemId){
+                        (item as HTMLElement).style.transform = 'translateX(0%)';
+                    } else { 
+                        (item as HTMLElement).style.transform = 'translateX(100%)';
+                    }
+                })
+            }
+            uiMenuEasingSub.forEach(item => {
+                (item as HTMLElement).style.transform = 'translateX(100%)';
+            });
           }, 0);
           return () => clearTimeout(timer);
     };
@@ -102,6 +201,21 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
             setspecSelectIndex(-1);
             setEasingSelectIndex(-1);
             setEasingSelectIndex(itemId)   
+
+            const uiMenuSpecSub = document.querySelectorAll(`.ui-menu-spec-sub`);
+            if(itemId != -1){
+                const uiMenuEasingSub = document.querySelectorAll(`.ui-menu-easing-sub`);
+                uiMenuEasingSub.forEach((item, i) => { 
+                    if(i === itemId){
+                        (item as HTMLElement).style.transform = 'translateX(0%)';
+                    } else { 
+                        (item as HTMLElement).style.transform = 'translateX(100%)';
+                    }
+                })
+            }
+            uiMenuSpecSub.forEach(item => {
+                (item as HTMLElement).style.transform = 'translateX(100%)';
+            });
           }, 0);
           return () => clearTimeout(timer);
     };

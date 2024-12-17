@@ -1,7 +1,8 @@
-export default function CloseBtnIcon(parent: HTMLElement) {
+export default function CloseBtnIcon(parent: HTMLElement, index: number) {
     // Close button
     const closeButton = document.createElement('button');
-    closeButton.className = 'close-button';
+    closeButton.className = 'close-button idx-' + index.toString();
+    closeButton.setAttribute('data-index', index.toString());
     closeButton.style.position = 'absolute';
     closeButton.style.top = '0';
     closeButton.style.right = '0';

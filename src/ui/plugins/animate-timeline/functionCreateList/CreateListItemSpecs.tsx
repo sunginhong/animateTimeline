@@ -1,10 +1,19 @@
 import { valOptSpecs } from '../functionCreateMenuSub/Components/valOptSpecs';
 
 export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HTMLElement, index: number, listWidth: number, handleSpecClick: (itemId: number) => void): void {
+
+    const parentElement = parent.parentElement;
+
     const stateValue = parent.getAttribute('data-state-value-specmenu') || '';
     const specElement = document.createElement('p');
-    // specElement.setAttribute('data-state-value-specmenu', stateSpecMenu);
-    specElement.className = "ui-list-new-item-specs " + "input-elem" + index;
+    // specElement.setAttribute('data-index', index.toString());
+    // specElement.className = "ui-list-new-item-specs " + "input-elem-" + index;
+
+    if (parentElement) {
+        specElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        specElement.className = "ui-list-new-item-specs " + "input-elem-" + parentElement.getAttribute('data-index');
+    }
+
     specElement.style.display = "flex";
     specElement.style.alignItems = "center";
     specElement.style.justifyContent = "center";
@@ -14,8 +23,14 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     parent.appendChild(specElement);
 
     const inputElement = document.createElement('input');
-    // inputElement.setAttribute('data-state-value-specmenu', stateSpecMenu);
-    inputElement.className = "ui-list-new-item-specs-input " + "input-rect" + index;
+    // inputElement.setAttribute('data-index', index.toString());
+    // inputElement.className = "ui-list-new-item-specs-input " + "input-rect-" + index;
+
+    if (parentElement) {
+        inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        inputElement.className = "ui-list-new-item-specs-input " + "input-rect-" + parentElement.getAttribute('data-index');
+    }
+
     inputElement.type = "string";
     inputElement.readOnly = true;
     inputElement.defaultValue = "Select animation specs";
@@ -43,7 +58,8 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     const menuSubSpecRect = menuSubSpecElement.getBoundingClientRect();
 
     specElement.addEventListener('click', function(event: Event) {
-        handleSpecClick(index);
+        handleSpecClick(-1)
+        handleSpecClick(Number(this.getAttribute('data-index')));
     });
 
     inputElement.addEventListener('focus', () => {
@@ -69,7 +85,7 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: Array<string>)
     // console.log('specsUpdate', index, specs);
     let elemSize = {width: 0, height: 0};
 
-    const specsElement = document.querySelectorAll(`.ui-list-new-item-specs.input-elem`+index);
+    const specsElement = document.querySelectorAll(`.ui-list-new-item-specs.input-elem-`+index);
     specsElement.forEach((element: Element) => {
         if (element instanceof HTMLElement) {
             elemSize.width = element.offsetWidth;
@@ -77,23 +93,23 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: Array<string>)
         }
     });
     
-    const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect`+index);
+    const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect-`+index);
     inputElements.forEach((element: Element) => {
-        if (element instanceof HTMLInputElement && element.classList.contains(`input-rect${index}`)) {
+        if (element instanceof HTMLInputElement && element.classList.contains(`input-rect-${index}`)) {
             element.defaultValue = "";
         }
     });
     
     if (specs !== null && specs.length > 0) {
-        const existingResultElement = document.querySelector(`.ui-list-new-item-specs-input-result.input-result${index}`);
+        const existingResultElement = document.querySelector(`.ui-list-new-item-specs-input-result.input-result-${index}`);
 
-        const easingElement = document.querySelectorAll(`.ui-list-new-item-specs-input-result.input-result`+index);
+        const easingElement = document.querySelectorAll(`.ui-list-new-item-specs-input-result.input-result-`+index);
         easingElement.forEach((element: Element) => {
             element.remove();
         });
 
         const specsElementResult = document.createElement('div');
-        specsElementResult.className = "ui-list-new-item-specs-input-result " + "input-result" + index;
+        specsElementResult.className = "ui-list-new-item-specs-input-result " + "input-result-" + index;
         specsElementResult.style.position = "absolute";
         specsElementResult.style.width = (elemSize.width-2) + "px";
         specsElementResult.style.height = (elemSize.height-2) + "px";
@@ -107,7 +123,7 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: Array<string>)
         specsElementResult.style.overflowX = "scroll";
 
         const specsElementResultChilds = document.createElement('div');
-        specsElementResultChilds.className = "ui-list-new-item-specs-input-result-child " + "input-result-child" + index;
+        specsElementResultChilds.className = "ui-list-new-item-specs-input-result-child " + "input-result-child-" + index;
      
         specsElementResultChilds.style.position = "absolute";
         specsElementResultChilds.style.width = "auto";
@@ -177,14 +193,63 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: Array<string>)
         })
       
     } else {
-        const existingResultElement = document.querySelector(`.ui-list-new-item-specs-input-result.input-result${index}`);
+        const existingResultElement = document.querySelector(`.ui-list-new-item-specs-input-result.input-result-${index}`);
         if (existingResultElement) {
             existingResultElement.remove();
         }
         inputElements.forEach((element: Element) => {
-            if (element instanceof HTMLInputElement && element.classList.contains(`input-rect${index}`)) {
+            if (element instanceof HTMLInputElement && element.classList.contains(`input-rect-${index}`)) {
                 element.defaultValue = "Select animation specs";
             }
         });
     }
+};
+
+CreateListItemSpecs.indexUpdate = function (): void {
+    const specElement = document.querySelectorAll('.ui-list-new-item-specs') as NodeListOf<HTMLElement>;
+    const inputElement = document.querySelectorAll('.ui-list-new-item-specs-input') as NodeListOf<HTMLElement>;
+
+    specElement.forEach((item, i) => {
+        item.setAttribute('data-index', i.toString());
+        item.className = "ui-list-new-item-specs " + "input-elem-" + i.toString;
+    });
+
+    inputElement.forEach((item, i) => {
+        item.setAttribute('data-index', i.toString());
+        item.className = "ui-list-new-item-specs-input " + "input-rect-" + i.toString();
+    });
+    /// index update...
+    const specsElement = document.querySelectorAll('.ui-list-new-item-specs') as NodeListOf<HTMLElement>;
+    const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input`) as NodeListOf<HTMLElement>;
+    const specsElementResult = document.querySelectorAll(`.ui-list-new-item-specs-input-result`) as NodeListOf<HTMLElement>;
+    const specsElementResultChilds = document.querySelectorAll(`.ui-list-new-item-specs-input-result-child`) as NodeListOf<HTMLElement>;
+    
+    specsElement.forEach((item, i) => {
+        item.setAttribute('data-index', i.toString());
+        item.className = "ui-list-new-item-specs " + "input-elem-" + i.toString();
+    });
+
+    inputElements.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-specs-input " + "input-rect-" + parentElement.getAttribute('data-index');
+        }
+    });
+    
+    specsElementResult.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-specs-input-result " + "input-result-" + parentElement.getAttribute('data-index');
+        }
+    });
+
+    specsElementResultChilds.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-specs-input-result-child " + "input-result-child-" + parentElement.getAttribute('data-index');
+        }
+    });
 };

@@ -27,6 +27,7 @@ const animate_timeline = () => {
     const [itemNChecked, setItemNChecked] = useState(0);
     const [specSelectIndex, setSpecSelectIndex] = useState(0);
     const [easingSelectIndex, setEasingSelectIndex] = useState(0);
+    const [deleteSelectIndex, setDeleteSelectIndex] = useState(null);
 
     const [specsLabelChecked, setSpecsLabelChecked] = useState<string[]>([]);
     const [easingLabelChecked, setEasingLabelChecked] = useState('None');
@@ -45,20 +46,27 @@ const animate_timeline = () => {
     
     const handleAddItemCheckedChange = (newChecked: boolean) => {
         setAddItemChecked(newChecked);
-    };
+      };
 
     const handleResetItemCheckedChange = (newChecked: boolean) => {
         setResetItemChecked(newChecked);
     };
 
-    const handleItemNChange = (newChecked: number) => {setItemNChecked(newChecked) };
+    const handleItemNChange = (newChecked: number) => {
+      setItemNChecked(newChecked) 
+    };
 
-    const handleSpecMenuSelIndexChange = (newChecked: number) => {
+    const handleSpecSelIndexChange = (newChecked: number) => {
         setSpecSelectIndex(newChecked);
     };
     
-    const handleEasingMenuSelIndexChange = (newChecked: number) => {
+    const handleEasingSelIndexChange = (newChecked: number) => {
       setEasingSelectIndex(newChecked);
+    };
+
+    const handleDeleteSelIndexChange = (newChecked: number) => {
+      setDeleteSelectIndex(null)
+      setDeleteSelectIndex(newChecked);
     };
 
     const handleSpecsLabelChange = (newChecked: string[]) => {
@@ -70,7 +78,7 @@ const animate_timeline = () => {
     };
 
     useEffect(() => {
-      
+    
     }, [])
 
     return (
@@ -84,6 +92,7 @@ const animate_timeline = () => {
               resetItemChecked={resetItemChecked} 
               itemNChecked={itemNChecked}
 
+              totalN={itemNChecked}
               onAdWidthChange={handleAdWidthChange}
               onDelayCheckedChange={handleDelayCheckedChange}
               onStyleCheckedChange={handleStyleCheckedChange}
@@ -93,6 +102,7 @@ const animate_timeline = () => {
               onItemNChange={handleItemNChange}
               specSelectIndex={specSelectIndex}
               easingSelectIndex={easingSelectIndex}
+              deleteSelectIndex={deleteSelectIndex}
 
               specsLabelChecked={specsLabelChecked}
               easingLabelChecked={easingLabelChecked}
@@ -103,11 +113,13 @@ const animate_timeline = () => {
               addItemChecked={addItemChecked} 
               resetItemChecked={resetItemChecked} 
               itemNChecked={itemNChecked}
+
               specSelectIndex={specSelectIndex}
               easingSelectIndex={easingSelectIndex}
 
-              onSpecSelectIndexChange={handleSpecMenuSelIndexChange}
-              onEasingSelectIndexChange={handleEasingMenuSelIndexChange}
+              onSpecSelectIndexChange={handleSpecSelIndexChange}
+              onEasingSelectIndexChange={handleEasingSelIndexChange}
+              onDeleteIndexChange={handleDeleteSelIndexChange}
 
               specsLabelChecked={specsLabelChecked}
               easingLabelChecked={easingLabelChecked}

@@ -1,8 +1,16 @@
 export default function CreateListItemDelay(parent: HTMLElement, index: number, listWidth: number, handleDelayClick: () => void): void {
 
+    const parentElement = parent.parentElement;
+
     const delayElement = document.createElement('p');
-    delayElement.setAttribute('data-index', index.toString());
-    delayElement.className = "ui-list-new-item-delay";
+    // delayElement.setAttribute('data-index', index.toString());
+    // delayElement.className = "ui-list-new-item-delay";
+
+    if (parentElement) {
+        delayElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        delayElement.className = "ui-list-new-item-delay " + "input-elem-" + parentElement.getAttribute('data-index');
+    }
+
     delayElement.style.display = "flex";
     delayElement.style.alignItems = "center";
     delayElement.style.justifyContent = "center";
@@ -12,8 +20,14 @@ export default function CreateListItemDelay(parent: HTMLElement, index: number, 
     parent.appendChild(delayElement);
 
     const inputElement = document.createElement('input');
-    inputElement.setAttribute('data-index', index.toString());
-    inputElement.className = "ui-list-new-item-delay-input";
+    // inputElement.setAttribute('data-index', index.toString());
+    // inputElement.className = "ui-list-new-item-delay-input";
+
+    if (parentElement) {
+        inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
+        inputElement.className = "ui-list-new-item-delay-input " + "input-rect-" + parentElement.getAttribute('data-index');
+    }
+
     // inputElement.type = "number";
     // inputElement.defaultValue = (Math.floor(Math.random() * 6) + 3) + "00"; // Random duration
     inputElement.defaultValue = "delay(ms)"
@@ -63,3 +77,25 @@ export default function CreateListItemDelay(parent: HTMLElement, index: number, 
     });
     
 }
+
+CreateListItemDelay.indexUpdate = function (): void {
+    const delayElement = document.querySelectorAll('.ui-list-new-item-delay') as NodeListOf<HTMLElement>;
+    const inputElement = document.querySelectorAll('.ui-list-new-item-delay-input') as NodeListOf<HTMLElement>;
+
+    delayElement.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-delay " + "input-elem-" + parentElement.getAttribute('data-index');
+        }
+    });
+
+    inputElement.forEach((item, i) => {
+        const parentElement = item.parentElement;
+        if (parentElement) {
+            item.setAttribute('data-index', parentElement.getAttribute('data-index'));
+            item.className = "ui-list-new-item-delay-input " + "input-rect-" + parentElement.getAttribute('data-index');
+        }
+    });
+};
+
