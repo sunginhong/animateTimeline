@@ -25,7 +25,7 @@ interface UiMenuProps {
     easingSelectIndex: number;
     deleteSelectIndex: number;
 
-    specsLabelChecked: string[];
+    specsLabelChecked: any[][];
     easingLabelChecked: string;
 
     onAdWidthChange: (newWidth: string) => void;
@@ -35,7 +35,7 @@ interface UiMenuProps {
     onResetItemCheckedChange: (newChecked: boolean) => void;
     onItemNChange: (newChecked: number) => void;
 
-    onSpecsLabelChange: (newChecked: string[]) => void;
+    onSpecsLabelChange: (newChecked: any[][]) => void;
     onEasingLabelChange: (newChecked: string) => void;
 }
 
@@ -51,7 +51,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     const [selSpecIndex, setSelSpecIndex] = useState(specSelectIndex);
     const [selEasingIndex, setSelEasingIndex] = useState(easingSelectIndex);
 
-    const [isSpecsLabel, setIsSpecsLabel] = useState<string[]>(specsLabelChecked);
+    const [isSpecsLabel, setIsSpecsLabel] = useState<any[][]>(specsLabelChecked);
     const [isEasingLabel, setIsEasingLabel] = useState(easingLabelChecked);
     
     let menuSpecs: MenuSpecs = new MenuSpecs();
@@ -63,6 +63,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
         menuSpecs.create(uiMenuRef.current, "ui-menu-spec-sub " + itemN, itemN, specsSelectClick, specsLabelCheck);
         menuEasings.create(uiMenuRef.current, "ui-menu-easing-sub " + itemN, itemN, easingSelectClick, easingLabelCheck);
         setTimeout(() => setIsAddClicked(false), 100);
+       
     };
     const handleResetClick = () => {
         setIsResetClicked(true);
@@ -74,7 +75,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     }, [isAddClicked]);
 
     useEffect(() => {
-        onItemNChange(itemN);
+        // onItemNChange(itemN-1);
     }, [isAddClicked]);
 
     useEffect(() => {
@@ -106,10 +107,6 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     }, [easingSelectIndex]);
 
     useEffect(() => {
-        onSpecsLabelChange(isSpecsLabel);
-    }, [isSpecsLabel]);
-
-    useEffect(() => {
         onEasingLabelChange(isEasingLabel);
     }, [isEasingLabel]);
 
@@ -130,6 +127,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     }, [deleteSelectIndex]);
 
     useEffect(() => { 
+
      },[itemN]);
 
     // useEffect(() => { console.log(itemN) }, [itemN]);
@@ -146,8 +144,9 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
         setIsEasingLabel(easingLabel);
     };
 
-    const specsLabelCheck = (specsLabelCheck: string[]) => {
+    const specsLabelCheck = (specsLabelCheck: any[][]) => {
         setIsSpecsLabel(specsLabelCheck);
+        onSpecsLabelChange(specsLabelCheck);
     };
 
 

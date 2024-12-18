@@ -38,7 +38,7 @@ export default function ListItemCreateDiv(parent: HTMLElement, className: string
     CreateListItemDelete(listItemContain, index, listWidthArray[5], handleDeleteClick);
 }
 
-ListItemCreateDiv.specsUpdate = function (index: number, specs: Array<string>): void {
+ListItemCreateDiv.specsUpdate = function (index: number, specs: Array<any[][]>): void {
     CreateListItemSpec.specsUpdate(index, specs);
 };
 

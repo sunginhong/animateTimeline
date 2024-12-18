@@ -14,7 +14,7 @@ interface UiListProps {
     itemNChecked: number;
     specSelectIndex: number;
     easingSelectIndex: number;
-    specsLabelChecked: string[];
+    specsLabelChecked: any[][];
     easingLabelChecked: string;
 
     onSpecSelectIndexChange: (newChecked: number) => void;
@@ -22,7 +22,7 @@ interface UiListProps {
     onDeleteIndexChange: (newChecked: number) => void;
 }
 
-const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemNChecked, onSpecSelectIndexChange, onEasingSelectIndexChange, onDeleteIndexChange, specsLabelChecked, easingLabelChecked}) => {
+const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemNChecked,  onSpecSelectIndexChange, onEasingSelectIndexChange, onDeleteIndexChange, specsLabelChecked, easingLabelChecked}) => {
     const newItemsRef = useRef(null);
     const itemLabelRef = useRef(null);
 
@@ -33,20 +33,28 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
     const [itemIndex, setItemIndex] = useState(null);
     const [itemN, setItemN] = useState(0);
 
+    // const [specsLabel, setSpecsLabel] = useState<any[][]>([[]]);
+
     let listWidthArray: number[] = [74, 220, 98, 72, 74, 40];
     let list: ListItemElements = new ListItemElements();
 
     function fnAddBtn(): void {
+        // console.log('itemIndex called: '+itemIndex);
         list.create(newItemsRef.current, "ui-list-row-new-item list-new-item-" + itemIndex, itemIndex, listWidthArray, handleLabelClick, handleSpecClick, handleEasingClick, handleDurationClick, handleDelayClick, handleDeleteClick);
     } 
 
     function fnCreareBtn(): void {
     }
 
-    useEffect(() => {
-    }, [itemN]);
+    // useEffect(() => {
+    //     setSpecsLabel(specsLabelChecked)
+    // }, [specsLabelChecked]);
+
+    // useEffect(() => {
+    // }, [specsLabel]);
 
     useEffect(() => {
+        // console.log('itemIndex called: '+itemNChecked);
         setItemIndex(itemNChecked);
         setItemN(itemNChecked);
     }, [itemNChecked]);
@@ -80,6 +88,8 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
         if (specsLabelChecked) {
             list.specsUpdate(specSelectIndex, specsLabelChecked);
         }
+        
+  
     }, [specsLabelChecked]);
 
     useEffect(() => {
@@ -115,8 +125,16 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
             if(Number(itemTotalLengthTextContents[0])-1 >= 0) {
                 setItemN(Number(itemTotalLengthTextContents[0])-1);
             }
-        
         }
+        const uiMenuEasingSub = document.querySelectorAll(`.ui-menu-easing-sub`);
+        uiMenuEasingSub.forEach(item => {
+            (item as HTMLElement).style.transform = 'translateX(100%)';
+        });
+
+        const uiMenuSpecSub = document.querySelectorAll(`.ui-menu-spec-sub`);
+        uiMenuSpecSub.forEach(item => {
+            (item as HTMLElement).style.transform = 'translateX(100%)';
+        });
         timer0 = window.setTimeout(() => {
             setDelSelectIndex(list.delIndexUpdate());
             list.listDelete(list.delIndexUpdate(), Number(itemTotalLengthTextContents[0])-1);

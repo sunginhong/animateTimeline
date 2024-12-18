@@ -1,7 +1,7 @@
 import ListItemCreateDiv from './ListItemCreateDiv';
 
 export default class ListItemElements {
-    specsUpdate(index: number, specs: Array<string>): void {
+    specsUpdate(index: number, specs: any[][]): void {
         return ListItemCreateDiv.specsUpdate(index, specs);
     }
     easingUpdate(index: number, easing: string): void {

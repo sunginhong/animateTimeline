@@ -5,9 +5,11 @@ import { valOptSpecs } from './Components/valOptSpecs';
 import MenuSpecs from './MenuSpecs';
 import { get } from 'http';
 
-export default function MenuSpecCreateList(parent: HTMLElement, className: string, index: number, specSelectClick: (itemId: number) => void, specsLabelCheck: (itemId: string[]) => void) {
+MenuSpecCreateList.specs = [[]];
+export default function MenuSpecCreateList(parent: HTMLElement, className: string, index: number, specSelectClick: (itemId: number) => void, specsLabelCheck: (itemId: any[][]) => void) {
+
     let specs: any[][] = [[]];
-    
+
     const menu = document.createElement('div');
     menu.className = 'ui-menu-spec-sub ' + className;
     menu.setAttribute('data-index', index.toString());
@@ -136,6 +138,9 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
 
             const value = target.getAttribute('data-specs');
 
+            // console.log(target, value)
+            // console.log(value, specs)
+            
             const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input`);
             for (let i = 0; i < inputElements.length; i++) {
                 const inputElement = inputElements[i] as HTMLInputElement;
@@ -177,10 +182,12 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
             const uniqueSet = new Set(specPropsArray.map(item => JSON.stringify(item)));
             specUniqueArr = Array.from(uniqueSet).map(item => JSON.parse(item)) as [string][];
             // specUniqueArr.sort();
-            specs[index] = specUniqueArr;
-            specsLabelCheck(specs.flat().map(item => item[0]))
-            
+            MenuSpecCreateList.specs[index] = specUniqueArr;
+            // specsLabelCheck(MenuSpecCreateList.specs.flat().map(item => item[0]))
+            specsLabelCheck(MenuSpecCreateList.specs)
+            // console.log(MenuSpecCreateList.specs)
             specUniqueArr.sort();
+            // return MenuSpecCreateList.specs[index] = specs[index]
         });
       });
 
@@ -271,5 +278,6 @@ MenuSpecCreateList.indexUpdate = function (): void {
             }
         });
     });
+
 };
 

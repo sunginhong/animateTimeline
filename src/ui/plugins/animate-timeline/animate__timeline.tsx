@@ -29,7 +29,7 @@ const animate_timeline = () => {
     const [easingSelectIndex, setEasingSelectIndex] = useState(0);
     const [deleteSelectIndex, setDeleteSelectIndex] = useState(null);
 
-    const [specsLabelChecked, setSpecsLabelChecked] = useState<string[]>([]);
+    const [specsLabelChecked, setSpecsLabelChecked] = useState<any[][]>([]);
     const [easingLabelChecked, setEasingLabelChecked] = useState('None');
 
     const handleAdWidthChange = (newWidth: string) => {
@@ -69,17 +69,21 @@ const animate_timeline = () => {
       setDeleteSelectIndex(newChecked);
     };
 
-    const handleSpecsLabelChange = (newChecked: string[]) => {
-      setSpecsLabelChecked(newChecked);
+    const handleSpecsLabelChange = (newChecked: any[][]) => {
+      // setSpecsLabelChecked(newChecked);
+      setSpecsLabelChecked(preData => {
+        let newData = [newChecked]
+          return newData;
+      });
     };
 
     const handleEasingLabelChange = (newChecked: string) => {
       setEasingLabelChecked(newChecked);
     };
 
-    useEffect(() => {
-    
-    }, [])
+    useEffect(() => {  
+      // console.log(specsLabelChecked[0])
+    }, [specsLabelChecked]);
 
     return (
       <>
