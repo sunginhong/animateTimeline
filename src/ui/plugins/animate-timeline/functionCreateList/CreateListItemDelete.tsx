@@ -69,12 +69,13 @@ CreateListItemDelete.indexUpdate = function (): void {
 };
 
 CreateListItemDelete.delIndexUpdate = function (): number {
-
     return CreateListItemDelete.delIndexUpdateSet(selDelIndex);
 };
 
 CreateListItemDelete.delIndexUpdateSet = function (index): number {
-
     return index;
 };
 
+CreateListItemDelete.resetUpdate = function (): number {
+    return null;
+};

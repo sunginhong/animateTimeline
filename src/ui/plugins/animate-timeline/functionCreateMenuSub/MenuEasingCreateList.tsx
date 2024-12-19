@@ -212,7 +212,7 @@ MenuEasingCreateList.update = function (EasingMenuSelectIndex: number, className
     });
 };
 
-MenuEasingCreateList.menuEasingDelete = function (index: number, itemN: number): void {
+MenuEasingCreateList.menuEasingDelete = function (index: number): void {
     const MenuEasing = document.querySelectorAll(`.ui-menu-easing-sub`);
 
     MenuEasing.forEach((item, idx) => {

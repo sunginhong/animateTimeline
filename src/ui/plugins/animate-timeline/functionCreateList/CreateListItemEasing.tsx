@@ -147,6 +147,12 @@ CreateListItemEasing.easingUpdate = function (index: number, easing: string): vo
         optionLabelElement.style.pointerEvents = 'none';
         optionLabelElement.textContent = easing;
         optionElement.appendChild(optionLabelElement);
+
+        const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+index) as NodeListOf<HTMLElement>;
+
+        listItem.forEach((item, i) => {
+            item.setAttribute('data-easing-props', easing);
+        }); 
       
     } else {
         const existingResultElement = document.querySelector(`.ui-list-new-item-easing-input.input-rect-${index}`);
@@ -158,6 +164,11 @@ CreateListItemEasing.easingUpdate = function (index: number, easing: string): vo
                 element.defaultValue = "Select easing function";
             }
         });
+
+        const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+index) as NodeListOf<HTMLElement>;
+        listItem.forEach((item, i) => {
+            item.setAttribute('data-easing-props', null);
+        }); 
     }
 };
 

@@ -75,6 +75,15 @@ export default function CreateListItemDuration(parent: HTMLElement, index: numbe
         }
     });
 
+    inputElement.addEventListener('input', function(event: Event) {
+        const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+this.parentElement.getAttribute('data-index')) as NodeListOf<HTMLElement>;
+        if (isNaN(Number(inputElement.value))) {
+            // inputElement.value = "";
+        }
+        listItem.forEach((item, i) => {
+            item.setAttribute('data-duration-props', inputElement.value);
+        }); 
+    });
 }
 
 CreateListItemDuration.indexUpdate = function (): void {

@@ -75,6 +75,16 @@ export default function CreateListItemDelay(parent: HTMLElement, index: number, 
             inputElement.style.border = "1px solid rgba(3, 199, 90, 0)";
         }
     });
+
+    inputElement.addEventListener('input', function(event: Event) {
+        const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+this.parentElement.getAttribute('data-index')) as NodeListOf<HTMLElement>;
+        if (isNaN(Number(inputElement.value))) {
+            // inputElement.value = "";
+        }
+        listItem.forEach((item, i) => {
+            item.setAttribute('data-delay-props', inputElement.value);
+        }); 
+    });
     
 }
 

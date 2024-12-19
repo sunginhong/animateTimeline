@@ -182,7 +182,7 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
 
                 const specsSelectorOption = document.querySelectorAll(`.specs-selector-option.idx-${index}`);
                 specsSelectorOption.forEach(specsSelectorOption => {
-                    specsSelectorOption.remove();
+                    // specsSelectorOption.remove();
                 });
             }
 
@@ -240,7 +240,7 @@ MenuSpecCreateList.update = function (specMenuSelectIndex: number, className: st
     });
 };
 
-MenuSpecCreateList.menuSpecDelete = function (index: number, itemN: number): void {
+MenuSpecCreateList.menuSpecDelete = function (index: number): void {
     const MenuSpec = document.querySelectorAll(`.ui-menu-spec-sub`);
 
     MenuSpec.forEach((item, idx) => {

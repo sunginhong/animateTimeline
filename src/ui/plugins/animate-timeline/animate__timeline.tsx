@@ -3,6 +3,7 @@ import './animate__timeline.css'
 import UiMenu from './UiMenu';
 import UIList from './UiList'; 
 import { set } from 'mongoose';
+import { h } from 'vue';
 
 const animate_timeline = () => {
     const uiRef = useRef(null);
@@ -31,6 +32,7 @@ const animate_timeline = () => {
 
     const [specsLabelChecked, setSpecsLabelChecked] = useState<any[][]>([]);
     const [easingLabelChecked, setEasingLabelChecked] = useState('None');
+    const [settingPropsChecked, setSettingPropsChecked] = useState<any[][]>([]);
 
     const handleAdWidthChange = (newWidth: string) => {
       setAdWidth(newWidth);
@@ -69,8 +71,11 @@ const animate_timeline = () => {
       setDeleteSelectIndex(newChecked);
     };
 
+    const handleCreateChange = (newChecked: any[][]) => {
+      console.log(newChecked)
+    };
+
     const handleSpecsLabelChange = (newChecked: any[][]) => {
-      // setSpecsLabelChecked(newChecked);
       setSpecsLabelChecked(preData => {
         let newData = [newChecked]
           return newData;
@@ -81,9 +86,13 @@ const animate_timeline = () => {
       setEasingLabelChecked(newChecked);
     };
 
+    const handleSetPropsChange = (newChecked: any[][]) => {
+      // console.log(newChecked)
+    };
+
     useEffect(() => {  
-      // console.log(specsLabelChecked[0])
-    }, [specsLabelChecked]);
+      // console.log(settingPropsChecked)
+    }, [settingPropsChecked]);
 
     return (
       <>
@@ -110,6 +119,9 @@ const animate_timeline = () => {
 
               specsLabelChecked={specsLabelChecked}
               easingLabelChecked={easingLabelChecked}
+              settingPropsChecked={settingPropsChecked}
+
+              onSetPropsChange={handleSetPropsChange}
               onSpecsLabelChange={handleSpecsLabelChange}
               onEasingLabelChange={handleEasingLabelChange}
           />
@@ -124,6 +136,7 @@ const animate_timeline = () => {
               onSpecSelectIndexChange={handleSpecSelIndexChange}
               onEasingSelectIndexChange={handleEasingSelIndexChange}
               onDeleteIndexChange={handleDeleteSelIndexChange}
+              onCreateChange={handleCreateChange}
 
               specsLabelChecked={specsLabelChecked}
               easingLabelChecked={easingLabelChecked}

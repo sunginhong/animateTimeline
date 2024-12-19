@@ -11,7 +11,11 @@ export default class ListItemElements {
         return ListItemCreateDiv.listDelete(index, itemN);
     }
     delIndexUpdate(): number { return ListItemCreateDiv.delIndexUpdate(); }
-    
+   
+    resetUpdate(): void { return ListItemCreateDiv.resetUpdate(); }
+
+    getListProps(): any { return ListItemCreateDiv.getListProps(); }
+
     create(parent: HTMLElement, className: string, index: number, listWidthArray: number[], handleLabelClick: () => void, handleSpecClick: (itemId: number) => void, handleEasingClick: (itemId: number) => void, handleDurationClick: () => void, handleDelayClick: () => void, handleDeleteClick: () => void): void {
         return ListItemCreateDiv(parent, className, index, listWidthArray, handleLabelClick, handleSpecClick, handleEasingClick, handleDurationClick, handleDelayClick, handleDeleteClick);
     }

@@ -60,7 +60,6 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     specElement.addEventListener('click', function(event: Event) {
         handleSpecClick(-1)
         handleSpecClick(Number(this.getAttribute('data-index')));
-        // console.log(this.getAttribute('data-index'));
     });
 
     inputElement.addEventListener('focus', () => {
@@ -90,9 +89,10 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
         if (element instanceof HTMLElement) {
             elemSize.width = element.offsetWidth;
             elemSize.height = element.offsetHeight;
+            // element.setAttribute('data-spec-props', specs[0]?.toString());
         }
     });
-    
+
     const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect-`+index);
     inputElements.forEach((element: Element) => {
         if (element instanceof HTMLInputElement && element.classList.contains(`input-rect-${index}`)) {
@@ -159,9 +159,9 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
             specsElement.forEach((element: Element) => {
                 element.appendChild(specsElementResult);
             });
-    
+            const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+index) as NodeListOf<HTMLElement>;
             const specsElementResultChildsSel = document.querySelectorAll(`.ui-list-new-item-specs-input-result-child.input-result-child-`+index) as NodeListOf<HTMLElement>;
-    
+            const arr = [];
             specs[0][index].forEach((spec, specIndex) => {
                 for (let i = 0; i < spec.length; i++) {
                     const optionElement = document.createElement('div');
@@ -175,6 +175,11 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
                     optionElement.style.pointerEvents = 'none';
                     optionElement.style.borderRadius = '35px';
                     optionElement.style.marginRight = '2px';
+                    
+                    listItem.forEach((item, i) => {
+                        arr.push(spec[i].toString());
+                        item.setAttribute('data-specs-props', arr.toString());
+                    }); 
     
                     const specsSelResult = document.querySelector(`.specs-selector-option#opt-${index}-${valOptSpecs.findIndex(item => item.label === spec[i].toString())}`);
                     if (specsSelResult instanceof HTMLElement) {
@@ -201,6 +206,7 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
                     optionLabelElement.style.pointerEvents = 'none';
                     optionLabelElement.textContent = spec[i].toString();
                     optionElement.appendChild(optionLabelElement);
+
                 }
     
             });
@@ -213,12 +219,15 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
             inputElements.forEach((element: Element) => {
                 if (element instanceof HTMLInputElement && element.classList.contains(`input-rect-${index}`)) {
                     element.defaultValue = "Select animation specs";
+
+                    const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+index) as NodeListOf<HTMLElement>;
+                    listItem.forEach((item, i) => {
+                        item.setAttribute('data-specs-props', null);
+                    }); 
                 }
             });
         }
     });
-    
-    
 };
 
 CreateListItemSpecs.indexUpdate = function (): void {

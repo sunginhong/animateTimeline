@@ -6,7 +6,7 @@ import CreateListItemDuration from './CreateListItemDuration'
 import CreateListItemDelay from './CreateListItemDelay'
 import CreateListItemDelete from './CreateListItemDelete'
 
-const listArray: HTMLElement[] = [];
+let listArray: HTMLElement[] = [];
 export default function ListItemCreateDiv(parent: HTMLElement, className: string, index: number, listWidthArray: number[], handleLabelClick: () => void, handleSpecClick: (itemId: number) => void, handleEasingClick: (itemId: number) => void, handleDurationClick: () => void, handleDelayClick: () => void, handleDeleteClick: () => void): void {
     const list = document.createElement('div');
     // list.className = className;
@@ -20,6 +20,10 @@ export default function ListItemCreateDiv(parent: HTMLElement, className: string
         list.className = "ui-list-row-new-item list-new-item-" + i.toString();
         list.id = i.toString();
         list.setAttribute('data-index', i.toString());
+        list.setAttribute('data-specs-props', null);
+        list.setAttribute('data-easing-props', null);
+        list.setAttribute('data-duration-props', (0).toString());
+        list.setAttribute('data-delay-props', (0).toString());
         listItemContain.id = i.toString();
         listItemContain.setAttribute('data-index', i.toString());
     });
@@ -162,4 +166,16 @@ ListItemCreateDiv.indexUpdate = function (): void {
 ListItemCreateDiv.delIndexUpdate = function (): number {
     let delListIndex = CreateListItemDelete.delIndexUpdate() 
     return delListIndex;
+}
+
+ListItemCreateDiv.resetUpdate = function (): void {
+    CreateListItemDelete.resetUpdate();
+    listArray.forEach((list, i) => {
+        list.remove();
+        listArray = [];
+    });
+};
+
+ListItemCreateDiv.getListProps = function (): HTMLElement[] {
+    return listArray;
 }

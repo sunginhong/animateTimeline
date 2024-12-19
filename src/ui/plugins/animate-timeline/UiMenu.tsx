@@ -7,6 +7,7 @@ import MenuBorderLine from './components/MenuBorderLine';
 import MenuStyleButton from './components/MenuStyleButton';
 import MenuSpecs from './functionCreateMenuSub/MenuSpecs';
 import MenuEasing from './functionCreateMenuSub/MenuEasing';
+import { set } from 'mongoose';
 export const specSelectIndex = -1;
 export const easingSelectIndex = -1;
 
@@ -27,6 +28,7 @@ interface UiMenuProps {
 
     specsLabelChecked: any[][];
     easingLabelChecked: string;
+    settingPropsChecked: any[][];
 
     onAdWidthChange: (newWidth: string) => void;
     onDelayCheckedChange: (newChecked: boolean) => void;
@@ -37,9 +39,10 @@ interface UiMenuProps {
 
     onSpecsLabelChange: (newChecked: any[][]) => void;
     onEasingLabelChange: (newChecked: string) => void;
+    onSetPropsChange: (newChecked: any[][]) => void;
 }
 
-const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, addItemChecked, resetItemChecked, onAdWidthChange, onDelayCheckedChange, onStyleCheckedChange, onAddItemCheckedChange, onResetItemCheckedChange, onItemNChange, specSelectIndex, specsLabelChecked, onSpecsLabelChange, easingSelectIndex, deleteSelectIndex, easingLabelChecked, onEasingLabelChange }, props) => {
+const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, addItemChecked, resetItemChecked, onAdWidthChange, onDelayCheckedChange, onStyleCheckedChange, onAddItemCheckedChange, onResetItemCheckedChange, onSetPropsChange, onItemNChange, specSelectIndex, specsLabelChecked, settingPropsChecked, onSpecsLabelChange, easingSelectIndex, deleteSelectIndex, easingLabelChecked, onEasingLabelChange }, props) => {
     const uiMenuRef = useRef(null);
     const [isAdWidth, setIsAdWidth] = useState(adWidth);
     const [isDelayChecked, setIsDelayChecked] = useState(delayChecked);
@@ -47,12 +50,11 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     const [isAddClicked, setIsAddClicked] = useState(addItemChecked);
     const [isResetClicked, setIsResetClicked] = useState(resetItemChecked);
     const [itemN, setItemN] = useState(0);
-    
     const [selSpecIndex, setSelSpecIndex] = useState(specSelectIndex);
     const [selEasingIndex, setSelEasingIndex] = useState(easingSelectIndex);
-
     const [isSpecsLabel, setIsSpecsLabel] = useState<any[][]>(specsLabelChecked);
     const [isEasingLabel, setIsEasingLabel] = useState(easingLabelChecked);
+    const [isSettingProps, setIsSettingProps] = useState<any[][]>(settingPropsChecked);
     
     let menuSpecs: MenuSpecs = new MenuSpecs();
     let menuEasings: MenuEasing = new MenuEasing();
@@ -67,7 +69,23 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     };
     const handleResetClick = () => {
         setIsResetClicked(true);
-        setTimeout(() => setIsResetClicked(false), 100);
+
+        const uiMenuSpecSub = document.querySelectorAll('.ui-menu-spec-sub') as NodeListOf<HTMLElement>;
+        const uiMenuEasingSub = document.querySelectorAll('.ui-menu-easing-sub') as NodeListOf<HTMLElement>;
+            
+        setItemN(0);
+        setItemN(prevItemN => 0);
+    
+        uiMenuSpecSub.forEach((item) => {
+            item.remove();
+        });
+        uiMenuEasingSub.forEach((item) => {
+            item.remove();
+        });
+        // 
+        setTimeout(() => {
+            setIsResetClicked(false);
+        }, 500);
     };
 
     useEffect(() => {
@@ -121,10 +139,8 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     useEffect(() => {
         if(deleteSelectIndex != null){
             setItemN(prevItemN => Math.max(prevItemN - 1, 0));
-            menuSpecs.menuSpecDelete(deleteSelectIndex, itemN);
-            menuEasings.menuEasingDelete(deleteSelectIndex, itemN);
-
-            // console.log('deleteSelectIndex: ' + deleteSelectIndex);
+            menuSpecs.menuSpecDelete(deleteSelectIndex);
+            menuEasings.menuEasingDelete(deleteSelectIndex);
         }
     }, [deleteSelectIndex]);
 
@@ -149,18 +165,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     const specsLabelCheck = (specsLabelCheck: any[][]) => {
         setIsSpecsLabel(specsLabelCheck);
         onSpecsLabelChange(specsLabelCheck);
-        // console.log(specsLabelCheck);
     };
-
-
-    // useEffect(() => {
-    //     setSelSpecIndex(prevIndex => {
-    //         if (prevIndex === specSelectIndex) {
-    //             return specSelectIndex + 1; // Force re-render by changing the state
-    //         }
-    //         return specSelectIndex;
-    //     });
-    // }, [specSelectIndex]);
 
     return (
         <div className='ui-menu' ref={uiMenuRef}>
