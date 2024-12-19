@@ -60,6 +60,7 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     specElement.addEventListener('click', function(event: Event) {
         handleSpecClick(-1)
         handleSpecClick(Number(this.getAttribute('data-index')));
+        // console.log(this.getAttribute('data-index'));
     });
 
     inputElement.addEventListener('focus', () => {
@@ -203,7 +204,8 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
                 }
     
             });
-        } else {
+        }       
+        if (specs[0][index].length <= 0) {
             const existingResultElement = document.querySelector(`.ui-list-new-item-specs-input-result.input-result-${index}`);
             if (existingResultElement) {
                 existingResultElement.remove();

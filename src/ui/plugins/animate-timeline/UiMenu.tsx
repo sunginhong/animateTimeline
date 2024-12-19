@@ -123,6 +123,8 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
             setItemN(prevItemN => Math.max(prevItemN - 1, 0));
             menuSpecs.menuSpecDelete(deleteSelectIndex, itemN);
             menuEasings.menuEasingDelete(deleteSelectIndex, itemN);
+
+            // console.log('deleteSelectIndex: ' + deleteSelectIndex);
         }
     }, [deleteSelectIndex]);
 
@@ -147,6 +149,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     const specsLabelCheck = (specsLabelCheck: any[][]) => {
         setIsSpecsLabel(specsLabelCheck);
         onSpecsLabelChange(specsLabelCheck);
+        // console.log(specsLabelCheck);
     };
 
 

@@ -87,9 +87,8 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
     useEffect(() => {
         if (specsLabelChecked) {
             list.specsUpdate(specSelectIndex, specsLabelChecked);
+            // console.log(specsLabelChecked)
         }
-        
-  
     }, [specsLabelChecked]);
 
     useEffect(() => {

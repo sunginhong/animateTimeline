@@ -4,11 +4,12 @@ import TitleLabel from './Components/TitleLabel';
 import { valOptSpecs } from './Components/valOptSpecs';
 import MenuSpecs from './MenuSpecs';
 import { get } from 'http';
+import { set } from 'mongoose';
 
 MenuSpecCreateList.specs = [[]];
 export default function MenuSpecCreateList(parent: HTMLElement, className: string, index: number, specSelectClick: (itemId: number) => void, specsLabelCheck: (itemId: any[][]) => void) {
 
-    let specs: any[][] = [[]];
+    // let specs: any[][] = [[]];
 
     const menu = document.createElement('div');
     menu.className = 'ui-menu-spec-sub ' + className;
@@ -99,6 +100,8 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
         optionElement.id = `opt-${index}-${optionIndex}`;
         optionElement.setAttribute('data-specs', option.label);
         optionElement.setAttribute('data-specs-opt-idx', optionIndex.toString());
+        optionElement.setAttribute('data-nums', index.toString());
+        optionElement.setAttribute('data-active', 'false');
         optionElement.style.display = 'flex';
         optionElement.style.padding = '2px 8px';
         optionElement.style.justifyContent = 'center';
@@ -138,9 +141,8 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
 
             const value = target.getAttribute('data-specs');
 
-            // console.log(target, value)
-            // console.log(value, specs)
-            
+            const selIndex = Number(target.getAttribute('data-index'));
+
             const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input`);
             for (let i = 0; i < inputElements.length; i++) {
                 const inputElement = inputElements[i] as HTMLInputElement;
@@ -156,10 +158,10 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
                     });
                 }
             }
-
-            if (!target.classList.contains('active')) {
+            
+            if (!optionElement.getAttribute('data-active') || optionElement.getAttribute('data-active') === 'false') {
                 if (value !== 'None') {
-                    target.classList.add('active');
+                    target.setAttribute('data-active', 'true');
                     optionElement.style.backgroundColor = '#D9F7E6';
                     optionLabelElement.style.color = '#03A94D';
                     specPropsArray.push([value]);
@@ -170,23 +172,40 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
                     specPropsArray.length = 0;
                 }
             } else {
-                target.classList.remove('active');
+                target.setAttribute('data-active', 'false');
                 optionElement.style.backgroundColor = '#F0F0F0';
                 optionLabelElement.style.color = '#737373';
                 const indexToRemove = specPropsArray.findIndex(item => item[0] === value);
                 if (indexToRemove !== -1) {
                     specPropsArray.splice(indexToRemove, 1);
                 }
+
+                const specsSelectorOption = document.querySelectorAll(`.specs-selector-option.idx-${index}`);
+                specsSelectorOption.forEach(specsSelectorOption => {
+                    specsSelectorOption.remove();
+                });
             }
 
             const uniqueSet = new Set(specPropsArray.map(item => JSON.stringify(item)));
             specUniqueArr = Array.from(uniqueSet).map(item => JSON.parse(item)) as [string][];
             // specUniqueArr.sort();
-            MenuSpecCreateList.specs[index] = specUniqueArr;
-            // specsLabelCheck(MenuSpecCreateList.specs.flat().map(item => item[0]))
-            specsLabelCheck(MenuSpecCreateList.specs)
-            // console.log(MenuSpecCreateList.specs)
             specUniqueArr.sort();
+            // console.log(specUniqueArr)
+            // if(this.getAttribute('data-specs') === specUniqueArr[index]) {
+            // }
+            specUniqueArr.forEach((item, idx) => {
+                if(this.getAttribute('data-specs') === specUniqueArr[idx][0]){
+                    // console.log(this.getAttribute('data-specs'))
+                }
+            });
+
+            // console.log(specUniqueArr, index, selIndex)
+            // // specsLabelCheck(MenuSpecCreateList.specs.flat().map(item => item[0]))
+            MenuSpecCreateList.specs[Number(this.getAttribute('data-nums'))] = specUniqueArr;
+            // console.log(this.getAttribute('data-specs'))
+            specsLabelCheck(MenuSpecCreateList.specs);
+            // console.log(MenuSpecCreateList.specs)
+            
             // return MenuSpecCreateList.specs[index] = specs[index]
         });
       });
@@ -225,11 +244,22 @@ MenuSpecCreateList.menuSpecDelete = function (index: number, itemN: number): voi
     const MenuSpec = document.querySelectorAll(`.ui-menu-spec-sub`);
 
     MenuSpec.forEach((item, idx) => {
-        if(idx === index){
+        // if(item.getAttribute('data-index') === index.toString()) {
+            if(idx === index){
+            // item.remove();
+            // const specsSelectorOption = document.querySelectorAll(`.specs-selector-option.idx-${index}`);
+            // specsSelectorOption.forEach(specsSelectorOption => {
+            //     specsSelectorOption.remove();
+            // });
+            MenuSpecCreateList.specs.splice(Number(item.getAttribute('data-index')), 1);   
             item.remove();
+          
+            setTimeout(() => {
+                MenuSpecCreateList.indexUpdate();
+            }, 0);
         }
     });
-    MenuSpecCreateList.indexUpdate();
+ 
 }
 
 MenuSpecCreateList.indexUpdate = function (): void {
@@ -267,9 +297,13 @@ MenuSpecCreateList.indexUpdate = function (): void {
                         frameBottomSpecContain.className = "specs-selector-frame-bottom-spec-contain idx-" + i.toString();
                         
                         Array.from(frameBottomSpecContain.children).forEach(specsSelectorOption => {
+                            const parentElement = frameBottomSpecContain.parentElement;
+
                             if(specsSelectorOption.classList.contains('specs-selector-option')) {
                                 specsSelectorOption.setAttribute('data-index', i.toString());
-                                specsSelectorOption.className = "specs-selector-option idx-" + i.toString();
+                                specsSelectorOption.setAttribute('data-nums', parentElement.getAttribute('data-index'));
+                                // specsSelectorOption.className = "specs-selector-option idx-" + i.toString();
+                                // specsSelectorOption.classList
                                 specsSelectorOption.id = `opt-${i.toString()}-${specsSelectorOption.getAttribute('data-specs-opt-idx')}`;
                             }
                         });
