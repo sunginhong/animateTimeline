@@ -1,5 +1,5 @@
 ("use strict");
-import { animate_timeline } from './create-animate-timeline';
+import { animate_timeline_v2 } from './create-animate-timeline-v2';
 
 figma.showUI(__html__);
 // figma.ui.resize(677, 500);
@@ -11,7 +11,7 @@ figma.ui.onmessage = (msg) => {
     const fontStyleBold = figma.variables.createVariable("fontFamily", collection, "STRING");
     fontStyleBold.setValueForMode(modeId, "Bold");
     
-    if (msg.type === "create-animate-timeline") {
-        animate_timeline(msg);
+    if (msg.type === "create-animate-timeline-v2") {
+        animate_timeline_v2(msg);
     };
 };

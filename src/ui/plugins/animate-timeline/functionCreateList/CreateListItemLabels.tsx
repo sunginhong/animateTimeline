@@ -1,3 +1,5 @@
+import { FunctionMultiMenuOut } from './FunctionMultiMenuOut';
+
 export default function CreateListItemLabels(parent: HTMLElement, index: number ,listWidth: number, handleLabelClick: () => void): void {
 
     const parentElement = parent.parentElement;
@@ -15,29 +17,24 @@ export default function CreateListItemLabels(parent: HTMLElement, index: number 
     labelContainer.style.justifyContent = "center";
     labelContainer.style.width = listWidth + "px";
     labelContainer.style.height = "100%";
+    labelContainer.style.overflow = "hidden";
     parent.appendChild(labelContainer);
 
     const inputElement = document.createElement('input');
-    // inputElement.setAttribute('data-index', index.toString());
-    // inputElement.className = "ui-list-new-item-label-input";
 
     if (parentElement) {
         inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
         inputElement.className = "ui-list-new-item-label-input";
     }
     
-    inputElement.defaultValue = "Add label name";
+    inputElement.placeholder = "Add label name";
+    inputElement.type = "string";
     inputElement.style.position = "relative";
     inputElement.style.width = (listWidth-6) + "px";
     inputElement.style.height = "calc(100% - 4px)";
     inputElement.style.borderRadius = "4px 0px 0px 4px";
-    inputElement.style.color = "#B3B3B3";
-    inputElement.style.textAlign = "center";
     inputElement.style.alignItems = "center";
     inputElement.style.justifyContent = "center";
-    inputElement.style.fontSize = "8px";
-    inputElement.style.fontWeight = "600";
-    inputElement.style.lineHeight = "16px";
     inputElement.style.border = "0";
     inputElement.style.backgroundColor = "transparent";
     inputElement.style.outline = "none";
@@ -50,7 +47,7 @@ export default function CreateListItemLabels(parent: HTMLElement, index: number 
     });
 
     inputElement.addEventListener('focus', () => {
-        inputElement.value = "";
+        // inputElement.value = "";
         // inputElement.style.color = "rgba(3, 199, 90, 1)";
         inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
     });
@@ -61,7 +58,7 @@ export default function CreateListItemLabels(parent: HTMLElement, index: number 
     });
 
     inputElement.addEventListener('blur', () => {
-        inputElement.value = inputElement.value === "" ? "Add label name" : inputElement.value;
+        // inputElement.value = inputElement.value === "" ? "Add label name" : inputElement.value;
         // inputElement.style.color = "rgba(66, 66, 66, 1)";
         inputElement.style.border = "1px solid rgba(3, 199, 90, 0)";
     });
@@ -71,6 +68,17 @@ export default function CreateListItemLabels(parent: HTMLElement, index: number 
             // inputElement.style.color = "rgba(66, 66, 66, 1)";
             inputElement.style.border = "1px solid rgba(3, 199, 90, 0)";
         }
+        FunctionMultiMenuOut();
+    });
+
+    inputElement.addEventListener('input', function(event: Event) {
+        const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+this.parentElement.getAttribute('data-index')) as NodeListOf<HTMLElement>;
+        if (isNaN(Number(inputElement.value))) {
+            // inputElement.value = null;
+        }
+        listItem.forEach((item, i) => {
+            item.setAttribute('data-label-props', inputElement.value);
+        }); 
     });
 }
 

@@ -1,3 +1,4 @@
+import { FunctionMultiMenuOut } from './FunctionMultiMenuOut';
 var selDelIndex = 0;
 export default function CreateListItemDelete(parent: HTMLElement, index: number, listWidth: number, handleDeleteClick: () => void): void {
     const parentElement = parent.parentElement;

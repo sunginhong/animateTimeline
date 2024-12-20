@@ -1,3 +1,4 @@
+import './css/InputStyles.css';
 import CreateListItemLabels from './CreateListItemLabels';
 import CreateListItemLines from './CreateListItemLines';
 import CreateListItemSpec from './CreateListItemSpecs';
@@ -20,14 +21,14 @@ export default function ListItemCreateDiv(parent: HTMLElement, className: string
         list.className = "ui-list-row-new-item list-new-item-" + i.toString();
         list.id = i.toString();
         list.setAttribute('data-index', i.toString());
-        list.setAttribute('data-specs-props', null);
-        list.setAttribute('data-easing-props', null);
-        list.setAttribute('data-duration-props', (0).toString());
-        list.setAttribute('data-delay-props', (0).toString());
+        // list.setAttribute('data-label-props', null);
+        // list.setAttribute('data-specs-props', null);
+        // list.setAttribute('data-easing-props', null);
+        // list.setAttribute('data-duration-props', null);
+        // list.setAttribute('data-delay-props', null);
         listItemContain.id = i.toString();
         listItemContain.setAttribute('data-index', i.toString());
     });
-    // list.setAttribute('data-state-value-specmenu', stateSpecMenu.toString());
 
     CreateListItemLabels(listItemContain, index, listWidthArray[0], handleLabelClick);
     CreateListItemLines(listItemContain, 1, '#F0F0F0');
@@ -176,6 +177,12 @@ ListItemCreateDiv.resetUpdate = function (): void {
     });
 };
 
-ListItemCreateDiv.getListProps = function (): HTMLElement[] {
-    return listArray;
+ListItemCreateDiv.getListProps = function (): any[] {
+    let propsArr: Array<any[]> = [];
+
+    listArray.forEach((list, i) => {
+        propsArr.push([list.getAttribute('data-index'), list.getAttribute('data-label-props'), list.getAttribute('data-specs-props'), list.getAttribute('data-easing-props'), list.getAttribute('data-duration-props'), list.getAttribute('data-delay-props')]);
+    })
+    return propsArr;
 }
+

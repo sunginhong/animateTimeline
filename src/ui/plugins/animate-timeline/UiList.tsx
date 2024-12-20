@@ -30,6 +30,7 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
     const [easingSelectIndex, setEasingSelectIndex] = useState(null);
     const [deleteSelectIndex, setDelSelectIndex] = useState(null);
     const [itemIndex, setItemIndex] = useState(null);
+    const [detectNull, setDetectNull] = useState(false);
     
     let listWidthArray: number[] = [74, 220, 98, 72, 74, 40];
     let list: ListItemElements = new ListItemElements();
@@ -39,9 +40,33 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
     } 
 
     function fnCreareBtn(): void {
-        // onCreateChange([[]])
-        console.log(list.getListProps());
+        let listPropsLength = list.getListProps().length;
+        let i = 0;
+        while(i < listPropsLength){
+            let k = 0;
+            while(k < list.getListProps()[i].length){
+                if(list.getListProps()[i][k] === "null" || list.getListProps()[i][k] === null || list.getListProps()[i][k] === "" || list.getListProps()[i][k] === undefined){ 
+                    if(!detectNull){
+                        setDetectNull(true);
+                    } 
+                    break;
+                } else {  setDetectNull(false);
+                    if(k === list.getListProps()[i].length - 1){
+                        onCreateChange(list.getListProps());
+                        return;
+                    }
+                }
+                k++;
+            }
+            i++;
+        }
     }
+
+    useEffect(() => {
+        if(detectNull){
+            alert('Please fill in all fields');
+        }
+    }, [detectNull]);
 
     function fnResetBtn(): void {
     }

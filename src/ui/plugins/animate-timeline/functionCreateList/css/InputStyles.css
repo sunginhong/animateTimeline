@@ -1,0 +1,21 @@
+input, textarea {
+  color: #424242;
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Pretendard Variable";
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+input::placeholder, textarea::placeholder  {
+    color: #B3B3B3;
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: "Pretendard Variable";
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+}

@@ -20,7 +20,7 @@ const animate_timeline = () => {
     // let designType00: boolean = true;
     // let designType01: boolean = false;
 
-    const [adWidth, setAdWidth] = useState('100px');
+    const [adWidth, setAdWidth] = useState(100);
     const [delayChecked, setDelayChecked] = useState(false);
     const [styleChecked, setStyleChecked] = useState(false);
     const [addItemChecked, setAddItemChecked] = useState(false);
@@ -34,7 +34,7 @@ const animate_timeline = () => {
     const [easingLabelChecked, setEasingLabelChecked] = useState('None');
     const [settingPropsChecked, setSettingPropsChecked] = useState<any[][]>([]);
 
-    const handleAdWidthChange = (newWidth: string) => {
+    const handleAdWidthChange = (newWidth: number) => {
       setAdWidth(newWidth);
     };
 
@@ -72,7 +72,13 @@ const animate_timeline = () => {
     };
 
     const handleCreateChange = (newChecked: any[][]) => {
-      console.log(newChecked)
+      // console.log(newChecked, adWidth, delayChecked, styleChecked)
+      parent.postMessage({
+        pluginMessage: {
+          type: 'create-animate-timeline-v2',
+          newChecked, adWidth, delayChecked, styleChecked
+        }
+      }, '*');
     };
 
     const handleSpecsLabelChange = (newChecked: any[][]) => {
@@ -91,7 +97,6 @@ const animate_timeline = () => {
     };
 
     useEffect(() => {  
-      // console.log(settingPropsChecked)
     }, [settingPropsChecked]);
 
     return (

@@ -5,3 +5,12 @@
 .ui-list-new-item-specs-input-result-child  {
     ::-webkit-scrollbar {    display: none;  }
 }
+
+input::placeholder {
+    color: red;
+    font-style: italic;
+}
+textarea::placeholder {
+    color: blue;
+    font-weight: bold;
+}

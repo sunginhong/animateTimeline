@@ -97,13 +97,13 @@ CreateListItemEasing.easingUpdate = function (index: number, easing: string): vo
     if (easing !== "None") {
         const existingResultElement = document.querySelector(`.ui-list-new-item-easing-input.input-rect-${index}`);
 
-        const easingElement = document.querySelectorAll(`.ui-list-new-item-easing-input.input-rect-`+index);
+        const easingElement = document.querySelectorAll(`.ui-list-new-item-easing-input-result.input-rect-`+index);
         easingElement.forEach((element: Element) => {
             element.remove();
         });
         
         const easingElementResult = document.createElement('div');
-        easingElementResult.className = "ui-list-new-item-easing-input " + "input-rect-" + index;
+        easingElementResult.className = "ui-list-new-item-easing-input-result " + "input-rect-" + index;
         easingElementResult.setAttribute('data-index', index.toString());
         easingElementResult.style.position = "absolute";
         easingElementResult.style.width = elemSize.width + "px";
@@ -153,9 +153,9 @@ CreateListItemEasing.easingUpdate = function (index: number, easing: string): vo
         listItem.forEach((item, i) => {
             item.setAttribute('data-easing-props', easing);
         }); 
-      
+
     } else {
-        const existingResultElement = document.querySelector(`.ui-list-new-item-easing-input.input-rect-${index}`);
+        const existingResultElement = document.querySelector(`.ui-list-new-item-easing-input-result.input-rect-${index}`);
         if (existingResultElement) {
             existingResultElement.remove();
         }

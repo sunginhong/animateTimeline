@@ -15,7 +15,7 @@ export const totalN = 0;
 
 interface UiMenuProps {
     totalN: number;
-    adWidth: string;
+    adWidth: number;
     delayChecked: boolean;
     styleChecked: boolean;
     addItemChecked: boolean;
@@ -30,7 +30,7 @@ interface UiMenuProps {
     easingLabelChecked: string;
     settingPropsChecked: any[][];
 
-    onAdWidthChange: (newWidth: string) => void;
+    onAdWidthChange: (newWidth: number) => void;
     onDelayCheckedChange: (newChecked: boolean) => void;
     onStyleCheckedChange: (newChecked: boolean) => void;
     onAddItemCheckedChange: (newChecked: boolean) => void;
@@ -170,6 +170,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     return (
         <div className='ui-menu' ref={uiMenuRef}>
             <div className='ui-menu-contain'>
+                <div className='ui-menu-contain-group'>
                 <span className='ui-menu-title-main'>Table Setting</span>
                 <div className='ui-menu-row-btn-contain'>
                     <div className='ui-menu-column'>                
@@ -181,14 +182,13 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
                             </div>
                         </div>
                         <MenuBorderLine color='#737373' thickness={1} />
-                        <MenuInputButton label='AdjustWidth' onClick={() => {console.log('AdjustWidth ' + isAdWidth)}} inputValue={isAdWidth} onInputChange={(value) => {setIsAdWidth(value)}} />
+                        <MenuInputButton label='AdjustWidth' inputValue={isAdWidth.toString()} onInputChange={(value) => {setIsAdWidth(Number(value))}} />
                         <MenuCheckBoxButton 
                             label='Visible delay time' 
                             isDelayChecked={isDelayChecked} 
                             onChange={() => setIsDelayChecked(!isDelayChecked)} 
                         />
                         <MenuBorderLine color='#737373' thickness={1} />
-                        <p className='item-total-length'>{itemN}</p>
                         <div className='ui-menu-btn-contain'>
                             <p className='ui-menu-btn-label'>Style</p>
                             <div className='ui-menu-btn-rect vertical'>
@@ -197,6 +197,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -65,10 +65,21 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameBottom.style.gap = '22px';
     menuFrameBottom.style.alignSelf = 'stretch';
     menuFrameBottom.style.flexWrap = 'wrap';
-    menuFrameBottom.style.margin = '0px 16px 0px 16px'
+    // menuFrameBottom.style.margin = '0px 16px 0px 16px'
     menu.appendChild(menuFrameBottom);
 
-    TitleLabel(menuFrameBottom, 'Easing', 'Choose your\nanimation easings');
+    const menuFrameBottomGroup= document.createElement('div');
+    menuFrameBottomGroup.className = 'easing-selector-frame-bottom-group idx-' + index.toString();
+    menuFrameBottomGroup.setAttribute('data-index', index.toString());
+    menuFrameBottomGroup.style.display = 'flex';
+    menuFrameBottomGroup.style.height = '100%';
+    menuFrameBottomGroup.style.flexDirection = 'column';
+    menuFrameBottomGroup.style.flexWrap = 'wrap';
+    menuFrameBottomGroup.style.justifyContent = 'space-between';
+    menuFrameBottomGroup.style.margin = '0px 16px 26px 16px'
+    menu.appendChild(menuFrameBottomGroup);
+
+    TitleLabel(menuFrameBottomGroup, 'Easing', 'Choose your\nanimation easings');
 
     const menuFrameBottomEasing= document.createElement('div');
     menuFrameBottomEasing.className = 'easing-selector-frame-bottom-easing-contain idx-' + index.toString();
@@ -79,7 +90,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameBottomEasing.style.gap = '4px';
     menuFrameBottomEasing.style.alignSelf = 'stretch';
     menuFrameBottomEasing.style.flexWrap = 'wrap';
-    menuFrameBottom.appendChild(menuFrameBottomEasing);
+    menuFrameBottomGroup.appendChild(menuFrameBottomEasing);
 
     // 옵션 리스트 생성
 
@@ -252,6 +263,10 @@ MenuEasingCreateList.indexUpdate = function (): void {
             if(child.classList.contains('easing-selector-frame-bottom')) {
                 child.setAttribute('data-index', i.toString());
                 child.className = "easing-selector-frame-bottom idx-" + i.toString();
+            }
+            if(child.classList.contains('easing-selector-frame-bottom-group')) {
+                child.setAttribute('data-index', i.toString());
+                child.className = "easing-selector-frame-bottom-group idx-" + i.toString();
 
                 Array.from(child.children).forEach(frameBottomEasingContain => {
 

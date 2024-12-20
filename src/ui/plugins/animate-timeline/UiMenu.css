@@ -4,69 +4,85 @@
     width: 162px;
     height: 100%;
     background-color: #E5E5E5;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    /* overflow-x: hidden; */
+    overflow: hidden;
 
     > .ui-menu-contain {
-        padding: 26px 26px 16px 16px;
+        position: absolute;
+        display: flex;
         width: 119px;
-        margin-bottom: 50px;
+        height: 100%;
+        flex-direction: column;
 
-        > .ui-menu-title-main {
-            color: var(--Color-Neutral-Gray-1300, #2E2E2E);
-            font-feature-settings: 'liga' off, 'clig' off;
-            font-family: "SF Pro Display";
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 16px; /* 100% */
-        }
-        > .ui-menu-row-btn-contain {
+        > .ui-menu-contain-group {
+            width: 119px;
+            height: 100%;
+            flex-direction: column;
+            flex-wrap: wrap ;
+            justify-content: space-between;
             display: flex;
-            width: 100%;
-            margin-top: 58px;
-            
-            > .ui-menu-column {
+            padding: 16px 26px 16px 16px;
+
+            > .ui-menu-title-main {
+                color: var(--Color-Neutral-Gray-1300, #2E2E2E);
+                font-feature-settings: 'liga' off, 'clig' off;
+                font-family: "SF Pro Display";
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 16px; /* 100% */
+                flex-wrap: wrap;
+            }
+            > .ui-menu-row-btn-contain {
                 display: flex;
                 width: 100%;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--X-Large, 16px);
-
-                > .ui-menu-btn-contain {
+                
+                > .ui-menu-column {
                     display: flex;
+                    width: 100%;
                     flex-direction: column;
                     align-items: flex-start;
-                    gap: 2px;
-                    align-self: stretch;
-
-                    > .ui-menu-btn-label {
-                        color: #000;
-                        font-feature-settings: 'liga' off, 'clig' off;
-                        font-family: "Pretendard Variable";
-                        font-size: 8px;
-                        font-style: normal;
-                        font-weight: 600;
-                        line-height: 16px; /* 200% */
-                    }
-                    > .ui-menu-btn-rect {
-                        display: flex;
-                        justify-content: flex-end;
-                        align-items: center;
-                        gap: var(--XX-Small, 4px);
-                        align-self: stretch;
-                    
-                        &.vertical {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: flex-start;
-                        }
+                    flex-wrap: wrap ;
+                    gap: 8px;
     
-                        > .add-btn {
-                            /* width: 54px;  */
+                    > .ui-menu-btn-contain {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        flex-wrap: wrap ;
+                        /* gap: 2px; */
+                        align-self: stretch;
+    
+                        > .ui-menu-btn-label {
+                            display: flex;
+                            color: #000;
+                            font-feature-settings: 'liga' off, 'clig' off;
+                            font-family: "Pretendard Variable";
+                            font-size: 8px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 16px; /* 200% */
                         }
-                        > .reset-btn {
-                            /* width: 61px;  */
+                        > .ui-menu-btn-rect {
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center;
+                            gap: var(--XX-Small, 4px);
+                            align-self: stretch;
+                        
+                            &.vertical {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: flex-start;
+                            }
+        
+                            > .add-btn {
+                                /* width: 54px;  */
+                            }
+                            > .reset-btn {
+                                /* width: 61px;  */
+                            }
                         }
                     }
                 }

@@ -43,7 +43,7 @@ function App() {
     {/* <div className='bottom' style={{position:"absolute", width:"100%", height: "calc(500px - 55px)", top: "55px" ,backgroundColor: "#efefef" }}>
       {tabContents[selectedIndex].page}
     </div> */}
-        <div className='bottom' style={{position:"absolute", width:"100%", height: "calc(500px - 0px)", top: "0px" ,backgroundColor: "#efefef" }}>
+        <div className='bottom' style={{position:"absolute", width:"779px", height: "312px", top: "0px" ,overflow: 'hidden' }}>
       {tabContents[selectedIndex].page}
     </div>
   </>;

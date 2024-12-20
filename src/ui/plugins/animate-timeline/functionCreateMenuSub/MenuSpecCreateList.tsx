@@ -70,10 +70,21 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     menuFrameBottom.style.gap = '22px';
     menuFrameBottom.style.alignSelf = 'stretch';
     menuFrameBottom.style.flexWrap = 'wrap';
-    menuFrameBottom.style.margin = '0px 16px 0px 16px'
+    // menuFrameBottom.style.margin = '0px 16px 0px 16px'
     menu.appendChild(menuFrameBottom);
 
-    TitleLabel(menuFrameBottom, 'Spec', 'Choose your\nanimation specs');
+    const menuFrameBottomGroup= document.createElement('div');
+    menuFrameBottomGroup.className = 'specs-selector-frame-bottom-group idx-' + index.toString();
+    menuFrameBottomGroup.setAttribute('data-index', index.toString());
+    menuFrameBottomGroup.style.display = 'flex';
+    menuFrameBottomGroup.style.height = '100%';
+    menuFrameBottomGroup.style.flexDirection = 'column';
+    menuFrameBottomGroup.style.flexWrap = 'wrap';
+    menuFrameBottomGroup.style.justifyContent = 'space-between';
+    menuFrameBottomGroup.style.margin = '0px 16px 26px 16px'
+    menu.appendChild(menuFrameBottomGroup);
+
+    TitleLabel(menuFrameBottomGroup, 'Spec', 'Choose your\nanimation specs');
 
     const menuFrameBottomSpec= document.createElement('div');
     menuFrameBottomSpec.className = 'specs-selector-frame-bottom-spec-contain idx-' + index.toString();
@@ -84,7 +95,7 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
     menuFrameBottomSpec.style.gap = '4px';
     menuFrameBottomSpec.style.alignSelf = 'stretch';
     menuFrameBottomSpec.style.flexWrap = 'wrap';
-    menuFrameBottom.appendChild(menuFrameBottomSpec);
+    menuFrameBottomGroup.appendChild(menuFrameBottomSpec);
 
     // 옵션 리스트 생성
 
@@ -290,6 +301,11 @@ MenuSpecCreateList.indexUpdate = function (): void {
             if(child.classList.contains('specs-selector-frame-bottom')) {
                 child.setAttribute('data-index', i.toString());
                 child.className = "specs-selector-frame-bottom idx-" + i.toString();
+            }
+
+            if(child.classList.contains('specs-selector-frame-bottom-group')) {
+                child.setAttribute('data-index', i.toString());
+                child.className = "specs-selector-frame-bottom-group idx-" + i.toString();
 
                 Array.from(child.children).forEach(frameBottomSpecContain => {
                     if(frameBottomSpecContain.classList.contains('specs-selector-frame-bottom-spec-contain')) {

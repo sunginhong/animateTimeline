@@ -1,4 +1,3 @@
-import { FunctionMultiMenuOut } from './FunctionMultiMenuOut';
 export default function CreateListItemDelay(parent: HTMLElement, index: number, listWidth: number, handleDelayClick: () => void): void {
 
     const parentElement = parent.parentElement;
@@ -29,6 +28,7 @@ export default function CreateListItemDelay(parent: HTMLElement, index: number, 
     inputElement.style.position = "relative";
     inputElement.style.width = (listWidth-6) + "px";
     inputElement.style.height = "calc(100% - 4px)";
+    inputElement.style.textAlign = "center";
     inputElement.style.alignItems = "center";
     inputElement.style.justifyContent = "center";
     inputElement.style.border = "0";
@@ -64,7 +64,6 @@ export default function CreateListItemDelay(parent: HTMLElement, index: number, 
             // inputElement.style.color = "rgba(66, 66, 66, 1)";
             inputElement.style.border = "1px solid rgba(3, 199, 90, 0)";
         }
-        FunctionMultiMenuOut();
     });
 
     inputElement.addEventListener('input', function(event: Event) {
