@@ -17,6 +17,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menu.style.flexDirection = 'column';
     menu.style.backgroundColor = '#fff';
     menu.style.zIndex = '10';
+    menu.style.overflowY = 'scroll';
     parent.appendChild(menu);
     menu.style.transform = 'translateX(100%)';
 
@@ -77,6 +78,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameBottomGroup.style.flexWrap = 'wrap';
     menuFrameBottomGroup.style.justifyContent = 'space-between';
     menuFrameBottomGroup.style.margin = '0px 16px 26px 16px'
+    menuFrameBottomGroup.style.gap = '20px';
     menu.appendChild(menuFrameBottomGroup);
 
     TitleLabel(menuFrameBottomGroup, 'Easing', 'Choose your\nanimation easings');
