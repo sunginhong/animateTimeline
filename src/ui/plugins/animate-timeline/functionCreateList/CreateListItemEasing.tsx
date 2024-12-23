@@ -1,13 +1,10 @@
 import { valOptEasing } from '../functionCreateMenuSub/Components/valOptEasing';
-
+import { SelBorderUpdate } from '../functionCreateMenuSub/SelBorderUpdate';
 export default function CreateListItemEasing(parent: HTMLElement, index: number, listWidth: number, handleEasingClick: (itemId: number) => void): void {
 
     const parentElement = parent.parentElement;
-
     const easingElement = document.createElement('p');
-    // easingElement.setAttribute('data-index', index.toString());
-    // easingElement.className = "ui-list-new-item-easing " + "input-elem-" + index;
-
+ 
     if (parentElement) {
         easingElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
         easingElement.className = "ui-list-new-item-easing " + "input-elem-" + parentElement.getAttribute('data-index');
@@ -22,8 +19,7 @@ export default function CreateListItemEasing(parent: HTMLElement, index: number,
     parent.appendChild(easingElement);
 
     const inputElement = document.createElement('input');
-    // inputElement.className = "ui-list-new-item-easing-input " + "input-rect-" + index;
-
+ 
     if (parentElement) {
         inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
         inputElement.className = "ui-list-new-item-easing-input " + "input-rect-" + parentElement.getAttribute('data-index');
@@ -54,14 +50,16 @@ export default function CreateListItemEasing(parent: HTMLElement, index: number,
     easingElement.addEventListener('click', function(event: Event) {
         handleEasingClick(-1)
         handleEasingClick(Number(this.getAttribute('data-index')));
+
+        SelBorderUpdate("easing", Number(this.getAttribute('data-index')));
     });
 
     inputElement.addEventListener('focus', () => {
-        inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
+        // inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
     });
 
     inputElement.addEventListener('active', () => {
-        inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
+        // inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
     });
 
     inputElement.addEventListener('blur', () => {

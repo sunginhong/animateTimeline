@@ -2,6 +2,7 @@ import { m } from 'framer-motion';
 import CloseBtnIcon from './Components/CloseBtnIcon';
 import TitleLabel from './Components/TitleLabel';
 import { valOptSpecs } from './Components/valOptSpecs';
+import { SelBorderUpdate } from '../functionCreateMenuSub/SelBorderUpdate';
 import MenuSpecs from './MenuSpecs';
 import { get } from 'http';
 import { set } from 'mongoose';
@@ -154,23 +155,19 @@ export default function MenuSpecCreateList(parent: HTMLElement, className: strin
 
             const value = target.getAttribute('data-specs');
 
-            const selIndex = Number(target.getAttribute('data-index'));
+            const inputSpecsElements = document.querySelectorAll(`.ui-list-new-item-specs-input`);
+            const inputEasingElements = document.querySelectorAll(`.ui-list-new-item-easing-input`);
 
-            const inputElements = document.querySelectorAll(`.ui-list-new-item-specs-input`);
-            for (let i = 0; i < inputElements.length; i++) {
-                const inputElement = inputElements[i] as HTMLInputElement;
-                if(index === i) {
-                    const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect`+i);
-                    inputElementsItem.forEach(item => {
-                        (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
-                    });
+            inputSpecsElements.forEach(item => {
+                if(Number(item.getAttribute('data-index')) === index){
+                    (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
                 } else {
-                    const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect`+i);
-                    inputElementsItem.forEach(item => {
-                        (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
-                    });
+                    (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
                 }
-            }
+            });
+            // inputEasingElements.forEach(item => {
+            //     (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
+            // });
             
             if (!optionElement.getAttribute('data-active') || optionElement.getAttribute('data-active') === 'false') {
                 if (value !== 'None') {
@@ -235,21 +232,7 @@ MenuSpecCreateList.update = function (specMenuSelectIndex: number, className: st
             (menu as HTMLElement).style.transform = 'translateX(100%)';
         }
 
-        const inputElements = document.querySelectorAll(`.ui-list-new-item-easing-input`);
-        for (let i = 0; i < inputElements.length; i++) {
-            const inputElement = inputElements[i] as HTMLInputElement;
-            if(specMenuSelectIndex === i) {
-                const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect`+i);
-                inputElementsItem.forEach(item => {
-                    (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
-                });
-            } else {
-                const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-specs-input.input-rect`+i);
-                inputElementsItem.forEach(item => {
-                    (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
-                });
-            }
-        }
+        SelBorderUpdate("specs", specMenuSelectIndex);
     });
 };
 
@@ -257,13 +240,7 @@ MenuSpecCreateList.menuSpecDelete = function (index: number): void {
     const MenuSpec = document.querySelectorAll(`.ui-menu-spec-sub`);
 
     MenuSpec.forEach((item, idx) => {
-        // if(item.getAttribute('data-index') === index.toString()) {
-            if(idx === index){
-            // item.remove();
-            // const specsSelectorOption = document.querySelectorAll(`.specs-selector-option.idx-${index}`);
-            // specsSelectorOption.forEach(specsSelectorOption => {
-            //     specsSelectorOption.remove();
-            // });
+        if(idx === index){
             MenuSpecCreateList.specs.splice(Number(item.getAttribute('data-index')), 1);   
             item.remove();
           

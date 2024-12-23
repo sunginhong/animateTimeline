@@ -1,13 +1,9 @@
 import { valOptSpecs } from '../functionCreateMenuSub/Components/valOptSpecs';
-
+import { SelBorderUpdate } from '../functionCreateMenuSub/SelBorderUpdate';
 export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HTMLElement, index: number, listWidth: number, handleSpecClick: (itemId: number) => void): void {
 
     const parentElement = parent.parentElement;
-
-    const stateValue = parent.getAttribute('data-state-value-specmenu') || '';
     const specElement = document.createElement('p');
-    // specElement.setAttribute('data-index', index.toString());
-    // specElement.className = "ui-list-new-item-specs " + "input-elem-" + index;
 
     if (parentElement) {
         specElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
@@ -23,21 +19,18 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     parent.appendChild(specElement);
 
     const inputElement = document.createElement('input');
-    // inputElement.setAttribute('data-index', index.toString());
-    // inputElement.className = "ui-list-new-item-specs-input " + "input-rect-" + index;
 
     if (parentElement) {
         inputElement.setAttribute('data-index', parentElement.getAttribute('data-index'));
         inputElement.className = "ui-list-new-item-specs-input " + "input-rect-" + parentElement.getAttribute('data-index');
     }
 
+    inputElement.defaultValue = "Select animation specs";
     inputElement.type = "string";
     inputElement.readOnly = true;
-    inputElement.defaultValue = "Select animation specs";
     inputElement.style.position = "relative";
     inputElement.style.width = (listWidth-6) + "px";
     inputElement.style.height = "calc(100% - 4px)";
-    // inputElement.style.color = "rgba(66, 66, 66, 1)";
     inputElement.style.color = "#B3B3B3";
     inputElement.style.textAlign = "center";
     inputElement.style.alignItems = "center";
@@ -60,14 +53,16 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     specElement.addEventListener('click', function(event: Event) {
         handleSpecClick(-1)
         handleSpecClick(Number(this.getAttribute('data-index')));
+
+        SelBorderUpdate("specs", Number(this.getAttribute('data-index')));
     });
 
     inputElement.addEventListener('focus', () => {
-        inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
+        // inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
     });
 
     inputElement.addEventListener('active', () => {
-        inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
+        // inputElement.style.border = "1px solid rgba(3, 199, 90, 1)";
     });
 
     inputElement.addEventListener('blur', () => {
@@ -144,14 +139,14 @@ CreateListItemSpecs.specsUpdate = function (index: number, specs: any[][]): void
     
     
             if(specs[0]?.length > 2){
-                const specsElementResultFade = document.createElement('div');
-                specsElementResultFade.style.position = "absolute";
-                specsElementResultFade.style.width = "20px";
-                specsElementResultFade.style.height = elemSize.height + "px";
-                specsElementResultFade.style.backgroundImage = "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))",
-                specsElementResultFade.style.left = "0";
-                specsElementResultFade.style.zIndex = "1";
-                specsElementResult.appendChild(specsElementResultFade);
+                // const specsElementResultFade = document.createElement('div');
+                // specsElementResultFade.style.position = "absolute";
+                // specsElementResultFade.style.width = "20px";
+                // specsElementResultFade.style.height = elemSize.height + "px";
+                // specsElementResultFade.style.backgroundImage = "linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0))",
+                // specsElementResultFade.style.left = "0";
+                // specsElementResultFade.style.zIndex = "1";
+                // specsElementResult.appendChild(specsElementResultFade);
             } else {
                 null
             }

@@ -1,6 +1,7 @@
 import CloseBtnIcon from './Components/CloseBtnIcon';
 import TitleLabel from './Components/TitleLabel';
 import { valOptEasing } from './Components/valOptEasing';
+import { SelBorderUpdate } from '../functionCreateMenuSub/SelBorderUpdate';
 import MenuEasing from './MenuEasing';
 
 export default function MenuEasingCreateList(parent: HTMLElement, className: string, index: number, easingselectClick: (itemId: number) => void, easingLabelCheck: (itemId: string) => void) {
@@ -148,21 +149,19 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
 
             const value = target.getAttribute('data-easings');
 
-            const inputElements = document.querySelectorAll(`.ui-list-new-item-easing-input`);
-            for (let i = 0; i < inputElements.length; i++) {
-                const inputElement = inputElements[i] as HTMLInputElement;
-                if(index === i) {
-                    const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-easing-input.input-rect`+i);
-                    inputElementsItem.forEach(item => {
-                        (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
-                    });
+            const inputSpecsElements = document.querySelectorAll(`.ui-list-new-item-specs-input`);
+            const inputEasingElements = document.querySelectorAll(`.ui-list-new-item-easing-input`);
+
+            // inputSpecsElements.forEach(item => {
+            //     (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
+            // });
+            inputEasingElements.forEach(item => {
+                if(Number(item.getAttribute('data-index')) === index){
+                    (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
                 } else {
-                    const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-easing-input.input-rect`+i);
-                    inputElementsItem.forEach(item => {
-                        (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
-                    });
+                    (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
                 }
-            }
+            });
 
             if (target.classList.contains('active')) {
                 target.classList.remove('active');
@@ -207,21 +206,7 @@ MenuEasingCreateList.update = function (EasingMenuSelectIndex: number, className
         } else {
             (menu as HTMLElement).style.transform = 'translateX(100%)';
         }
-        const inputElements = document.querySelectorAll(`.ui-list-new-item-easing-input`);
-            for (let i = 0; i < inputElements.length; i++) {
-                const inputElement = inputElements[i] as HTMLInputElement;
-                if(EasingMenuSelectIndex === i) {
-                    const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-easing-input.input-rect`+i);
-                    inputElementsItem.forEach(item => {
-                        (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
-                    });
-                } else {
-                    const inputElementsItem = document.querySelectorAll(`.ui-list-new-item-easing-input.input-rect`+i);
-                    inputElementsItem.forEach(item => {
-                        (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
-                    });
-                }
-            }
+        SelBorderUpdate("easing", EasingMenuSelectIndex);
     });
 };
 
@@ -290,4 +275,3 @@ MenuEasingCreateList.indexUpdate = function (): void {
         });
     });
 };
-
