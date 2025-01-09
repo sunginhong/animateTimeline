@@ -149,12 +149,8 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
 
             const value = target.getAttribute('data-easings');
 
-            const inputSpecsElements = document.querySelectorAll(`.ui-list-new-item-specs-input`);
             const inputEasingElements = document.querySelectorAll(`.ui-list-new-item-easing-input`);
 
-            // inputSpecsElements.forEach(item => {
-            //     (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 0)";
-            // });
             inputEasingElements.forEach(item => {
                 if(Number(item.getAttribute('data-index')) === index){
                     (item as HTMLElement).style.border = "1px solid rgba(3, 199, 90, 1)";
@@ -190,7 +186,6 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
             const uniqueSet = new Set(easingLabelCheckArray.map(item => JSON.stringify(item)));
             EasingUniqueArr = Array.from(uniqueSet).map(item => JSON.parse(item)) as [string][];
             EasingUniqueArr.sort();
-            
             easings[index] = EasingUniqueArr;
         });
       });

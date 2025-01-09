@@ -74,81 +74,7 @@ ListItemCreateDiv.listDelete = function (index: number, itemN: number): void {
         });
         window.clearTimeout(timer2);
     }, 350);
-
-    // CreateListItemLabels.indexUpdate = function (index: string): void {
-    //     const labelContainer = document.querySelectorAll('.ui-list-new-item-label') as NodeListOf<HTMLElement>;
-    //     const inputElement = document.querySelectorAll('.ui-list-new-item-label-input') as NodeListOf<HTMLElement>;
-    
-    //     labelContainer.forEach((item, i) => {
-    //         item.setAttribute('data-index', i.toString());
-    //     });
-    //     inputElement.forEach((item, i) => {
-    //         item.setAttribute('data-index', i.toString());
-    //     });
-    // };
-    
-
-
-    // delbtn.addEventListener('click', function() {
-    //     fnSpecSelectorClose();
-    //     let timer1: number | undefined;
-    //     let timer2: number | undefined;
-    
-    //     if (itemN > 0) {
-    //       timer1 = window.setTimeout(() => {
-    //         listArray.forEach((item, i) => {
-    //           if (this.id === i.toString()) {
-    //             item.remove();
-    //             delbtnArray[i].remove();
-    //             listArray.splice(i, 1);
-    //             delbtnArray.splice(i, 1);
-    //             specArrayF = [...Array(i)];
-    //             specsArray.splice(i, 1);
-    //             specArrayF.splice(i, 1);
-    //             specs.splice(i, 1);
-    //             specUniqueArrF.splice(i, 1);
-    //             // specsSelectorArr.splice(i, 1);
-    //             specsSelectorArr[i].remove();
-    //             specsSelectorArr.splice(i, 1);
-    //           }
-    //         });
-    //         window.clearTimeout(timer1);
-    //       }, 100);
-    
-    //       itemN -= 1;
-    //     }
-    
-    //     timer2 = window.setTimeout(() => {
-    //       listArray.forEach((item, i) => {
-    //         item.id = i.toString();
-    //         delbtnArray[i].id = i.toString();
-    //         item.querySelectorAll('option').forEach((option) => {
-    //           option.id = i.toString();
-    //         });
-    //       });
-    //       window.clearTimeout(timer2);
-    //     }, 350);
-    //   });
-
 }
-
-
-// listArray.forEach((item, i) => {
-//     if (this.id === i.toString()) {
-//         item.remove();
-//         delbtnArray[i].remove();
-//         listArray.splice(i, 1);
-//         delbtnArray.splice(i, 1);
-//         specArrayF = [...Array(i)];
-//         specsArray.splice(i, 1);
-//         specArrayF.splice(i, 1);
-//         specs.splice(i, 1);
-//         specUniqueArrF.splice(i, 1);
-//         specsSelectorArr[i].remove();
-//         specsSelectorArr.splice(i, 1);
-//     }
-// });
-
 
 ListItemCreateDiv.indexUpdate = function (): void {
     const listElement = document.querySelectorAll('.ui-list-row-new-item') as NodeListOf<HTMLElement>;
@@ -186,3 +112,11 @@ ListItemCreateDiv.getListProps = function (): any[] {
     return propsArr;
 }
 
+ListItemCreateDiv.resetListProps = function (): any[] {
+    let propsArr: Array<any[]> = [];
+    listArray.forEach((list, i) => {
+        list.remove();
+        listArray = [];
+    });
+    return propsArr;
+}

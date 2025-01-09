@@ -147,8 +147,6 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     useEffect(() => { 
 
      },[itemN]);
-
-    // useEffect(() => { console.log(itemN) }, [itemN]);
     
     const specsSelectClick = (index: number) => {
         setSelSpecIndex(index);
@@ -159,6 +157,7 @@ const UiMenu: React.FC<UiMenuProps> = ({ adWidth, delayChecked, styleChecked, ad
     };
 
     const easingLabelCheck = (easingLabel: string) => {
+        setIsEasingLabel('');
         setIsEasingLabel(easingLabel);
     };
 

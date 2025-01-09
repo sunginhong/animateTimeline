@@ -16,6 +16,7 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     specElement.style.width = listWidth + "px";
     specElement.style.height = "100%";
     specElement.style.overflow = "hidden";
+    specElement.style.margin = '0';
     parent.appendChild(specElement);
 
     const inputElement = document.createElement('input');
@@ -38,6 +39,8 @@ export default function CreateListItemSpecs(parent: HTMLElement, parentChild: HT
     inputElement.style.fontSize = "8px";
     inputElement.style.fontWeight = "600";
     inputElement.style.lineHeight = "16px";
+    inputElement.style.margin = '0';
+    inputElement.style.padding = '0';
     inputElement.style.border = "0";
     inputElement.style.backgroundColor = "transparent";
     inputElement.style.outline = "none";

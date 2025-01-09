@@ -16,6 +16,8 @@ export default class ListItemElements {
 
     getListProps(): any { return ListItemCreateDiv.getListProps(); }
 
+    resetListProps(): any { return ListItemCreateDiv.resetListProps(); }
+
     create(parent: HTMLElement, className: string, index: number, listWidthArray: number[], handleLabelClick: () => void, handleSpecClick: (itemId: number) => void, handleEasingClick: (itemId: number) => void, handleDurationClick: () => void, handleDelayClick: () => void, handleDeleteClick: () => void): void {
         return ListItemCreateDiv(parent, className, index, listWidthArray, handleLabelClick, handleSpecClick, handleEasingClick, handleDurationClick, handleDelayClick, handleDeleteClick);
     }

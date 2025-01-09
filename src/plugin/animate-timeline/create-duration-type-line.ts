@@ -40,7 +40,6 @@ export const createDurationTypeLine = ({delayState, parent, index, durations, de
     rectDuration_dot_end.fills = [{ type: "SOLID", color: bgColor }];
     rectDuration_dot_end.cornerRadius = 10;
     rectDuration.appendChild(rectDuration_dot_end);
-    
 }
 
 function numberToString(n) {

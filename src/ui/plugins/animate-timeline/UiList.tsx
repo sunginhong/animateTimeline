@@ -118,12 +118,6 @@ const UiList: React.FC<UiListProps> = ({ addItemChecked, resetItemChecked, itemN
         }
     }, [easingLabelChecked]);
 
-    useEffect(() => {
-        if (easingLabelChecked) {
-            
-        }
-    }, [easingLabelChecked]);
-
     const handleLabelClick = () => {
         handleMenuReset();
     };
