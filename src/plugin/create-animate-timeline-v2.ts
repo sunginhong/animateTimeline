@@ -20,14 +20,14 @@ export let tableSpecsTitleArr = new Array;
 export let tableSpecPropssArr = new Array;
 
 export const animate_timeline_v2 = (msg) => {
-    // console.log(msg.newChecked, msg.adWidth, msg.delayChecked, msg.styleChecked)
-
     const frame_parents = figma.createComponent();
     frame_parents.name = "frame_parents";
     frame_parents.clipsContent = false;
-    // frame_parents.layoutSizingVertical = 'HUG';
-    // frame_parents.primaryAxisAlignItems = 'CENTER';
-    // frame_parents.counterAxisAlignItems = 'CENTER';
+    frame_parents.layoutMode = "VERTICAL";
+    frame_parents.primaryAxisSizingMode = "AUTO";
+    frame_parents.counterAxisSizingMode = "AUTO";
+    frame_parents.itemSpacing = 1;
+    frame_parents.layoutAlign = "STRETCH";
     frame_parents.fills = [
     {
         type: "SOLID",
@@ -36,6 +36,6 @@ export const animate_timeline_v2 = (msg) => {
     },
     ];
 
-    createFigmaTimeLines({parent: frame_parents, msg: msg.newChecked});
+    // createFigmaTimeLines({parent: frame_parents, msg: msg.newChecked});
     createFigmaTables({parent: frame_parents, msg: msg.newChecked});
 }

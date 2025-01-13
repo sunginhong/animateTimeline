@@ -91,7 +91,7 @@ CreateListItemEasing.easingUpdate = function (index: number, easing: string): vo
             element.defaultValue = "";
         }
     });
-    console.log(easing)
+    
     if (easing !== "None") {
         const existingResultElement = document.querySelector(`.ui-list-new-item-easing-input.input-rect-${index}`);
 
