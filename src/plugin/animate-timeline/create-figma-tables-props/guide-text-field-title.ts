@@ -55,7 +55,8 @@ export const text_field_title = async ({parents, index, value, i, msg, delayBool
         text_field_props.characters = "가나다라가나다라가나다라가나다라가나다라가나다라";
     }
     if( i === 1){
-        text_field_props.characters = "0." + msg[4] + "(" + msg[4] + "ms)";
+        const seconds = (msg[4] / 1000).toFixed(2);
+        text_field_props.characters = `${seconds}s (${msg[4]}ms)`;
     }
     if(!delayBool){
         if( i === 2){
@@ -68,7 +69,9 @@ export const text_field_title = async ({parents, index, value, i, msg, delayBool
         }
     } else {
         if( i === 2){
-            text_field_props.characters = "0." + msg[5] + "(" + msg[5] + "ms)";
+            // text_field_props.characters = "0." + msg[5] + "s (" + msg[5] + "ms)";
+            const seconds = (msg[5] / 1000).toFixed(2);
+            text_field_props.characters = `${seconds}s (${msg[5]}ms)`;
         }
         if( i === 3){
             text_field_props.setBoundVariable("fontStyle", fontStyleBold);

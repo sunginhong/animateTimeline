@@ -70,14 +70,14 @@ export default function CreateListItemDelay(parent: HTMLElement, index: number, 
     inputElement.addEventListener('input', function(event: Event) {
         const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+this.parentElement.getAttribute('data-index')) as NodeListOf<HTMLElement>;
         if (isNaN(Number(inputElement.value))) {
-            // inputElement.value = null;
             listItem.forEach((item, i) => {
-                // item.setAttribute('data-delay-props', null);
+                // item.setAttribute('data-duration-props', null);
             }); 
         }
         listItem.forEach((item, i) => {
             item.setAttribute('data-delay-props', inputElement.value);
         }); 
+        inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
     });
 }
 

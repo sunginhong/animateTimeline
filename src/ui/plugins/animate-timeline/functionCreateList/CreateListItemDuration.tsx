@@ -57,7 +57,7 @@ export default function CreateListItemDuration(parent: HTMLElement, index: numbe
     });
 
     inputElement.addEventListener('blur', () => {
-        inputElement.value = inputElement.value === "" ? "duration(ms)" : inputElement.value;
+        inputElement.value = inputElement.value === "" ? "duration(ms)" : (Math.abs(parseInt(inputElement.value))).toString();
         // inputElement.style.color = "rgba(66, 66, 66, 1)";
         inputElement.style.border = "1px solid rgba(3, 199, 90, 0)";
     });
@@ -74,14 +74,16 @@ export default function CreateListItemDuration(parent: HTMLElement, index: numbe
         const listItem = document.querySelectorAll(`.ui-list-row-new-item.list-new-item-`+this.parentElement.getAttribute('data-index')) as NodeListOf<HTMLElement>;
         if (isNaN(Number(inputElement.value))) {
             listItem.forEach((item, i) => {
-                // item.setAttribute('data-duration-props', null);
             }); 
         }
         listItem.forEach((item, i) => {
             item.setAttribute('data-duration-props', inputElement.value);
         }); 
+        inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
     });
+
 }
+
 
 CreateListItemDuration.indexUpdate = function (): void {
     const durationElement = document.querySelectorAll('.ui-list-new-item-duration') as NodeListOf<HTMLElement>;
