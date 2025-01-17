@@ -1,34 +1,34 @@
-("use strict");
+"use strict";
 
-import { createFigmaTables } from "./create-figma-tables";
-import { createFigmaTimeLines } from "./create-figma-timelines";
+import { createFigmaTables } from "./create-figma-tables/create-figma-tables";
+import { createFigmaTimelines } from "./create-figma-timelines/create-figma-timelines";
 
-const collectionBold = figma.variables.createVariableCollection("new-collectionBold");
-const modeIdBold = collectionBold.modes[0].modeId;
-const fontStyleBold = figma.variables.createVariable("fontFamily", collectionBold, "STRING");
-fontStyleBold.setValueForMode(modeIdBold, "Bold");
+const boldCollection = figma.variables.createVariableCollection("boldCollection");
+const boldModeId = boldCollection.modes[0].modeId;
+const boldFontStyle = figma.variables.createVariable("fontFamily", boldCollection, "STRING");
+boldFontStyle.setValueForMode(boldModeId, "Bold");
 
-const collectionRegular  = figma.variables.createVariableCollection("new-collection2");
-const modeIdRegular  = collectionRegular.modes[0].modeId;
-const fontStyleRegular = figma.variables.createVariable("fontFamily", collectionRegular, "STRING");
-fontStyleRegular.setValueForMode(modeIdRegular, "regular");
+const regularCollection = figma.variables.createVariableCollection("regularCollection");
+const regularModeId = regularCollection.modes[0].modeId;
+const regularFontStyle = figma.variables.createVariable("fontFamily", regularCollection, "STRING");
+regularFontStyle.setValueForMode(regularModeId, "Regular");
 
-export let tableCellArr_label = new Array;
-export let tableCellArr_specs = new Array;
-export let tableCellArr_props = new Array;
-export let tableSpecsTitleArr = new Array;
-export let tableSpecPropssArr = new Array;
+export let labelTableCells = [];
+export let specsTableCells = [];
+export let propsTableCells = [];
+export let specsTableTitles = [];
+export let specPropsTable = [];
 
-export const animate_timeline_v2 = (msg) => {
-    const frame_parents = figma.createComponent();
-    frame_parents.name = "frame_parents";
-    frame_parents.clipsContent = false;
-    frame_parents.layoutMode = "VERTICAL";
-    frame_parents.primaryAxisSizingMode = "AUTO";
-    frame_parents.counterAxisSizingMode = "AUTO";
-    frame_parents.itemSpacing = 1;
-    frame_parents.layoutAlign = "STRETCH";
-    frame_parents.fills = [
+export const createAnimateTimelineV2 = (msg) => {
+    const parentFrame = figma.createComponent();
+    parentFrame.name = "parentFrame";
+    parentFrame.clipsContent = false;
+    parentFrame.layoutMode = "VERTICAL";
+    parentFrame.primaryAxisSizingMode = "AUTO";
+    parentFrame.counterAxisSizingMode = "AUTO";
+    parentFrame.itemSpacing = 1;
+    parentFrame.layoutAlign = "STRETCH";
+    parentFrame.fills = [
     {
         type: "SOLID",
         color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 },
@@ -36,6 +36,6 @@ export const animate_timeline_v2 = (msg) => {
     },
     ];
 
-    // createFigmaTimeLines({parent: frame_parents, msg: msg.newChecked});
-    createFigmaTables({parent: frame_parents, msg: msg.newChecked});
+    createFigmaTables({ parent: parentFrame, msg: msg.newChecked });
+    createFigmaTimelines({ parent: parentFrame, msg: msg });
 }

@@ -18,7 +18,6 @@ function curveColorsCheck(eases) {
         "Spring level 2",
         "Linear",
     ];
-    console.log(eases)
     switch (eases) {
         case valOptEasing[0]:
             curveColors = {

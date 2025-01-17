@@ -20,13 +20,13 @@ const tableLabels = ["Label", "Action", "Property"];
 
 export const createFigmaTables = ({parent, msg}) => {
     const frame_tables = figma.createFrame();
-    frame_tables.name = "frame_tables";
+    frame_tables.name = "TablesFrame";
     frame_tables.layoutMode = "VERTICAL";
     frame_tables.clipsContent = true;
     frame_tables.primaryAxisSizingMode = "AUTO";
     frame_tables.counterAxisSizingMode = "AUTO";
     frame_tables.itemSpacing = 1;
-    frame_tables.layoutAlign = "STRETCH";
+    // frame_tables.layoutAlign = "STRETCH";
     frame_tables.minWidth = 726;
     frame_tables.cornerRadius = 8;
     frame_tables.strokes = [{ type: "SOLID", color: { r: 240 / 255, g: 240 / 255, b: 240 / 255 } }];
@@ -50,6 +50,7 @@ export const createFigmaTables = ({parent, msg}) => {
         },
         ];
         frame_tables.appendChild(table_cell);
+        
         const data = values;
 
         tableLabels.forEach((values, i) => {
