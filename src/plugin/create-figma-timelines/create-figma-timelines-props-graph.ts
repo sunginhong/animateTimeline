@@ -23,6 +23,14 @@ export const createTimelineGraph = ({ parent, msg, index }) => {
     const fillColorArr = [];
     const strokeColorArr = [];
 
+    const durationArray = [];
+
+    msg.newChecked.forEach((values, i) => {
+        durationArray.push(msg.newChecked[i][4]);
+    });
+
+    const maxDuration = Math.max(...durationArray);
+
     msg.newChecked.forEach((value, i) => {
         durationLength = value[4].length;
         fillColorArr.push(getGraphCurveColor(msg.newChecked[index][3]).bgColor);
@@ -56,6 +64,8 @@ export const createTimelineGraph = ({ parent, msg, index }) => {
     });
     rectWidth = msg.adWidth / 10;
 
+    // console.log(Math.abs(maxDuration / 100), durationArray)
+
     const rectDuration = figma.createFrame();
     rectDuration.name = "rectDuration " + index;
     rectDuration.cornerRadius = 100;
@@ -64,20 +74,41 @@ export const createTimelineGraph = ({ parent, msg, index }) => {
     rectDuration.counterAxisSizingMode = "AUTO";
     rectDuration.primaryAxisAlignItems = "MIN";
     rectDuration.counterAxisAlignItems = "MIN";
+    rectDuration.x = 0;
     rectDuration.paddingTop = 6;
     rectDuration.paddingBottom = 6;
-
-    if (durationLength === 1) {
-        rectDuration.resize(durationFirstArr[index], rectHeight);
-    } else if (durationLength === 2) {
-        rectDuration.resize(rectWidth * durationFirstArr[index], rectHeight);
-    } else if (durationLength === 3) {
-        rectDuration.resize(rectWidth * (durationFirstArr[index] + durationSecondArr[index]), rectHeight);
-    } else if (durationLength === 4) {
-        rectDuration.resize(rectWidth * (durationFirstArr[index] + durationSecondArr[index] + durationThirdArr[index]), rectHeight);
-    }
-    createGraphLabels({ item: rectDuration, index: index, fillColorArr: fillColorArr, strokeColorArr: strokeColorArr });
     parent.appendChild(rectDuration);
+
+    if(parseInt(durationArray[index]) >= 0 && parseInt(durationArray[index]) < 100){
+        rectDuration.resize(parseInt(numberToString(durationArray[index])[0])*rectWidth, rectHeight);
+    } else if(parseInt(durationArray[index]) >= 100 && parseInt(durationArray[index]) < 1000){
+        rectDuration.resize(parseInt(numberToString(durationArray[index])[0] + numberToString(durationArray[index])[1])*rectWidth, rectHeight);
+    } else if(parseInt(durationArray[index]) >= 1000 && parseInt(durationArray[index]) < 10000){
+        rectDuration.resize(parseInt(numberToString(durationArray[index])[0] + numberToString(durationArray[index])[1] + numberToString(durationArray[index])[2])*rectWidth, rectHeight);
+    } 
+
+    // const rectDuration = figma.createFrame();
+    // rectDuration.name = "rectDuration " + index;
+    // rectDuration.cornerRadius = 100;
+    // rectDuration.layoutMode = "VERTICAL";
+    // rectDuration.primaryAxisSizingMode = "AUTO";
+    // rectDuration.counterAxisSizingMode = "AUTO";
+    // rectDuration.primaryAxisAlignItems = "MIN";
+    // rectDuration.counterAxisAlignItems = "MIN";
+    // rectDuration.paddingTop = 6;
+    // rectDuration.paddingBottom = 6;
+
+    // if (durationLength === 1) {
+    //     rectDuration.resize(durationFirstArr[index], rectHeight);
+    // } else if (durationLength === 2) {
+    //     rectDuration.resize(rectWidth * durationFirstArr[index], rectHeight);
+    // } else if (durationLength === 3) {
+    //     rectDuration.resize(rectWidth * (durationFirstArr[index] + durationSecondArr[index]), rectHeight);
+    // } else if (durationLength === 4) {
+    //     rectDuration.resize(rectWidth * (durationFirstArr[index] + durationSecondArr[index] + durationThirdArr[index]), rectHeight);
+    // }
+    createGraphLabels({ item: rectDuration, index: index, fillColorArr: fillColorArr, strokeColorArr: strokeColorArr });
+    // parent.appendChild(rectDuration);
 }
 
 function createGraphLabels({ item, index, fillColorArr, strokeColorArr }) {
@@ -95,4 +126,8 @@ function createGraphLabels({ item, index, fillColorArr, strokeColorArr }) {
             visible: true,
         }
     ];
+}
+
+function numberToString(n) {
+    return (n + "").split("");
 }

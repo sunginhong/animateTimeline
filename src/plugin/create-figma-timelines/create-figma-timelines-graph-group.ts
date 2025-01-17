@@ -14,8 +14,8 @@ export const createTimelineGraphGroup = ({ parent, msg, index, delayBool }) => {
     timelineGraphsGroup.layoutAlign = "STRETCH";
     timelineGraphsGroup.primaryAxisSizingMode = "AUTO";
     timelineGraphsGroup.counterAxisSizingMode = "AUTO";
-    timelineGraphsGroup.primaryAxisAlignItems = "CENTER";
-    timelineGraphsGroup.counterAxisAlignItems = "CENTER";
+    timelineGraphsGroup.primaryAxisAlignItems = "MIN";
+    timelineGraphsGroup.counterAxisAlignItems = "MIN";
     timelineGraphsGroup.minWidth = 100;
     timelineGraphsGroup.itemSpacing = 1;
     timelineGraphsGroup.paddingRight = 55;
