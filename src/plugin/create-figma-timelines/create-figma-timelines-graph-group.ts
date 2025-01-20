@@ -1,6 +1,7 @@
 ("use strict");
 
-import { createTimelineGraph } from "./create-figma-timelines-props-graph";
+import { createTimelineGraphDuration } from "./create-figma-timelines-props-graph_duration";
+import { createTimelineGraphDelay } from "./create-figma-timelines-props-graph_delay";
 
 const collectionBold = figma.variables.createVariableCollection("newCollectionBold");
 const modeIdBold = collectionBold.modes[0].modeId;
@@ -16,8 +17,9 @@ export const createTimelineGraphGroup = ({ parent, msg, index, delayBool }) => {
     timelineGraphsGroup.counterAxisSizingMode = "AUTO";
     timelineGraphsGroup.primaryAxisAlignItems = "MIN";
     timelineGraphsGroup.counterAxisAlignItems = "MIN";
+    timelineGraphsGroup.clipsContent = false;
     timelineGraphsGroup.minWidth = 100;
-    timelineGraphsGroup.itemSpacing = 1;
+    timelineGraphsGroup.itemSpacing = 0;
     timelineGraphsGroup.paddingRight = 55;
     timelineGraphsGroup.constraints = { horizontal: "STRETCH", vertical: "STRETCH" };
     timelineGraphsGroup.fills = [
@@ -28,5 +30,10 @@ export const createTimelineGraphGroup = ({ parent, msg, index, delayBool }) => {
         },
     ];
     parent.appendChild(timelineGraphsGroup);
-    createTimelineGraph({ parent: timelineGraphsGroup, msg: msg, index: index });
+
+    if(0 < msg.newChecked[index][5]){
+        createTimelineGraphDelay({ parent: timelineGraphsGroup, msg: msg, index: index, delayChecked: msg.delayChecked, styleChecked: msg.styleChecked });
+    }
+
+    createTimelineGraphDuration({ parent: timelineGraphsGroup, msg: msg, index: index, styleChecked: msg.styleChecked });
 }

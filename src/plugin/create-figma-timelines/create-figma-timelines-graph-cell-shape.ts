@@ -18,6 +18,7 @@ export const createTimelineGraphCellShape = ({ parent, msg, index }) => {
     timelineGraphParent.primaryAxisAlignItems = "MIN";
     timelineGraphParent.counterAxisAlignItems = "MIN";
     timelineGraphParent.layoutSizingHorizontal = "HUG";
+    timelineGraphParent.clipsContent = false;
     timelineGraphParent.minHeight = getElemHeight();
     timelineGraphParent.paddingTop = 10;
     timelineGraphParent.paddingBottom = 10;

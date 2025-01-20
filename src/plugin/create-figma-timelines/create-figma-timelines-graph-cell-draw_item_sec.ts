@@ -7,8 +7,11 @@ const modeIdBold = collectionBold.modes[0].modeId;
 const fontStyleBold = figma.variables.createVariable("fontFamily", collectionBold, "STRING");
 fontStyleBold.setValueForMode(modeIdBold, "Bold");
 
-export const createTimelineGraphsCellDrawItemSec = ({ parent, msg, maxDuration, durationArray, textLineHeight }) => {
-    for (let i = 0; i < Math.abs(maxDuration / 100) + 2; i++) {
+export const createTimelineGraphsCellDrawItemSec = ({ parent, msg, maxDuration, maxDelay, durationArray, textLineHeight }) => {
+    // console.log(Math.floor(Math.abs(maxDuration / 100) + Math.abs(maxDelay / 100)))
+    const totalDuraitons = Math.floor(Math.abs(maxDuration / 100) + Math.abs(maxDelay / 100)) + 2;
+
+    for (let i = 0; i < totalDuraitons; i++) {
         const timelineRect = figma.createFrame();
         timelineRect.name = "timelineRect " + i;
         timelineRect.x = i * msg.adWidth;

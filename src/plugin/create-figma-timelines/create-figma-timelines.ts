@@ -22,7 +22,7 @@ export const createFigmaTimelines = ({ parent, msg }) => {
     timelinesFrame.clipsContent = false;
     timelinesFrame.primaryAxisSizingMode = "AUTO";
     timelinesFrame.counterAxisSizingMode = "AUTO";
-    timelinesFrame.itemSpacing = 1;
+    timelinesFrame.itemSpacing = 0;
     timelinesFrame.layoutAlign = "STRETCH";
     timelinesFrame.minWidth = 726;
     timelinesFrame.cornerRadius = 0;

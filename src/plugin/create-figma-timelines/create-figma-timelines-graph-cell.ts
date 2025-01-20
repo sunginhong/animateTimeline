@@ -11,13 +11,16 @@ fontStyleBold.setValueForMode(modeIdBold, "Bold");
 
 export const createTimelineGraphsCell = ({ parent, msg }) => {
     const durationArray = [];
+    const delayArray = [];
     const textLineHeight = 16;
 
     msg.newChecked.forEach((values, i) => {
         durationArray.push(msg.newChecked[i][4]);
+        delayArray.push(msg.newChecked[i][5]);
     });
 
     const maxDuration = Math.max(...durationArray);
+    const maxDelay = Math.max(...delayArray)
     const timelinesContainer = figma.createFrame();
     timelinesContainer.name = "timelinesContainer";
     timelinesContainer.layoutAlign = "STRETCH";
@@ -42,7 +45,7 @@ export const createTimelineGraphsCell = ({ parent, msg }) => {
     ];
     parent.appendChild(timelinesContainer);
 
-    createTimelineGraphsCellDrawItemSec({ parent: timelinesContainer, msg, maxDuration, durationArray, textLineHeight });
+    createTimelineGraphsCellDrawItemSec({ parent: timelinesContainer, msg, maxDuration, maxDelay, durationArray, textLineHeight });
     createTimelineGraphsCellShapeParents({ parent: parent, msg: msg });
 }
 
