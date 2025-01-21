@@ -1,6 +1,8 @@
 # Animate TimeLine
 **Figma Plugin**
 
+![animeTimeline_video_1](https://github.com/user-attachments/assets/577ec164-5d35-4bbd-9e08-366d2ae0a041)
+
 ### Interaction Guide Creation Tool
 
 > Escape the hassle of creating interaction guides! While essential for design projects, creating interaction guides can often be time-consuming and labor-intensive. To alleviate this burden, we have developed a groundbreaking Figma plugin. By simply inputting Action attributes, this Figma plugin automatically generates timelines and interaction guides, making your workflow more efficient and straightforward.
