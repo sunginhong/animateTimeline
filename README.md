@@ -1,6 +1,10 @@
 # Animate TimeLine
 **Figma Plugin**
 
+https://www.figma.com/community/plugin/1390574471920151745/animate-timeline
+
+<br>
+
 ![animeTimeline_video_1](https://github.com/user-attachments/assets/577ec164-5d35-4bbd-9e08-366d2ae0a041)
 
 ### Interaction Guide Creation Tool
