@@ -31,11 +31,9 @@ Select the element for which you want to create an interaction guide.
 Enter the code attributes into the plugin panel.
 The plugin will automatically generate the timeline and complete the interaction guide.
 
-
 ### Conclusion
 
 > Stop wasting time on complex interaction guide creation. Use our Figma plugin to create interaction guides efficiently and accurately. Experience the Figma plugin that reduces the time spent on guide creation now!
-
 
 
 ### Product
