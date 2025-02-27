@@ -1,6 +1,7 @@
 ("use strict");
 
 import { createTimelineLabelsCell } from "./create-figma-timelines-labels-cell";
+import { createTimelineSpecsCell } from "./create-figma-timelines-specs-cell";
 import { createTimelineGraphsCell } from "./create-figma-timelines-graph-cell";
 
 const boldCollection = figma.variables.createVariableCollection("BoldCollection");
@@ -31,5 +32,6 @@ export const createFigmaTimelines = ({ parent, msg }) => {
     parent.appendChild(timelinesFrame);
 
     createTimelineLabelsCell({ parent: timelinesFrame, msg: msg });
+    createTimelineSpecsCell({ parent: timelinesFrame, msg: msg });
     createTimelineGraphsCell({ parent: timelinesFrame, msg: msg });
 };

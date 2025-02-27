@@ -16,7 +16,7 @@ export const createTimelineLabelsGroup = ({ parent, msg, index, delayBool }) => 
     timelineLabelsGroup.counterAxisSizingMode = "AUTO";
     timelineLabelsGroup.primaryAxisAlignItems = "CENTER";
     timelineLabelsGroup.counterAxisAlignItems = "CENTER";
-    timelineLabelsGroup.minWidth = 100;
+    timelineLabelsGroup.minWidth = 128;
     timelineLabelsGroup.itemSpacing = 1;
     timelineLabelsGroup.paddingRight = 55;
     timelineLabelsGroup.constraints = { horizontal: "STRETCH", vertical: "STRETCH" };

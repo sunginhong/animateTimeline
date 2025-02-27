@@ -16,7 +16,7 @@ export const createTimelineActionsGroup = ({parent, msg, index, delayBool}) => {
     timeline_actions_group.counterAxisSizingMode = "AUTO";
     timeline_actions_group.primaryAxisAlignItems = "CENTER";
     timeline_actions_group.counterAxisAlignItems = "CENTER";
-    timeline_actions_group.itemSpacing = 1;
+    timeline_actions_group.itemSpacing = 4;
     timeline_actions_group.paddingRight = 48;
     timeline_actions_group.constraints = { horizontal: "STRETCH", vertical: "STRETCH" };
     timeline_actions_group.fills = [

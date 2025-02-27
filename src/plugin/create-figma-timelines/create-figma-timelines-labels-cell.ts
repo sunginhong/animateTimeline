@@ -1,4 +1,4 @@
-import { createTimelineLeftProps } from "./create-figma-timelines-left-props";
+import { createTimelineLeftLabelsProps } from "./create-figma-timelines-left-labels-props";
 
 export const createTimelineLabelsCell = ({ parent, msg }) => {
     const labelsCell = figma.createFrame();
@@ -44,6 +44,6 @@ export const createTimelineLabelsCell = ({ parent, msg }) => {
         labelsCell.appendChild(labelsParent);
 
         const data = values;
-        createTimelineLeftProps({ parent: labelsParent, msg: data, index: i, delayBool: false });
+        createTimelineLeftLabelsProps({ parent: labelsParent, msg: data, index: i, delayBool: false });
     });
 }
