@@ -1,5 +1,6 @@
 ("use strict");
-import { createAnimateTimelineV2 } from './create-animate-timeline-v2';
+import { createAnimateTimelineV2 } from '../plugin__animateTimeline/create-animate-timeline-v2'
+import { createGuideTemplatesTitle } from '../plugin__guideTemplates/create-guide-templates-title';
 
 figma.showUI(__html__);
 // figma.ui.resize(677, 500);
@@ -13,5 +14,8 @@ figma.ui.onmessage = (msg) => {
     
     if (msg.type === "create-animate-timeline-v2") {
         createAnimateTimelineV2(msg);
+    };
+    if (msg.type === "create-guide-templates-title") {
+        createGuideTemplatesTitle(msg);
     };
 };

@@ -26,7 +26,7 @@ export const createAnimateTimelineV2 = (msg) => {
     parentFrame.layoutMode = "VERTICAL";
     parentFrame.primaryAxisSizingMode = "AUTO";
     parentFrame.counterAxisSizingMode = "AUTO";
-    parentFrame.itemSpacing = 1;
+    parentFrame.itemSpacing = 25;
     parentFrame.layoutAlign = "STRETCH";
     parentFrame.fills = [
     {
@@ -35,6 +35,10 @@ export const createAnimateTimelineV2 = (msg) => {
         visible: false,
     },
     ];
+
+    figma.currentPage.selection
+    .filter(node => 'appendChild' in node)
+    .forEach(node => (node as FrameNode | GroupNode).appendChild(parentFrame));
 
     createFigmaTables({ parent: parentFrame, msg: msg.newChecked });
     createFigmaTimelines({ parent: parentFrame, msg: msg });

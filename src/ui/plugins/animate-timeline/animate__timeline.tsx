@@ -15,10 +15,6 @@ const animate_timeline = () => {
     let specs: any[][] = [[]];
     let specsSelectorArr: HTMLElement[] = [];
     let specUniqueArrF: any[] = [];
-    // let zoomBool: boolean = false;
-    // let fitBool: boolean = false;
-    // let designType00: boolean = true;
-    // let designType01: boolean = false;
 
     const [adWidth, setAdWidth] = useState(100);
     const [delayChecked, setDelayChecked] = useState(false);

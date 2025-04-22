@@ -1,6 +1,6 @@
 {
-  "name": "interaction guide form plugin(animation timeline)",
-  "id": "1390574471920151745",
+  "name": "animate-document-dev",
+  "id": "1403178485093439941",
   "api": "1.0.0",
   "main": "./plugin.js",
   "capabilities": [],

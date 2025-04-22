@@ -1,5 +1,5 @@
 {
-  "name": "animate-document-dev",
+  "name": "animate-document",
   "id": "1403178485093439941",
   "api": "1.0.0",
   "main": "./plugin.js",

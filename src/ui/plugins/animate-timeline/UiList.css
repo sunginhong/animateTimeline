@@ -1,5 +1,5 @@
 .ui-list {
-    position: fixed;
+    position: absolute;
     float: right;
     width: 617px;
     height: 100%;

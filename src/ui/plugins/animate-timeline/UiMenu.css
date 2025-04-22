@@ -1,5 +1,5 @@
 .ui-menu {
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 162px;
     height: 100%;
@@ -17,7 +17,6 @@
 
         > .ui-menu-contain-group {
             width: 119px;
-            height: 100%;
             flex-direction: column;
             flex-wrap: wrap ;
             justify-content: space-between;

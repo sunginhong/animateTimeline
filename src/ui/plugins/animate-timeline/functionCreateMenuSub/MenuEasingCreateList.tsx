@@ -22,6 +22,16 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     parent.appendChild(menu);
     menu.style.transform = 'translateX(100%)';
 
+    const menuContain = document.createElement('div');
+    menuContain.className = 'ui-menu-spec-easing-contain ' + index.toString();
+    menuContain.setAttribute('data-index', index.toString());
+    menuContain.style.position = 'absolute';
+    menuContain.style.width = '100%';
+    menuContain.style.top = '0';
+    menuContain.style.display = 'flex';
+    menuContain.style.flexDirection = 'column';
+    menu.appendChild(menuContain);
+
     const menuFrameTop = document.createElement('div');
     menuFrameTop.className = 'easing-selector-frame-top idx-' + index.toString();
     menuFrameTop.setAttribute('data-index', index.toString());
@@ -32,7 +42,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameTop.style.alignSelf = 'stretch';
     menuFrameTop.style.flexWrap = 'wrap';
     menuFrameTop.style.margin = '0px 16px 82px 16px'
-    menu.appendChild(menuFrameTop);
+    menuContain.appendChild(menuFrameTop);
 
     const closeButtonrect = document.createElement('div');
     closeButtonrect.className = 'close-button-rect idx-' + index.toString();
@@ -68,7 +78,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameBottom.style.alignSelf = 'stretch';
     menuFrameBottom.style.flexWrap = 'wrap';
     // menuFrameBottom.style.margin = '0px 16px 0px 16px'
-    menu.appendChild(menuFrameBottom);
+    menuContain.appendChild(menuFrameBottom);
 
     const menuFrameBottomGroup= document.createElement('div');
     menuFrameBottomGroup.className = 'easing-selector-frame-bottom-group idx-' + index.toString();
@@ -80,7 +90,7 @@ export default function MenuEasingCreateList(parent: HTMLElement, className: str
     menuFrameBottomGroup.style.justifyContent = 'space-between';
     menuFrameBottomGroup.style.margin = '0px 16px 26px 16px'
     menuFrameBottomGroup.style.gap = '20px';
-    menu.appendChild(menuFrameBottomGroup);
+    menuContain.appendChild(menuFrameBottomGroup);
 
     TitleLabel(menuFrameBottomGroup, 'Easing', 'Choose your\nanimation easings');
 
