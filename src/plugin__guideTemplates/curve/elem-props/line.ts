@@ -1,0 +1,21 @@
+interface CurvePropsLineProps {
+    parent: FrameNode;
+    parentWidth: number;  
+}
+
+export function createCurvePropsLine({ parent, parentWidth }: CurvePropsLineProps) {
+    const curvePropsLine = figma.createFrame();
+    curvePropsLine.layoutMode = "HORIZONTAL";
+    curvePropsLine.layoutAlign = "MIN";
+    curvePropsLine.primaryAxisAlignItems = 'MIN';
+    curvePropsLine.primaryAxisSizingMode = "AUTO";
+    curvePropsLine.counterAxisSizingMode = "AUTO";
+    curvePropsLine.counterAxisAlignItems = "MIN";
+    curvePropsLine.name = "curve_props_line";
+    curvePropsLine.resize(parentWidth, 1);
+    curvePropsLine.clipsContent = false;
+    curvePropsLine.fills = [
+        { type: "SOLID", color: { r: 217 / 255, g: 217 / 255, b: 217 / 255 }, visible: true },
+    ];
+    parent.appendChild(curvePropsLine);
+}

@@ -1,9 +1,10 @@
 ("use strict");
 import { createAnimateTimelineV2 } from '../plugin__animateTimeline/create-animate-timeline-v2'
-import { createGuideTemplatesForm } from '../plugin__guideTemplates/create-guide-templates-form';
-import { createGuideTemplatesTitle } from '../plugin__guideTemplates/create-guide-templates-title';
-import { createGuideTemplatesList } from '../plugin__guideTemplates/create-guide-templates-list';
-import { createGuidetemplatesCurve } from '../plugin__guideTemplates/create-guide-templates-curve';
+import { createTemplatesForm } from '../plugin__guideTemplates/create-templates-form';
+import { createTemplatesTitle } from '../plugin__guideTemplates/create-templates-title';
+import { createTemplatesList } from '../plugin__guideTemplates/create-templates-list';
+import { createTemplatesCurve } from '../plugin__guideTemplates/create-templates-curve';
+import { createTemplatesHaptic } from '../plugin__guideTemplates/create-templates-haptic';
 
 figma.showUI(__html__);
 // figma.ui.resize(677, 500);
@@ -18,18 +19,19 @@ figma.ui.onmessage = (msg) => {
     if (msg.type === "create-animate-timeline-v2") {
         createAnimateTimelineV2(msg);
     };
-    if( msg.type === "create-guide-templates-form") {
-        createGuideTemplatesForm(msg);
+    if( msg.type === "create-templates-form") {
+        createTemplatesForm(msg);
     }
-    if (msg.type === "create-guide-templates-title") {
-        createGuideTemplatesTitle(msg);
+    if (msg.type === "create-templates-title") {
+        createTemplatesTitle(msg);
     };
-    if( msg.type === "create-guide-templates-list") {
-        createGuideTemplatesList(msg);
+    if( msg.type === "create-templates-list") {
+        createTemplatesList(msg);
     }
-    if (msg.type === "create-guide-templates-curve") {
-        createGuidetemplatesCurve(msg);
+    if (msg.type === "create-templates-curve") {
+        createTemplatesCurve(msg);
     }
-    if (msg.type === "create-guide-templates-haptics") {
+    if (msg.type === "create-templates-haptic") {
+        createTemplatesHaptic(msg);
     }
 };

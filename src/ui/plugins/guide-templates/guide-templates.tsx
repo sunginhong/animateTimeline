@@ -10,59 +10,40 @@ const guide_templates = () => {
       };
 
 
-    const handleSwitchChange = (dataType) => {
-        switch (dataType) {
-            case "formFrame":
-                parent.postMessage({
-                    pluginMessage: {
-                      type: 'create-guide-templates-form',
-                    }
-                  }, '*');
-                break;
-            case "titleFrame":
-                parent.postMessage({
-                    pluginMessage: {
-                      type: 'create-guide-templates-title',
-                    }
-                  }, '*');
-                break;
-            case "listFrame":
-                parent.postMessage({
-                    pluginMessage: {
-                      type: 'create-guide-templates-list',
-                    }
-                  }, '*');
-                break;
-            case "curveFrame":
-                parent.postMessage({
-                    pluginMessage: {
-                      type: 'create-guide-templates-curve',
-                    }
-                  }, '*');
-                break;
-            case "hapticsFrame":
-                parent.postMessage({
-                    pluginMessage: {
-                      type: 'create-guide-templates-haptics',
-                    }
-                  }, '*');
-                break;
-            default:
-        }
+    const handleSwitchChange = (dataType: string | null) => {
+      if (!dataType) return;
+
+      const messageTypeMap: Record<string, string> = {
+        formFrame: 'create-templates-form',
+        titleFrame: 'create-templates-title',
+        listFrame: 'create-templates-list',
+        curveFrame: 'create-templates-curve',
+        hapticsFrame: 'create-templates-haptic',
+        hapticFrame: 'create-templates-haptic',
+      };
+
+      const messageType = messageTypeMap[dataType];
+      if (messageType) {
+        parent.postMessage({
+          pluginMessage: {
+            type: messageType,
+          }
+        }, '*');
+      }
+    };
         // parent.postMessage({
         //   pluginMessage: {
         //     type: 'create-guide-templates-title',
         //   }
         // }, '*');
-      };
- 
-    return (
+return (
       <>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             <button data-type={"formFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>가이드폼</button>
             <button data-type={"titleFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>표지</button>
             <button data-type={"listFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>리스트</button>
             <button data-type={"curveFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>curve</button>
+            <button data-type={"hapticFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>haptic</button>
             {/* <TableItem title={"Title"}/>
             <TableItem title={"Easing"}/>
             <TableItem title={"Haptics"}/>
