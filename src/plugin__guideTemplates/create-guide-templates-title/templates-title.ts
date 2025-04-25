@@ -1,7 +1,4 @@
-const collectionBold = figma.variables.createVariableCollection("newCollectionBold");
-const modeIdBold = collectionBold.modes[0].modeId;
-const fontStyleBold = figma.variables.createVariable("fontFamily", collectionBold, "STRING");
-fontStyleBold.setValueForMode(modeIdBold, "Bold");
+import { fontStyleBold } from "../../plugin/utils/getFonts";
 
 export function templatesTitle({ parents, label }) {
     (async () => {

@@ -1,9 +1,13 @@
 import { templatesTitleFrame } from './create-guide-templates-title/templates-title-frames';
 
 export const createGuideTemplatesTitle = (msg) => {
-    const title = figma.createComponent();
+    const title = figma.createFrame();
     title.name = "title";
+    title.layoutPositioning="AUTO";
     title.clipsContent = false;
+    title.layoutMode = "VERTICAL";
+    title.primaryAxisAlignItems = "CENTER";
+    title.paddingLeft = 80*2;
     title.resize(1920, 1080);
     title.fills = [
     {

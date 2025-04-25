@@ -1,7 +1,6 @@
-import { templatesBadge } from "./templates-badge";
-import { templatesTitle } from "./templates-title";
+import { curveTitle } from "./curve-title";
 
-export function templatesTitleFrame({ parents }) {
+export function curveTitleFrame({ parents }) {
     const titleFrame = figma.createFrame();
     titleFrame.layoutMode = "VERTICAL";
     titleFrame.layoutAlign = "MIN";
@@ -9,8 +8,8 @@ export function templatesTitleFrame({ parents }) {
     titleFrame.primaryAxisSizingMode = "AUTO";
     titleFrame.counterAxisSizingMode = "AUTO";
     titleFrame.counterAxisAlignItems = "MIN";
-    titleFrame.itemSpacing = 32;
-    titleFrame.name = "title_frame";
+    titleFrame.itemSpacing = 15;
+    titleFrame.name = "curve_title_frame";
     titleFrame.clipsContent = false;
     titleFrame.fills = [
         { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 }, visible: false },
@@ -18,7 +17,7 @@ export function templatesTitleFrame({ parents }) {
     ];
     parents.appendChild(titleFrame);
 
-    templatesBadge({parents: titleFrame, label: "INTERACTION"});
-    templatesTitle({ parents: titleFrame, label: "가이드 타이틀" });
-   
+    curveTitle({ parents: titleFrame, label: "Interactive Studio", cases: "description" });
+    curveTitle({ parents: titleFrame, label: "Curve Guide", cases: "Title" });
+
 }
