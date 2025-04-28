@@ -2,22 +2,22 @@ import { templatesCurveFrame } from './curve/templates-curve-frames';
 
 export const createTemplatesCurve = (message) => {
     let paddingLeftRight = 50;
-    const curveFrame = figma.createFrame();
-    curveFrame.name = "curve";
-    curveFrame.layoutPositioning = "AUTO";
-    curveFrame.clipsContent = false;
-    curveFrame.layoutMode = "VERTICAL"; 
-    curveFrame.primaryAxisAlignItems = "MIN";
-    curveFrame.primaryAxisSizingMode = "AUTO";
-    curveFrame.counterAxisAlignItems = "MIN"; 
-    curveFrame.counterAxisSizingMode = "AUTO";
-    curveFrame.paddingLeft = paddingLeftRight;
-    curveFrame.paddingRight = paddingLeftRight;
-    curveFrame.paddingTop = 100;
-    curveFrame.paddingBottom = 100;
-    curveFrame.itemSpacing = 20; 
-    // curveFrame.resize(1920, 1080);
-    curveFrame.fills = [
+    const curve = figma.createFrame();
+    curve.name = "curve";
+    curve.layoutPositioning = "AUTO";
+    curve.clipsContent = false;
+    curve.layoutMode = "VERTICAL"; 
+    curve.primaryAxisAlignItems = "MIN";
+    curve.primaryAxisSizingMode = "AUTO";
+    curve.counterAxisAlignItems = "MIN"; 
+    curve.counterAxisSizingMode = "AUTO";
+    curve.paddingLeft = paddingLeftRight;
+    curve.paddingRight = paddingLeftRight;
+    curve.paddingTop = 100;
+    curve.paddingBottom = 100;
+    curve.itemSpacing = 20; 
+    // curve.resize(1920, 1080);
+    curve.fills = [
         {
             type: "SOLID",
             color: { r: 0 / 255, g: 0 / 255, b: 0 / 255 },
@@ -26,7 +26,7 @@ export const createTemplatesCurve = (message) => {
     ];
     figma.currentPage.selection
         .filter(node => 'appendChild' in node)
-        .forEach(node => (node as FrameNode | GroupNode).appendChild(curveFrame));
+        .forEach(node => (node as FrameNode | GroupNode).appendChild(curve));
 
-    templatesCurveFrame({ parent: curveFrame, parentWidth: 1920 - paddingLeftRight * 2 });
+    templatesCurveFrame({ parent: curve, parentWidth: 1920 - paddingLeftRight * 2 });
 }
