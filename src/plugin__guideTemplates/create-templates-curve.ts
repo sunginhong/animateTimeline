@@ -1,3 +1,4 @@
+import { getWidth } from '../plugin/utils/getWidth';
 import { templatesCurveFrame } from './curve/templates-curve-frames';
 
 export const createTemplatesCurve = (message) => {
@@ -28,5 +29,5 @@ export const createTemplatesCurve = (message) => {
         .filter(node => 'appendChild' in node)
         .forEach(node => (node as FrameNode | GroupNode).appendChild(curve));
 
-    templatesCurveFrame({ parent: curve, parentWidth: 1920 - paddingLeftRight * 2 });
+    templatesCurveFrame({ parent: curve, parentWidth: getWidth("templates") - paddingLeftRight * 2 });
 }

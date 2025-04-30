@@ -1,9 +1,9 @@
-interface CurvePropsLineProps {
+interface interfaceProps {
     parent: FrameNode;
     parentWidth: number;  
 }
 
-export function createCurvePropsLine({ parent, parentWidth }: CurvePropsLineProps) {
+export function createCurvePropsLine({ parent, parentWidth }: interfaceProps) {
     const curvePropsLine = figma.createFrame();
     curvePropsLine.layoutMode = "HORIZONTAL";
     curvePropsLine.layoutAlign = "MIN";

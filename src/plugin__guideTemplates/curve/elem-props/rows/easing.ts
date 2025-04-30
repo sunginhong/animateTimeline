@@ -1,11 +1,11 @@
-import { createCurvePropsEasingLabelFrame } from "./easing-label/frame";
+import { createEasingLabelFrame } from "./easing-label/frame";
 
-interface curvePropsRowsEasingProps {
+interface interfaceProps {
     parent: FrameNode;
     easingType: string; 
 }
 
-export function createCurvePropsRowsEasing({ parent, easingType }: curvePropsRowsEasingProps) {
+export function createPropsRowsEasing({ parent, easingType }: interfaceProps) {
     const curvePropsRowsEasingFrame = figma.createFrame();
     curvePropsRowsEasingFrame.layoutMode = "VERTICAL";
     curvePropsRowsEasingFrame.layoutAlign = "MIN";
@@ -20,5 +20,5 @@ export function createCurvePropsRowsEasing({ parent, easingType }: curvePropsRow
         { type: "SOLID", color: { r: 32 / 255, g: 32 / 255, b: 32 / 255 }, visible: false },
     ];
     parent.appendChild(curvePropsRowsEasingFrame);
-    createCurvePropsEasingLabelFrame({ parent: curvePropsRowsEasingFrame, easingType: easingType });
+    createEasingLabelFrame({ parent: curvePropsRowsEasingFrame, easingType: easingType });
 }

@@ -1,3 +1,5 @@
+import { getWidth } from '../plugin/utils/getWidth';
+
 export const createTemplatesForm = (msg) => {
     const guideForm = figma.createFrame();
     guideForm.name = "guideForm";
@@ -9,11 +11,11 @@ export const createTemplatesForm = (msg) => {
     guideForm.counterAxisAlignItems = "MIN"; 
     guideForm.counterAxisSizingMode = "AUTO";
     guideForm.itemSpacing = 1; 
-    guideForm.resize(1920, 1080);
+    guideForm.resize(getWidth("templates"), 1080);
     guideForm.fills = [
         {
             type: "SOLID",
-            color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 },
+            color: { r: 0 / 255, g: 0 / 255, b: 0 / 255 },
             visible: true,
         },
     ];

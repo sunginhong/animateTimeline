@@ -1,9 +1,9 @@
-interface LineFrameProps {
+interface interfaceProps {
     parent: FrameNode;
     parentWidth: number; 
 }
 
-export function lineFrame({ parent, parentWidth }: LineFrameProps) {
+export function lineFrame({ parent, parentWidth }: interfaceProps) {
     const lineFrame = figma.createFrame();
     lineFrame.resize(parentWidth, 1);
     lineFrame.layoutMode = "VERTICAL";

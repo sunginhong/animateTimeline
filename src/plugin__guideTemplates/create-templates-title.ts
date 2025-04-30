@@ -1,3 +1,4 @@
+import { getWidth } from '../plugin/utils/getWidth';
 import { templatesTitleFrame } from './title/templates-title-frames';
 
 export const createTemplatesTitle = (msg) => {
@@ -8,7 +9,7 @@ export const createTemplatesTitle = (msg) => {
     title.layoutMode = "VERTICAL";
     title.primaryAxisAlignItems = "CENTER";
     title.paddingLeft = 80*2;
-    title.resize(1920, 1080);
+    title.resize(getWidth("templates"), 1080);
     title.fills = [
     {
         type: "SOLID",

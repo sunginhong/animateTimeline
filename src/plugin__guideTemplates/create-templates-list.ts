@@ -1,3 +1,4 @@
+import { getWidth } from '../plugin/utils/getWidth';
 import { templatesListFrame } from './list/templates-list-frames';
 
 export const createTemplatesList = (msg) => {
@@ -8,7 +9,7 @@ export const createTemplatesList = (msg) => {
     list.layoutMode = "VERTICAL";
     list.primaryAxisAlignItems = "CENTER";
     list.paddingLeft = 80*2;
-    list.resize(1920, 1080);
+    list.resize(getWidth("templates"), 1080);
     list.fills = [
     {
         type: "SOLID",

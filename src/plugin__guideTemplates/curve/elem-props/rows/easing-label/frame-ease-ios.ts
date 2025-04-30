@@ -1,13 +1,13 @@
 import { fontStyleBold } from "../../../../../plugin/utils/getFonts";
 import { getEasing } from "../../../../../plugin/utils/getEasing";
 
-interface EasingLabelProps {
+interface interfaceProps {
     parent: FrameNode;
     osType: string; 
     easingType: string; 
 }
 
-export function createEasingLabelIos({ parent, osType, easingType }: EasingLabelProps) {
+export function createIosEasingLabel({ parent, osType, easingType }: interfaceProps) {
     
     const easingFrame = figma.createFrame();
     easingFrame.layoutMode = "VERTICAL";

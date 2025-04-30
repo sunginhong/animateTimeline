@@ -1,12 +1,12 @@
 import { curvePropsRows } from "./rows/rows";
 import { createCurvePropsLine } from "./line";
 
-interface curvePropsFrameProps {
+interface interfaceProps {
     parent: FrameNode;
     parentWidth: number; 
 }
 
-export function curvePropsFrame({ parent, parentWidth }: curvePropsFrameProps) {
+export function curvePropsFrame({ parent, parentWidth }: interfaceProps) {
     const curvePropsFrame = figma.createFrame();
     const paddingLeftRight = 50;
     const parentWidthCalc = parentWidth - (paddingLeftRight * 2);

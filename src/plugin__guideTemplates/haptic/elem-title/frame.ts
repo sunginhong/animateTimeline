@@ -1,6 +1,6 @@
-import { curveTitle } from "./curve-title";
+import { hapticTitle } from "./frame-haptic-title";
 
-export function curveTitleFrame({ parent }) {
+export function hapticTitleFrame({ parent }) {
     const titleFrame = figma.createFrame();
     titleFrame.layoutMode = "VERTICAL";
     titleFrame.layoutAlign = "MIN";
@@ -17,7 +17,7 @@ export function curveTitleFrame({ parent }) {
     ];
     parent.appendChild(titleFrame);
 
-    curveTitle({ parent: titleFrame, label: "Interactive Studio", cases: "description" });
-    curveTitle({ parent: titleFrame, label: "Curve Guide", cases: "Title" });
+    hapticTitle({ parent: titleFrame, label: "Interactive Studio", cases: "description" });
+    hapticTitle({ parent: titleFrame, label: "Haptic Guide v3.0", cases: "Title" });
 
 }

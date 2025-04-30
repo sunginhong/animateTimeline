@@ -2,10 +2,10 @@ import { fontStyleBold } from "../../../../plugin/utils/getFonts";
 
 interface interfaceProps {
     parent: FrameNode;
-    easingType: string; 
+    hapticType: string; 
 }
 
-export function createPropsRowsLabel({ parent, easingType }: interfaceProps) {
+export function createPropsRowsLabel({ parent, hapticType }: interfaceProps) {
     const container = figma.createFrame();
     container.layoutMode = "VERTICAL";
     container.layoutAlign = "MIN";
@@ -24,7 +24,7 @@ export function createPropsRowsLabel({ parent, easingType }: interfaceProps) {
         textLabel.name = "CurvePropsRowsLabel";
         textLabel.setBoundVariable("fontStyle", fontStyleBold);
         await figma.loadFontAsync({ family: "Inter", style: "Bold" });
-        textLabel.characters = easingType;
+        textLabel.characters = hapticType;
         textLabel.textAlignHorizontal = "CENTER";
         textLabel.textAlignVertical = "CENTER";
         textLabel.layoutAlign = "CENTER";
@@ -32,14 +32,11 @@ export function createPropsRowsLabel({ parent, easingType }: interfaceProps) {
         textLabel.fontSize = 30;
         textLabel.lineHeight = { unit: "AUTO" };
         textLabel.fills = [
-            easingType === "Ease-Standard" ? { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } } :
-            easingType === "Ease-Out" ? { type: "SOLID", color: { r: 255 / 255, g: 153 / 255, b: 0 / 255 } } :
-            easingType === "Ease-Out-Level1" ? { type: "SOLID", color: { r: 255 / 255, g: 153 / 255, b: 0 / 255 } } :
-            easingType === "Ease-InOut" ? { type: "SOLID", color: { r: 219 / 255, g: 0 / 255, b: 255 / 255 } } :
-            easingType === "Spring" ? { type: "SOLID", color: { r: 255 / 255, g: 75 / 255, b: 0 / 255 } } :
-            easingType === "Spring-Level1" ? { type: "SOLID", color: { r: 255 / 255, g: 75 / 255, b: 0 / 255 } } :
-            easingType === "Spring-Level2" ? { type: "SOLID", color: { r: 255 / 255, g: 75 / 255, b: 0 / 255 } } :
-            { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
+            hapticType === "Selection" ? { type: "SOLID", color: { r: 255 / 255, g: 153 / 255, b: 0 / 255 } } :
+            hapticType === "Selection-0.5" ? { type: "SOLID", color: { r: 255 / 255, g: 153 / 255, b: 0 / 255 } } :
+            hapticType === "Error" ? { type: "SOLID", color: { r: 255 / 255, g: 75 / 255, b: 75 / 255 } } :
+            hapticType === "Success" ? { type: "SOLID", color: { r: 255 / 255, g: 75 / 255, b: 75 / 255 } } :
+            { type: "SOLID", color: { r: 255 / 255, g: 75 / 255, b: 75 / 255 } },
         ];
         container.appendChild(textLabel);
     })();

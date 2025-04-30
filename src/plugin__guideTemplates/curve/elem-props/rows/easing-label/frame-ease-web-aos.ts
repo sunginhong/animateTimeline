@@ -1,13 +1,13 @@
 import { fontStyleBold } from "../../../../../plugin/utils/getFonts";
 import { getEasing } from "../../../../../plugin/utils/getEasing";
 
-interface easingPropsFrameEaseProps {
+interface interfaceProps {
     parent: FrameNode;
     osType: string; 
     easingType: string; 
 }
 
-export function createEasingLabelWebAos({ parent, osType, easingType }: easingPropsFrameEaseProps) {
+export function createWebAosEasingLabel({ parent, osType, easingType }: interfaceProps) {
     
     (async () => {
         const easingLabel = figma.createText();

@@ -1,3 +1,6 @@
+import { getWidth } from '../plugin/utils/getWidth';
+import { templatesHapticFrame } from './haptic/templates-haptic-frames';
+
 export const createTemplatesHaptic = (message) => {
     let paddingLeftRight = 50;
     const haptic = figma.createFrame();
@@ -26,4 +29,5 @@ export const createTemplatesHaptic = (message) => {
         .filter(node => 'appendChild' in node)
         .forEach(node => (node as FrameNode | GroupNode).appendChild(haptic));
 
+    templatesHapticFrame({ parent: haptic, parentWidth: getWidth("templates") - paddingLeftRight * 2});
 }
