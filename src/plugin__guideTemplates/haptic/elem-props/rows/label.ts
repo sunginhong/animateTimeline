@@ -1,11 +1,12 @@
 import { fontStyleBold } from "../../../../plugin/utils/getFonts";
 
 interface interfaceProps {
+    msg: any
     parent: FrameNode;
     hapticType: string; 
 }
 
-export function createPropsRowsLabel({ parent, hapticType }: interfaceProps) {
+export function createPropsRowsLabel({ msg, parent, hapticType }: interfaceProps) {
     const container = figma.createFrame();
     container.layoutMode = "VERTICAL";
     container.layoutAlign = "MIN";

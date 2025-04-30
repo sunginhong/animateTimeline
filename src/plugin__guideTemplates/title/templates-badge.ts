@@ -1,6 +1,12 @@
 import { fontStyleBold } from "../../plugin/utils/getFonts";
 
-export function templatesBadge({parent, label }) {
+interface interfaceProps {
+    msg: any
+    parent: FrameNode;
+    label: string;
+}
+
+export function templatesBadge({ msg, parent, label }: interfaceProps) {
     const badgeFrame = figma.createFrame();
     badgeFrame.cornerRadius = 100;
     badgeFrame.layoutMode = "VERTICAL";
@@ -14,19 +20,24 @@ export function templatesBadge({parent, label }) {
     badgeFrame.paddingBottom = 6;
     badgeFrame.itemSpacing = 10;
     badgeFrame.layoutAlign = "CENTER";
-    badgeFrame.horizontalPadding = 20*2;
-    badgeFrame.verticalPadding = 12*2;
+    badgeFrame.horizontalPadding = 20 * 2;
+    badgeFrame.verticalPadding = 12 * 2;
     badgeFrame.name = "badgeFrame";
     badgeFrame.clipsContent = false;
     badgeFrame.fills = [
-        { type: "SOLID", color: { r: 0 / 255, g: 148 / 255, b: 255 / 255 }, visible: true },
-       
+        {
+            type: "SOLID",
+            color: msg.isDarkMode
+                ? { r: 0 / 255, g: 148 / 255, b: 255 / 255 }
+                : { r: 3 / 255, g: 199 / 255, b: 90 / 255 },
+            visible: true,
+        },
     ];
     parent.appendChild(badgeFrame);
 
     (async () => {
         const badgeLabel = figma.createText();
-        badgeLabel.name = "badgeLabel" ;
+        badgeLabel.name = "badgeLabel";
         badgeLabel.setBoundVariable("fontStyle", fontStyleBold);
         await figma.loadFontAsync({ family: "Inter", style: "Bold" });
         badgeLabel.characters = label;
@@ -34,7 +45,7 @@ export function templatesBadge({parent, label }) {
         badgeLabel.textAlignVertical = "CENTER";
         badgeLabel.layoutAlign = "CENTER";
         badgeLabel.constraints = { horizontal: "STRETCH", vertical: "STRETCH" };
-        badgeLabel.fontSize = 26*2;
+        badgeLabel.fontSize = 26 * 2;
         badgeLabel.fills = [
             { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
         ];

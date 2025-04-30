@@ -2,11 +2,12 @@ import { createPropsRowsLabel } from "./label";
 import { createPropsRowsEasing } from './easing';
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     easingType: string; 
 }
 
-export function curvePropsRows({ parent, easingType }: interfaceProps) {
+export function curvePropsRows({ msg, parent, easingType }: interfaceProps) {
     const curvePropsRows = figma.createFrame();
     curvePropsRows.layoutMode = "HORIZONTAL";
     curvePropsRows.layoutAlign = "MIN";
@@ -25,6 +26,6 @@ export function curvePropsRows({ parent, easingType }: interfaceProps) {
     ];
     parent.appendChild(curvePropsRows);
 
-    createPropsRowsLabel({ parent: curvePropsRows, easingType: easingType });
-    createPropsRowsEasing({ parent: curvePropsRows, easingType: easingType });
+    createPropsRowsLabel({ msg: msg, parent: curvePropsRows, easingType: easingType });
+    createPropsRowsEasing({ msg: msg, parent: curvePropsRows, easingType: easingType });
 }

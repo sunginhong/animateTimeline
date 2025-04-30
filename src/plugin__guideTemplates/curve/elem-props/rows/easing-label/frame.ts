@@ -2,11 +2,12 @@ import { fontStyleBold } from "../../../../../plugin/utils/getFonts";
 import { easingLabelFrameContain } from "./frame-props";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     easingType: string; 
 }
 
-export function createEasingLabelFrame({ parent, easingType }: interfaceProps) {
+export function createEasingLabelFrame({ msg, parent, easingType }: interfaceProps) {
     const easingLabelFrameParent = figma.createFrame();
     easingLabelFrameParent.layoutMode = "VERTICAL";
     easingLabelFrameParent.layoutAlign = "MIN";
@@ -21,7 +22,7 @@ export function createEasingLabelFrame({ parent, easingType }: interfaceProps) {
         { type: "SOLID", color: { r: 32 / 255, g: 32 / 255, b: 32 / 255 }, visible: false },
     ];
     parent.appendChild(easingLabelFrameParent);
-    easingLabelFrameContain({ parent: easingLabelFrameParent, osType: "Web", easingType: easingType });
-    easingLabelFrameContain({ parent: easingLabelFrameParent, osType: "AOS", easingType: easingType });
-    easingLabelFrameContain({ parent: easingLabelFrameParent, osType: "iOS", easingType: easingType });
+    easingLabelFrameContain({ msg: msg, parent: easingLabelFrameParent, osType: "Web", easingType: easingType });
+    easingLabelFrameContain({ msg: msg, parent: easingLabelFrameParent, osType: "AOS", easingType: easingType });
+    easingLabelFrameContain({ msg: msg, parent: easingLabelFrameParent, osType: "iOS", easingType: easingType });
 }

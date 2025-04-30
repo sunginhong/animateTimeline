@@ -1,6 +1,11 @@
 import { hapticTitle } from "./frame-haptic-title";
 
-export function hapticTitleFrame({ parent }) {
+interface interfaceProps {
+    msg: any;
+    parent: FrameNode;
+}
+
+export function hapticTitleFrame({ msg, parent }: interfaceProps) {
     const titleFrame = figma.createFrame();
     titleFrame.layoutMode = "VERTICAL";
     titleFrame.layoutAlign = "MIN";
@@ -17,7 +22,7 @@ export function hapticTitleFrame({ parent }) {
     ];
     parent.appendChild(titleFrame);
 
-    hapticTitle({ parent: titleFrame, label: "Interactive Studio", cases: "description" });
-    hapticTitle({ parent: titleFrame, label: "Haptic Guide v3.0", cases: "Title" });
+    hapticTitle({ msg: msg, parent: titleFrame, label: "Interactive Studio", cases: "description" });
+    hapticTitle({ msg: msg, parent: titleFrame, label: "Haptic Guide v3.0", cases: "Title" });
 
 }

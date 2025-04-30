@@ -1,11 +1,12 @@
 import { fontStyleBold } from "../../../../plugin/utils/getFonts";
 
 interface interfaceProps {
+    msg: any
     parent: FrameNode;
     easingType: string; 
 }
 
-export function createPropsRowsLabel({ parent, easingType }: interfaceProps) {
+export function createPropsRowsLabel({ msg, parent, easingType }: interfaceProps) {
     const container = figma.createFrame();
     container.layoutMode = "VERTICAL";
     container.layoutAlign = "MIN";
@@ -32,7 +33,7 @@ export function createPropsRowsLabel({ parent, easingType }: interfaceProps) {
         textLabel.fontSize = 30;
         textLabel.lineHeight = { unit: "AUTO" };
         textLabel.fills = [
-            easingType === "Ease-Standard" ? { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } } :
+            easingType === "Ease-Standard" ? { type: "SOLID", color: msg.isDarkMode ? { r: 255 / 255, g: 255 / 255, b: 255 / 255 } : { r: 0 / 255, g: 0 / 255, b: 0 / 255 }, } :
             easingType === "Ease-Out" ? { type: "SOLID", color: { r: 255 / 255, g: 153 / 255, b: 0 / 255 } } :
             easingType === "Ease-Out-Level1" ? { type: "SOLID", color: { r: 255 / 255, g: 153 / 255, b: 0 / 255 } } :
             easingType === "Ease-InOut" ? { type: "SOLID", color: { r: 219 / 255, g: 0 / 255, b: 255 / 255 } } :

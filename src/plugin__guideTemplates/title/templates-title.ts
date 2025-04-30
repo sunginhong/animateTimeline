@@ -1,9 +1,15 @@
 import { fontStyleBold } from "../../plugin/utils/getFonts";
 
-export function templatesTitle({ parent, label }) {
+interface interfaceProps {
+    msg: any;
+    parent: FrameNode;
+    label: string;
+}
+
+export function templatesTitle({ msg, parent, label }: interfaceProps) {
     (async () => {
         const titleLabel = figma.createText();
-        titleLabel.name = "titleLabel" ;
+        titleLabel.name = "titleLabel";
         titleLabel.setBoundVariable("fontStyle", fontStyleBold);
         await figma.loadFontAsync({ family: "Inter", style: "Bold" });
         titleLabel.characters = label;
@@ -14,7 +20,7 @@ export function templatesTitle({ parent, label }) {
         titleLabel.fontSize = 128;
         titleLabel.lineHeight = { unit: "AUTO" };
         titleLabel.fills = [
-            { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
+            { type: "SOLID", color: msg.isDarkMode ? { r: 255 / 255, g: 255 / 255, b: 255 / 255 } : { r: 0 / 255, g: 0 / 255, b: 0 / 255 } },
         ];
         parent.appendChild(titleLabel);
     })();

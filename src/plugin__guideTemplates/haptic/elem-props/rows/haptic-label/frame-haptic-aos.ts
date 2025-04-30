@@ -1,13 +1,14 @@
 import { fontStyleBold } from "../../../../../plugin/utils/getFonts";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     osType: string; 
     hapticType: string; 
     data?: any;
 }
 
-export function createAosHapticLabel({ parent, osType, hapticType, data }: interfaceProps) {
+export function createAosHapticLabel({ msg, parent, osType, hapticType, data }: interfaceProps) {
    
     data.forEach((item: any, index: number) => {
         if(item.osType === "AOS" ){
@@ -38,7 +39,7 @@ export function createAosHapticLabel({ parent, osType, hapticType, data }: inter
                 hapticLabel.fontSize = 30;
                 hapticLabel.lineHeight = { unit: "AUTO" };
                 hapticLabel.fills = [
-                    { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
+                    { type: "SOLID", color: msg.isDarkMode ? { r: 255 / 255, g: 255 / 255, b: 255 / 255 } : { r: 0 / 255, g: 0 / 255, b: 0 / 255 } },
                 ];
                 hapticLabelFrame.appendChild(hapticLabel);
             })();

@@ -1,7 +1,7 @@
 import { getWidth } from '../plugin/utils/getWidth';
 import { templatesHapticFrame } from './haptic/templates-haptic-frames';
 
-export const createTemplatesHaptic = (message) => {
+export const createTemplatesHaptic = (msg) => {
     let paddingLeftRight = 50;
     const haptic = figma.createFrame();
     haptic.name = "haptic";
@@ -21,7 +21,7 @@ export const createTemplatesHaptic = (message) => {
     haptic.fills = [
         {
             type: "SOLID",
-            color: { r: 0 / 255, g: 0 / 255, b: 0 / 255 },
+            color: msg.isDarkMode ?  { r: 0 / 255, g: 0 / 255, b: 0 / 255 } : { r: 255 / 255, g: 255 / 255, b: 255 / 255 },
             visible: true,
         },
     ];
@@ -29,5 +29,5 @@ export const createTemplatesHaptic = (message) => {
         .filter(node => 'appendChild' in node)
         .forEach(node => (node as FrameNode | GroupNode).appendChild(haptic));
 
-    templatesHapticFrame({ parent: haptic, parentWidth: getWidth("templates") - paddingLeftRight * 2});
+    templatesHapticFrame({ msg: msg, parent: haptic, parentWidth: getWidth("templates") - paddingLeftRight * 2});
 }

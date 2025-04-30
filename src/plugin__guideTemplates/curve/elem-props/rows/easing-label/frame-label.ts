@@ -1,11 +1,12 @@
 import { createEasingLabel } from "./frame-label-child";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     osType: string; 
 }
 
-export function createEasingLabelContainer({ parent, osType }: interfaceProps) {
+export function createEasingLabelContainer({ msg, parent, osType }: interfaceProps) {
     const easingLabelFrame = figma.createFrame();
     easingLabelFrame.layoutMode = "HORIZONTAL";
     easingLabelFrame.layoutAlign = "MIN";

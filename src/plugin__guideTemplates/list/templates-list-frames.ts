@@ -1,11 +1,16 @@
-import {templatesListTitleFrame } from "./templates-list-1title-frames";
-import {templatesListContentsFrame } from "./templates-list-2contents-frames";
+import { templatesListTitleFrame } from "./templates-list-1title-frames";
+import { templatesListContentsFrame } from "./templates-list-2contents-frames";
 
-export function templatesListFrame({ parent }) {
+interface interfaceProps {
+    msg: any; 
+    parent: FrameNode;
+}
+
+export function templatesListFrame({ msg, parent }: interfaceProps) {
     const listFrame = figma.createFrame();
     listFrame.layoutMode = "VERTICAL";
     listFrame.layoutAlign = "MIN";
-    listFrame.primaryAxisAlignItems = 'MIN'
+    listFrame.primaryAxisAlignItems = 'MIN';
     listFrame.primaryAxisSizingMode = "AUTO";
     listFrame.counterAxisSizingMode = "AUTO";
     listFrame.counterAxisAlignItems = "MIN";
@@ -14,10 +19,9 @@ export function templatesListFrame({ parent }) {
     listFrame.clipsContent = false;
     listFrame.fills = [
         { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 }, visible: false },
-       
     ];
     parent.appendChild(listFrame);
 
-    templatesListTitleFrame({ parent: listFrame });
-    templatesListContentsFrame({ parent: listFrame });
+    templatesListTitleFrame({ msg: msg, parent: listFrame });
+    templatesListContentsFrame({ msg: msg, parent: listFrame });
 }

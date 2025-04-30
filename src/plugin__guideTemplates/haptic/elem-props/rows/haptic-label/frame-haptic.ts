@@ -2,13 +2,14 @@ import { createAosHapticLabel } from "./frame-haptic-aos";
 import { createIosHapticLabel } from "./frame-haptic-ios";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     osType: string; 
     hapticType: string; 
     data?: any;
 }
 
-export function createHapticLabel({ parent, osType, hapticType, data }: interfaceProps) {
+export function createHapticLabel({ msg, parent, osType, hapticType, data }: interfaceProps) {
     const hapticLabelFrame = figma.createFrame();
     hapticLabelFrame.layoutMode = "VERTICAL";
     hapticLabelFrame.layoutAlign = "MIN";
@@ -24,9 +25,9 @@ export function createHapticLabel({ parent, osType, hapticType, data }: interfac
     parent.appendChild(hapticLabelFrame);
 
     if (osType === "AOS") {
-        createAosHapticLabel({ parent: hapticLabelFrame, osType: osType, hapticType: hapticType, data: data });
+        createAosHapticLabel({ msg: msg, parent: hapticLabelFrame, osType: osType, hapticType: hapticType, data: data });
     }
     if (osType === "iOS") {
-        createIosHapticLabel({ parent: hapticLabelFrame, osType: osType, hapticType: hapticType, data: data });
+        createIosHapticLabel({ msg: msg, parent: hapticLabelFrame, osType: osType, hapticType: hapticType, data: data });
     }
 }

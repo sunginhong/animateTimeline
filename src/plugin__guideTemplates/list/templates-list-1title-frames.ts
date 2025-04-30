@@ -1,10 +1,15 @@
 import { templatesListTitle } from "./elem/templates-list-title";
 
-export function templatesListTitleFrame({ parent }) {
+interface interfaceProps {
+    msg: any; 
+    parent: FrameNode;
+}
+
+export function templatesListTitleFrame({ msg, parent }: interfaceProps) {
     const TitleFrame = figma.createFrame();
     TitleFrame.layoutMode = "VERTICAL";
     TitleFrame.layoutAlign = "MIN";
-    TitleFrame.primaryAxisAlignItems = 'MIN'
+    TitleFrame.primaryAxisAlignItems = 'MIN';
     TitleFrame.primaryAxisSizingMode = "AUTO";
     TitleFrame.counterAxisSizingMode = "AUTO";
     TitleFrame.counterAxisAlignItems = "MIN";
@@ -13,9 +18,8 @@ export function templatesListTitleFrame({ parent }) {
     TitleFrame.clipsContent = false;
     TitleFrame.fills = [
         { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 }, visible: false },
-       
     ];
     parent.appendChild(TitleFrame);
 
-    templatesListTitle({ parent: TitleFrame, label: "Contents", cases: "Title" });
+    templatesListTitle({ msg: msg, parent: TitleFrame, label: "Contents", cases: "Title" });
 }

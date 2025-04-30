@@ -1,10 +1,15 @@
 import { curveTitle } from "./frame-curve-title";
 
-export function curveTitleFrame({ parent }) {
+interface interfaceProps {
+    msg: any;
+    parent: FrameNode;
+}
+
+export function curveTitleFrame({ msg, parent }: interfaceProps) {
     const titleFrame = figma.createFrame();
     titleFrame.layoutMode = "VERTICAL";
     titleFrame.layoutAlign = "MIN";
-    titleFrame.primaryAxisAlignItems = 'MIN'
+    titleFrame.primaryAxisAlignItems = 'MIN';
     titleFrame.primaryAxisSizingMode = "AUTO";
     titleFrame.counterAxisSizingMode = "AUTO";
     titleFrame.counterAxisAlignItems = "MIN";
@@ -13,11 +18,9 @@ export function curveTitleFrame({ parent }) {
     titleFrame.clipsContent = false;
     titleFrame.fills = [
         { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 }, visible: false },
-       
     ];
     parent.appendChild(titleFrame);
 
-    curveTitle({ parent: titleFrame, label: "Interactive Studio", cases: "description" });
-    curveTitle({ parent: titleFrame, label: "Curve Guide", cases: "Title" });
-
+    curveTitle({ msg: msg, parent: titleFrame, label: "Interactive Studio", cases: "description" });
+    curveTitle({ msg: msg, parent: titleFrame, label: "Curve Guide", cases: "Title" });
 }

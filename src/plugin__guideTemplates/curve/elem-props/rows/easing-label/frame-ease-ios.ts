@@ -2,12 +2,13 @@ import { fontStyleBold } from "../../../../../plugin/utils/getFonts";
 import { getEasing } from "../../../../../plugin/utils/getEasing";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     osType: string; 
     easingType: string; 
 }
 
-export function createIosEasingLabel({ parent, osType, easingType }: interfaceProps) {
+export function createIosEasingLabel({ msg, parent, osType, easingType }: interfaceProps) {
     
     const easingFrame = figma.createFrame();
     easingFrame.layoutMode = "VERTICAL";
@@ -40,7 +41,7 @@ export function createIosEasingLabel({ parent, osType, easingType }: interfacePr
             easingLabelTop.fontSize = 24;
             easingLabelTop.lineHeight = { unit: "AUTO" };
             easingLabelTop.fills = [
-                { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
+                { type: "SOLID", color: msg.isDarkMode ? { r: 255 / 255, g: 255 / 255, b: 255 / 255 } : { r: 0 / 255, g: 0 / 255, b: 0 / 255 } },
             ];
             easingFrame.appendChild(easingLabelTop);
 
@@ -66,7 +67,7 @@ export function createIosEasingLabel({ parent, osType, easingType }: interfacePr
             easingLabelBottom.fontSize = 24;
             easingLabelBottom.lineHeight = { unit: "AUTO" };
             easingLabelBottom.fills = [
-                { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
+                { type: "SOLID", color: msg.isDarkMode ? { r: 255 / 255, g: 255 / 255, b: 255 / 255 } : { r: 0 / 255, g: 0 / 255, b: 0 / 255 } },
             ];
             easingFrame.appendChild(easingLabelBottom);
         } 

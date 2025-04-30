@@ -1,7 +1,7 @@
 import { getWidth } from '../plugin/utils/getWidth';
 import { templatesCurveFrame } from './curve/templates-curve-frames';
 
-export const createTemplatesCurve = (message) => {
+export const createTemplatesCurve = (msg) => {
     let paddingLeftRight = 50;
     const curve = figma.createFrame();
     curve.name = "curve";
@@ -21,7 +21,7 @@ export const createTemplatesCurve = (message) => {
     curve.fills = [
         {
             type: "SOLID",
-            color: { r: 0 / 255, g: 0 / 255, b: 0 / 255 },
+            color: msg.isDarkMode ?  { r: 0 / 255, g: 0 / 255, b: 0 / 255 } : { r: 255 / 255, g: 255 / 255, b: 255 / 255 },
             visible: true,
         },
     ];
@@ -29,5 +29,5 @@ export const createTemplatesCurve = (message) => {
         .filter(node => 'appendChild' in node)
         .forEach(node => (node as FrameNode | GroupNode).appendChild(curve));
 
-    templatesCurveFrame({ parent: curve, parentWidth: getWidth("templates") - paddingLeftRight * 2 });
+    templatesCurveFrame({ msg: msg, parent: curve, parentWidth: getWidth("templates") - paddingLeftRight * 2 });
 }

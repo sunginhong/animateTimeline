@@ -3,11 +3,12 @@ import { lineFrame } from "./elem-line/line";
 import { curvePropsFrame } from "./elem-props/frame";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     parentWidth: number; 
 }
 
-export function templatesCurveFrame({ parent, parentWidth }: interfaceProps) {
+export function templatesCurveFrame({ msg, parent, parentWidth }: interfaceProps) {
     const curveFrame = figma.createFrame();
     curveFrame.layoutMode = "VERTICAL";
     curveFrame.layoutAlign = "MIN";
@@ -24,7 +25,7 @@ export function templatesCurveFrame({ parent, parentWidth }: interfaceProps) {
     ];
     parent.appendChild(curveFrame);
 
-    curveTitleFrame({ parent: curveFrame });
-    lineFrame({ parent: curveFrame, parentWidth: parentWidth });
-    curvePropsFrame({ parent: curveFrame, parentWidth: parentWidth });
+    curveTitleFrame({ msg: msg, parent: curveFrame });
+    lineFrame({ msg: msg, parent: curveFrame, parentWidth: parentWidth });
+    curvePropsFrame({ msg: msg, parent: curveFrame, parentWidth: parentWidth });
 }

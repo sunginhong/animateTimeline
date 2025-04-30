@@ -1,12 +1,13 @@
 import { createHapticLabelFrame } from "./haptic-label/frame";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     hapticType: string; 
     data: any;
 }
 
-export function createPropsRowsHaptic({ parent, hapticType, data }: interfaceProps) {
+export function createPropsRowsHaptic({ msg, parent, hapticType, data }: interfaceProps) {
     const curvePropsRowsHapticFrame = figma.createFrame();
     curvePropsRowsHapticFrame.layoutMode = "VERTICAL";
     curvePropsRowsHapticFrame.layoutAlign = "MIN";
@@ -21,5 +22,5 @@ export function createPropsRowsHaptic({ parent, hapticType, data }: interfacePro
         { type: "SOLID", color: { r: 32 / 255, g: 32 / 255, b: 32 / 255 }, visible: false },
     ];
     parent.appendChild(curvePropsRowsHapticFrame);
-    createHapticLabelFrame({ parent: curvePropsRowsHapticFrame, hapticType: hapticType, data: data });
+    createHapticLabelFrame({ msg: msg, parent: curvePropsRowsHapticFrame, hapticType: hapticType, data: data });
 }

@@ -1,9 +1,10 @@
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     parentWidth: number;  
 }
 
-export function createhapticPropsLine({ parent, parentWidth }: interfaceProps) {
+export function createhapticPropsLine({ msg, parent, parentWidth }: interfaceProps) {
     const hapticPropsLine = figma.createFrame();
     hapticPropsLine.layoutMode = "HORIZONTAL";
     hapticPropsLine.layoutAlign = "MIN";
@@ -15,7 +16,9 @@ export function createhapticPropsLine({ parent, parentWidth }: interfaceProps) {
     hapticPropsLine.resize(parentWidth, 1);
     hapticPropsLine.clipsContent = false;
     hapticPropsLine.fills = [
-        { type: "SOLID", color: { r: 217 / 255, g: 217 / 255, b: 217 / 255 }, visible: true },
+        { type: "SOLID", color: msg.isDarkMode
+            ? { r: 217 / 255, g: 217 / 255, b: 217 / 255 }
+            : { r: 0 / 255, g: 0 / 255, b: 0 / 255 }, visible: true },
     ];
     parent.appendChild(hapticPropsLine);
 }

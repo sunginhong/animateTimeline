@@ -2,12 +2,13 @@ import { fontStyleBold } from "../../../../../plugin/utils/getFonts";
 import { getEasing } from "../../../../../plugin/utils/getEasing";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     osType: string; 
     easingType: string; 
 }
 
-export function createWebAosEasingLabel({ parent, osType, easingType }: interfaceProps) {
+export function createWebAosEasingLabel({ msg, parent, osType, easingType }: interfaceProps) {
     
     (async () => {
         const easingLabel = figma.createText();
@@ -25,7 +26,7 @@ export function createWebAosEasingLabel({ parent, osType, easingType }: interfac
         easingLabel.fontSize = 24;
         easingLabel.lineHeight = { unit: "AUTO" };
         easingLabel.fills = [
-            { type: "SOLID", color: { r: 255 / 255, g: 255 / 255, b: 255 / 255 } },
+            { type: "SOLID", color: msg.isDarkMode ? { r: 255 / 255, g: 255 / 255, b: 255 / 255 } : { r: 0 / 255, g: 0 / 255, b: 0 / 255 } },
         ];
         parent.appendChild(easingLabel);
     })();

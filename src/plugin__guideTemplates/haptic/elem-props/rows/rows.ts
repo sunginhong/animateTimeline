@@ -3,11 +3,12 @@ import { createPropsRowsHaptic } from './haptic';
 import { getHaptic } from '../../data/haptic_v3';
 
 interface interfaceProps {
+    msg: any
     parent: FrameNode;
     hapticType: string; 
 }
 
-export function hapticPropsRows({ parent, hapticType }: interfaceProps) {
+export function hapticPropsRows({ msg, parent, hapticType }: interfaceProps) {
     const hapticPropsRows = figma.createFrame();
     hapticPropsRows.layoutMode = "HORIZONTAL";
     hapticPropsRows.layoutAlign = "MIN";
@@ -27,6 +28,6 @@ export function hapticPropsRows({ parent, hapticType }: interfaceProps) {
     parent.appendChild(hapticPropsRows);
     console.log(getHaptic(hapticType), hapticType)
 
-    createPropsRowsLabel({ parent: hapticPropsRows, hapticType: hapticType });
-    createPropsRowsHaptic({ parent: hapticPropsRows, hapticType: hapticType , data: getHaptic(hapticType)});
+    createPropsRowsLabel({ msg: msg, parent: hapticPropsRows, hapticType: hapticType });
+    createPropsRowsHaptic({ msg: msg, parent: hapticPropsRows, hapticType: hapticType , data: getHaptic(hapticType)});
 }

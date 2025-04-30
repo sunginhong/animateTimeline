@@ -28,38 +28,32 @@ const guide_templates = () => {
         parent.postMessage({
           pluginMessage: {
             type: messageType,
+            isDarkMode: isDarkMode,
           }
         }, '*');
       }
     };
-        // parent.postMessage({
-        //   pluginMessage: {
-        //     type: 'create-guide-templates-title',
-        //   }
-        // }, '*');
+
+    useEffect(() => {
+      // return console.log(isDarkMode)2
+    }, [isDarkMode]);
+
 return (
       <>
-       <div>
-            <label>
-              <input 
-                type="radio" 
-                name="templateType" 
-                value="formFrame" 
-                defaultChecked 
-                onChange={() => setIsDarkMode(true)} 
-              />
-              다크모드
+      <div>
+          {['다크모드', '라이트모드'].map((label, index) => (
+            <label key={label}>
+                <input
+              type="radio"
+              name="displayMode"
+              value={index === 0 ? "formFrame" : "titleFrame"}
+              defaultChecked={index === 0}
+              onChange={() => setIsDarkMode(index === 0)}
+                />
+                {label}
             </label>
-            <label>
-              <input 
-                type="radio" 
-                name="templateType" 
-                value="titleFrame" 
-                onChange={() => setIsDarkMode(false)} 
-              />
-              라이트모드
-            </label>
-        </div>
+          ))}
+      </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             <button data-type={"formFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>가이드폼</button>
             <button data-type={"titleFrame"} style={{padding: "20px", backgroundColor: "#fff"}} onClick={handleCreateChange}>표지</button>

@@ -13,7 +13,7 @@ export const createTemplatesTitle = (msg) => {
     title.fills = [
     {
         type: "SOLID",
-        color: { r: 33 / 255, g: 33 / 255, b: 33 / 255 },
+        color: msg.isDarkMode ?  { r: 33 / 255, g: 33 / 255, b: 33 / 255 } : { r: 255 / 255, g: 255 / 255, b: 255 / 255 },
         visible: true,
     },
     ];
@@ -21,5 +21,5 @@ export const createTemplatesTitle = (msg) => {
         .filter(node => 'appendChild' in node)
         .forEach(node => (node as FrameNode | GroupNode).appendChild(title));
 
-    templatesTitleFrame({parent: title});
+    templatesTitleFrame({msg: msg, parent: title});
 }

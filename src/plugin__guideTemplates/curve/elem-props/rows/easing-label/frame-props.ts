@@ -4,12 +4,13 @@ import { createEasingLabelContainer } from "./frame-label";
 import { createEasingLabel } from "./frame-ease";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     osType: string;
     easingType: string; 
 }
 
-export function easingLabelFrameContain({ parent, osType, easingType }: interfaceProps) {
+export function easingLabelFrameContain({ msg, parent, osType, easingType }: interfaceProps) {
     const easingLabelFrame = figma.createFrame();
     easingLabelFrame.layoutMode = "HORIZONTAL";
     easingLabelFrame.layoutAlign = "MIN";
@@ -25,7 +26,7 @@ export function easingLabelFrameContain({ parent, osType, easingType }: interfac
        
     ];
     parent.appendChild(easingLabelFrame);
-    createEasingLabelContainer({ parent: easingLabelFrame, osType: osType });
-    (osType === "Web" || osType === "AOS") && createEasingLabel({ parent: easingLabelFrame, osType: osType, easingType: easingType });
-    (osType === "iOS") && createEasingLabel({ parent: easingLabelFrame, osType: osType, easingType: easingType });
+    createEasingLabelContainer({ msg: msg, parent: easingLabelFrame, osType: osType });
+    (osType === "Web" || osType === "AOS") && createEasingLabel({ msg: msg, parent: easingLabelFrame, osType: osType, easingType: easingType });
+    (osType === "iOS") && createEasingLabel({ msg: msg, parent: easingLabelFrame, osType: osType, easingType: easingType });
 }

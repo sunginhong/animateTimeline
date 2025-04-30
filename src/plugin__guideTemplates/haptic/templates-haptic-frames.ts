@@ -3,11 +3,12 @@ import { lineFrame } from "./elem-line/line";
 import { hapticPropsFrame } from "./elem-props/frame";
 
 interface interfaceProps {
+    msg: any;
     parent: FrameNode;
     parentWidth: number; 
 }
 
-export function templatesHapticFrame({ parent, parentWidth }: interfaceProps) {
+export function templatesHapticFrame({ msg, parent, parentWidth }: interfaceProps) {
     const curveFrame = figma.createFrame();
     curveFrame.layoutMode = "VERTICAL";
     curveFrame.layoutAlign = "MIN";
@@ -24,8 +25,8 @@ export function templatesHapticFrame({ parent, parentWidth }: interfaceProps) {
     ];
     parent.appendChild(curveFrame);
 
-    hapticTitleFrame({ parent: curveFrame });
-    lineFrame({ parent: curveFrame, parentWidth: parentWidth });
-    hapticPropsFrame({ parent: curveFrame, parentWidth: parentWidth });
+    hapticTitleFrame({ msg: msg, parent: curveFrame });
+    lineFrame({ msg: msg, parent: curveFrame, parentWidth: parentWidth });
+    hapticPropsFrame({ msg: msg, parent: curveFrame, parentWidth: parentWidth });
     
 }
